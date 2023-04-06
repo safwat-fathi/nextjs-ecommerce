@@ -5,7 +5,9 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
+import { toast } from "react-toastify";
 
+// TODO: add toasters for success and error requests
 class HttpClient {
   private readonly _instance: AxiosInstance;
 
@@ -34,17 +36,40 @@ class HttpClient {
 
     this._instance.interceptors.response.use(
       (response: AxiosResponse) => {
+        this.showSuccessToaster(response.data.message || "Request succeeded");
         return response;
       },
       error => {
         if (error.response.status === 401) {
+          this.showErrorToaster(
+            error.response?.data?.message || "Unauthorized request"
+          );
+
           localStorage.removeItem("token");
           window.location.href = "/login";
         }
 
+        this.showErrorToaster(
+          error.response?.data?.message || "Request failed"
+        );
+
         return Promise.reject(error);
       }
     );
+  }
+
+  private showSuccessToaster(message: string): void {
+    toast.success(message, {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 3000,
+    });
+  }
+
+  private showErrorToaster(message: string): void {
+    toast.error(message, {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 3000,
+    });
   }
 
   public async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
