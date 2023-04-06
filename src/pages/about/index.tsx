@@ -1,7 +1,12 @@
-import Head from 'next/head'
-import { Test } from '@/components/Test'
+import Head from "next/head";
+import { Test } from "@/components/Test";
+import { GetServerSidePropsContext, GetStaticProps } from "next";
 
-export default function Home() {
+type Props = {
+  name: string;
+};
+
+const About = (props: Props) => {
   return (
     <>
       <Head>
@@ -11,10 +16,20 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-				<h1>About page</h1>
-				<Test/>
-			</main>
-        
+        <h1>About page</h1>
+        <h2>{props.name}</h2>
+        <Test />
+      </main>
     </>
-  )
-}
+  );
+};
+
+export const getStaticProps: GetStaticProps<Props> = async ctx => {
+  console.log(process.env.TEST);
+
+  return {
+    props: { name: "wwww" },
+  };
+};
+
+export default About;
