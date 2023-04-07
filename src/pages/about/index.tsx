@@ -6,6 +6,15 @@ type Props = {
   name: string;
 };
 
+export const getStaticProps: GetStaticProps<Props> = async ctx => {
+  console.log(process.env.TEST);
+  console.log(ctx.previewData);
+
+  return {
+    props: { name: "wwww" },
+  };
+};
+
 const About = (props: Props) => {
   return (
     <>
@@ -22,14 +31,6 @@ const About = (props: Props) => {
       </main>
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps<Props> = async ctx => {
-  console.log(process.env.TEST);
-
-  return {
-    props: { name: "wwww" },
-  };
 };
 
 export default About;
