@@ -1,4 +1,4 @@
-import { IAuthService } from "./services";
+import { IAuthService } from "../../types/services";
 
 export interface User {
   name: string;

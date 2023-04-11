@@ -1,6 +1,6 @@
-import { User } from "@/types/contexts";
 import { IAuthService } from "@/types/services";
 import HttpClient from "@/core/http-client";
+import { User } from "@/lib/contexts/types";
 
 const httpClient = new HttpClient();
 

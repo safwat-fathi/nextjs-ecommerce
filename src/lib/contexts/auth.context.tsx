@@ -1,7 +1,8 @@
 import { AuthService } from "@/services/auth.service";
-import { IAuthContext, User } from "@/types/contexts";
+
 import { useRouter } from "next/router";
 import { ReactNode, createContext, useEffect, useState } from "react";
+import { IAuthContext, User } from "./types";
 
 const AuthContext = createContext<IAuthContext>({
   user: null,
