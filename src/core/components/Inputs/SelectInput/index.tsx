@@ -1,4 +1,4 @@
-import { SelectInputProps } from "../types";
+import { SelectInputProps } from "../../types";
 
 // TODO: handle unselected value
 // TODO: handle register with react hook form
@@ -7,7 +7,7 @@ const SelectField = ({ label, name, options, ...rest }: SelectInputProps) => {
   return (
     <div className="form-group">
       {label && <label htmlFor={name}>{label}</label>}
-      <select name={name} placeholder="Test" {...rest}>
+      <select name={name} {...rest}>
         {options.map(option => (
           <option key={option.value} value={option.value}>
             {option.label}

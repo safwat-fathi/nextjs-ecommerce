@@ -1,10 +1,10 @@
-import { SlideshowLightbox } from "lightbox.js-react";
+// import { SlideshowLightbox } from "lightbox.js-react";
 import "lightbox.js-react/dist/index.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { FormProvider, useForm } from "react-hook-form";
-import TextInput from "@/core/components/TextInput";
-import SelectInput from "@/core/components/SelectInput";
+import TextInput from "@/core/components/Inputs/TextInput";
+import SelectInput from "@/core/components/Inputs/SelectInput";
 
 type FormData = {
   email: string;

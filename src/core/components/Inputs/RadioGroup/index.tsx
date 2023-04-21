@@ -9,6 +9,7 @@
 //   label,
 //   value,
 //   onChange,
+// ...rest
 // }: SelectInputProps) => {
 //   // const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 //   //   onChange({ ...event, target: { name, value: event.target.value } });
