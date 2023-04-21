@@ -1,9 +1,10 @@
-import InputField from "@/core/components/input";
 import { SlideshowLightbox } from "lightbox.js-react";
 import "lightbox.js-react/dist/index.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { FormProvider, useForm } from "react-hook-form";
+import TextInput from "@/core/components/TextInput";
+import SelectInput from "@/core/components/SelectInput";
 
 type FormData = {
   email: string;
@@ -29,16 +30,14 @@ export const Test = () => {
       <h1 className="text-end">Teeeeeeeeeeeeeesssssssssst</h1>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <InputField
-            name="email"
-            label="Email"
-            validationSchema={validationSchema}
-          />
-          <InputField
-            name="password"
-            type="password"
-            label="Password"
-            validationSchema={validationSchema}
+          <TextInput name="email" label="Email" />
+          <TextInput name="password" type="password" label="Password" />
+          <SelectInput
+            name="cities"
+            options={[
+              { value: 0, label: "cairo" },
+              { value: 1, label: "giza" },
+            ]}
           />
           <button type="submit" disabled={methods.formState.isSubmitting}>
             Submit

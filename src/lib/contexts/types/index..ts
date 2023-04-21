@@ -1,5 +1,3 @@
-import { IAuthService } from "../../types/services";
-
 export interface User {
   name: string;
   email: string;

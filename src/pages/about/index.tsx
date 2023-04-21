@@ -27,7 +27,6 @@ const About = (props: Props) => {
       <main>
         <h1>About page</h1>
         <h2>{props.name}</h2>
-        <Test />
       </main>
     </>
   );
