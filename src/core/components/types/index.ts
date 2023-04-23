@@ -3,8 +3,11 @@ import { HTMLInputTypeAttribute } from "react";
 export interface InputBaseProps {
   name: string;
   label?: string;
-  type?: HTMLInputTypeAttribute;
+  type: HTMLInputTypeAttribute;
   placeholder?: string;
+  icon?: JSX.Element;
+  className?: string;
+  required?: boolean;
 }
 
 export interface SelectInputProps

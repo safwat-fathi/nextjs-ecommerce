@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import { FormProvider, useForm } from "react-hook-form";
 import TextInput from "@/core/components/Inputs/TextInput";
 import SelectInput from "@/core/components/Inputs/SelectInput";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 type FormData = {
   email: string;
@@ -30,8 +32,34 @@ export const Test = () => {
       <h1 className="text-end">Teeeeeeeeeeeeeesssssssssst</h1>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <TextInput name="email" label="Email" />
-          <TextInput name="password" type="password" label="Password" />
+          <TextInput
+            name="email"
+            label="Email"
+            type="email"
+            className="py-2 ps-10"
+            placeholder="Type Email"
+            required
+            icon={
+              <FontAwesomeIcon
+                className="absolute w-8 h-full top-1/2 -translate-y-1/2 text-[#615c5c] z-10 left-0 flex items-center pl-3 pointer-events-none"
+                icon={faSearch}
+              />
+            }
+          />
+          <TextInput
+            name="password"
+            type="password"
+            label="Password"
+            placeholder="Type Password"
+            className="py-2 ps-10"
+            required
+            icon={
+              <FontAwesomeIcon
+                className="absolute w-8 h-full top-1/2 -translate-y-1/2 text-[#615c5c] z-10 left-0 flex items-center pl-3 pointer-events-none"
+                icon={faSearch}
+              />
+            }
+          />
           <SelectInput
             name="cities"
             options={[
