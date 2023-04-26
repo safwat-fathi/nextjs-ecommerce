@@ -1,11 +1,11 @@
-import { HTMLInputTypeAttribute } from "react";
+import { HTMLInputTypeAttribute, ReactNode } from "react";
 
 export interface InputBaseProps {
   name: string;
   label?: string;
   type: HTMLInputTypeAttribute;
   placeholder?: string;
-  icon?: JSX.Element;
+  icon?: ReactNode;
   className?: string;
   required?: boolean;
 }
@@ -15,12 +15,12 @@ export interface SelectInputProps
   options: { value: string | number; label: string }[];
 }
 
-export interface OverlayBaseProps {
+export interface OverlayProps {
   isOpen: boolean;
   onClose: () => void;
   isStatic?: boolean;
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode;
 }
-export interface ModalProps extends OverlayBaseProps {
+export interface ModalProps extends OverlayProps {
   title: string;
 }

@@ -1,14 +1,14 @@
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
-import { OverlayBaseProps } from "../types";
+import { OverlayProps } from "../types";
 
 const Drawer = ({
   isOpen,
   onClose,
   isStatic = true,
   children,
-}: OverlayBaseProps) => {
+}: OverlayProps) => {
   const handleClose = () => !isStatic && onClose();
 
   return (
@@ -27,10 +27,10 @@ const Drawer = ({
       {/* drawer */}
       <div
         className={clsx(
-          "fixed inset-y-0 right-0 w-64 bg-white overflow-y-auto transition-transform duration-300 z-50",
+          "fixed inset-y-0 min-w-[25rem] right-0 bg-white overflow-y-auto transform transition-transform duration-300 z-50",
           {
-            "transform translate-x-full": !isOpen,
-            "transform translate-x-0": isOpen,
+            "translate-x-full": !isOpen,
+            "translate-x-0": isOpen,
           }
         )}
       >

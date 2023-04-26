@@ -10,6 +10,8 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Drawer from "@/core/components/Drawer";
 import Modal from "@/core/components/Modal";
 import { useState } from "react";
+import { useTranslation } from "next-i18next";
+import { Portal } from "@/core/components/Portal";
 
 type FormData = {
   email: string;
@@ -25,6 +27,8 @@ export const Test = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const { t } = useTranslation("home");
+
   const methods = useForm<FormData>({
     resolver: yupResolver(validationSchema),
   });
@@ -34,9 +38,9 @@ export const Test = () => {
   };
 
   return (
-    <div className="container">
-      <h1 className="text-end">Teeeeeeeeeeeeeesssssssssst</h1>
-      <FormProvider {...methods}>
+    <>
+      <h1 className="font-bold">{t("title")}</h1>
+      {/* <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <TextInput
             name="email"
@@ -77,7 +81,7 @@ export const Test = () => {
             Submit
           </button>
         </form>
-      </FormProvider>
+      </FormProvider> */}
       {/* <SlideshowLightbox className="grid grid-cols-3 gap-2 mx-auto">
         <img
           className="w-full rounded"
@@ -92,29 +96,33 @@ export const Test = () => {
           src="https://images.pexels.com/photos/13208323/pexels-photo-13208323.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         />
       </SlideshowLightbox> */}
-      <button onClick={() => setIsDrawerOpen(true)}>Open Drawer</button>
+      {/* <button onClick={() => setIsDrawerOpen(true)}>Open Drawer</button> */}
       <button onClick={() => setIsModalOpen(true)}>Open Modal</button>
-      <Drawer
-        isOpen={isDrawerOpen}
-        isStatic={false}
-        onClose={() => {
-          console.log("close drawer");
-          setIsDrawerOpen(false);
-        }}
-      >
-        <h1>Hiiiiiiiiiiiii</h1>
-      </Drawer>
-      <Modal
-        isOpen={isModalOpen}
-        isStatic={false}
-        title="Biiiiiiiiiiiig Title"
-        onClose={() => {
-          console.log("close modal");
-          setIsModalOpen(false);
-        }}
-      >
-        <h1>Hiiiiiiiiiiiii from modal</h1>
-      </Modal>
-    </div>
+      {/* <Portal>
+        <Drawer
+          isOpen={isDrawerOpen}
+          isStatic={false}
+          onClose={() => {
+            console.log("close drawer");
+            setIsDrawerOpen(false);
+          }}
+        >
+          <h1>Hiiiiiiiiiiiii</h1>
+        </Drawer>
+      </Portal> */}
+      <Portal>
+        <Modal
+          isOpen={isModalOpen}
+          isStatic={false}
+          title="Biiiiiiiiiiiig Title"
+          onClose={() => {
+            console.log("close modal");
+            setIsModalOpen(false);
+          }}
+        >
+          <h1>Hiiiiiiiiiiiii from modal</h1>
+        </Modal>
+      </Portal>
+    </>
   );
 };

@@ -1,4 +1,4 @@
-import HttpClient from "@/core/http-client";
+import HttpClient from "@/core/lib/http-client";
 import { IAuthService } from "./types/services";
 import { User } from "@/lib/contexts/types/index.";
 

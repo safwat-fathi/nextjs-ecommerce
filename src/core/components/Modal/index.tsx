@@ -28,7 +28,7 @@ const Drawer = ({
       {/* modal */}
       <div
         className={clsx(
-          "w-full max-w-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 right-0 bg-white shadow-lg rounded-lg overflow-hidden transition-all duration-300 z-50",
+          "w-full max-w-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg rounded-lg overflow-hidden transition-all duration-300 z-50",
           {
             "opacity-0 pointer-events-none": !isOpen,
             "opacity-100 pointer-events-auto": isOpen,
