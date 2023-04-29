@@ -1,0 +1,15 @@
+@import "~tailwindcss/base";
+@import "~tailwindcss/components";
+@import "~tailwindcss/utilities";
+
+html:lang(ar) {
+  direction: rtl;
+}
+
+#pixel-to-watch {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  top: 200px;
+  left: 0;
+}

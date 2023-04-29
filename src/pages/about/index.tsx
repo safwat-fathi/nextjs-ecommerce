@@ -1,15 +1,11 @@
-import Head from "next/head";
-import { Test } from "@/components/Test";
-import { GetServerSidePropsContext, GetStaticProps } from "next";
+import { GetStaticProps } from "next";
+import MainLayout from "@/core/components/MainLayout";
 
 type Props = {
   name: string;
 };
 
 export const getStaticProps: GetStaticProps<Props> = async ctx => {
-  console.log(process.env.TEST);
-  console.log(ctx.previewData);
-
   return {
     props: { name: "wwww" },
   };
@@ -17,10 +13,10 @@ export const getStaticProps: GetStaticProps<Props> = async ctx => {
 
 const About = (props: Props) => {
   return (
-    <>
+    <MainLayout>
       <h1>About page</h1>
       <h2>{props.name}</h2>
-    </>
+    </MainLayout>
   );
 };
 

@@ -97,7 +97,7 @@ export const Test = () => {
         />
       </SlideshowLightbox> */}
       {/* <button onClick={() => setIsDrawerOpen(true)}>Open Drawer</button> */}
-      <button onClick={() => setIsModalOpen(true)}>Open Modal</button>
+      {/* <button onClick={() => setIsModalOpen(true)}>Open Modal</button> */}
       {/* <Portal>
         <Drawer
           isOpen={isDrawerOpen}
@@ -110,7 +110,7 @@ export const Test = () => {
           <h1>Hiiiiiiiiiiiii</h1>
         </Drawer>
       </Portal> */}
-      <Portal>
+      {/* <Portal>
         <Modal
           isOpen={isModalOpen}
           isStatic={false}
@@ -122,7 +122,7 @@ export const Test = () => {
         >
           <h1>Hiiiiiiiiiiiii from modal</h1>
         </Modal>
-      </Portal>
+      </Portal> */}
     </>
   );
 };

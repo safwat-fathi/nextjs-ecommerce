@@ -1,8 +1,12 @@
 import { ReactNode } from "react";
 import Head from "next/head";
 import LanguageButton from "@/components/LanguageButton";
+import dynamic from "next/dynamic";
+const DynamicToTop = dynamic(() => import("@/core/components/ToTopButton"), {
+  ssr: false,
+});
 
-const Layout = ({ children }: { children: ReactNode }) => {
+const MainLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Head>
@@ -23,6 +27,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
         </nav>
       </header>
       <main>{children}</main>
+      <div id="pixel-to-watch"></div>
+      <DynamicToTop />
       <footer>
         <h1>Footer</h1>
       </footer>
@@ -30,4 +36,4 @@ const Layout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default Layout;
+export default MainLayout;
