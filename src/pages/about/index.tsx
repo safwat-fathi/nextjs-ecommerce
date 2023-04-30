@@ -1,5 +1,6 @@
 import { GetStaticProps } from "next";
 import MainLayout from "@/core/components/MainLayout";
+import { NextSeo } from "next-seo";
 
 type Props = {
   name: string;
@@ -13,10 +14,13 @@ export const getStaticProps: GetStaticProps<Props> = async ctx => {
 
 const About = (props: Props) => {
   return (
-    <MainLayout>
-      <h1>About page</h1>
-      <h2>{props.name}</h2>
-    </MainLayout>
+    <>
+      <NextSeo title="About" />
+      <MainLayout>
+        <h1>About page</h1>
+        <h2>{props.name}</h2>
+      </MainLayout>
+    </>
   );
 };
 
