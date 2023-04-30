@@ -24,3 +24,12 @@ export interface OverlayProps {
 export interface ModalProps extends OverlayProps {
   title: string;
 }
+
+export interface SpinnerProps {
+  color: string;
+  fontSize: number;
+}
+
+export interface SkeletonProps {
+  type: "grid" | "list";
+}
