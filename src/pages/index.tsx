@@ -4,6 +4,8 @@ import { Test } from "@/components/Test";
 import { GetStaticPropsContext } from "next";
 import MainLayout from "@/core/components/MainLayout";
 import { NextSeo } from "next-seo";
+import { useContext } from "react";
+import { AuthContext } from "@/lib/contexts/auth.context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +18,10 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
 }
 
 export default function Home() {
+  const { isAuthenticated, user } = useContext(AuthContext);
+  console.log("🚀 ~ Home ~ user:", user);
+  console.log("🚀 ~ Home ~ isAuthenticated:", isAuthenticated);
+
   return (
     <>
       <NextSeo title="Home" />

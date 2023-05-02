@@ -4,8 +4,9 @@ import { useRouter } from "next/router";
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { IAuthContext, User } from "./types/index.";
 
-const AuthContext = createContext<IAuthContext>({
+export const AuthContext = createContext<IAuthContext>({
   user: null,
+  isAuthenticated: false,
   loading: false,
   login: async () => {},
   logout: async () => {},
@@ -14,12 +15,14 @@ const AuthContext = createContext<IAuthContext>({
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const router = useRouter();
   const authService = new AuthService();
 
   useEffect(() => {
     // TODO: check if user already logged in useEffect (from localStorage)
+    // TODO: if logged update isAuthenticated & user
     console.log(user);
   }, []);
 
@@ -27,6 +30,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       setLoading(true);
       const user = await authService.login(email, password);
+      // TODO: add user token to local storage
 
       if (!user) {
         console.log("no user found");
@@ -50,6 +54,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       await authService.logout();
 
       setUser(null);
+      setIsAuthenticated(false);
       // TODO: redirect to login route
       router.push("/login");
     } catch (err) {
@@ -62,7 +67,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, login: handleLogin, logout: handleLogout }}
+      value={{
+        user,
+        loading,
+        isAuthenticated,
+        login: handleLogin,
+        logout: handleLogout,
+      }}
     >
       {children}
     </AuthContext.Provider>
