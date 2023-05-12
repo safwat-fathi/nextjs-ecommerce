@@ -33,3 +33,13 @@ export interface SpinnerProps {
 export interface SkeletonProps {
   type: "grid" | "list";
 }
+
+export type CrumbItem = {
+  label: ReactNode;
+  isLast: boolean;
+  path: string;
+};
+
+export type BreadcrumbsProps = {
+  children: ReactNode;
+};
