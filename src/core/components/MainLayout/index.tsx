@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import LanguageButton from "@/components/LanguageButton";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-const DynamicToTop = dynamic(() => import("@/core/components/ToTopButton"), {
+const DynamicToTop = dynamic(() => import("@/core/components/BackToTop"), {
   ssr: false,
 });
 

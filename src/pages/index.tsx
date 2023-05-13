@@ -7,7 +7,7 @@ import { NextSeo } from "next-seo";
 import { useContext } from "react";
 import { AuthContext } from "@/lib/contexts/auth.context";
 import Breadcrumbs from "@/core/components/Breadcrumbs";
-import useBreadCrumbs from "@/lib/hooks/useBreadcrumbs";
+import useBreadcrumbs from "@/lib/hooks/useBreadcrumbs";
 import BreadcrumbItem from "@/core/components/Breadcrumbs/BreadcrumbItem";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,8 +22,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
 
 const Home: NextPage = () => {
   const { isAuthenticated, user } = useContext(AuthContext);
-  const breadcrumbs = useBreadCrumbs();
-  console.log("🚀 ~ breadcrumbs:", breadcrumbs);
+  const breadcrumbs = useBreadcrumbs();
 
   return (
     <>
@@ -42,7 +41,9 @@ const Home: NextPage = () => {
                 />
               ))}
           </Breadcrumbs>
+          <hr />
           <h1>Home</h1>
+          <hr />
           <Test />
         </div>
       </MainLayout>

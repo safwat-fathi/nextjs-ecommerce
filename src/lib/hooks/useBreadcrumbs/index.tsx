@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { CrumbItem } from "@/core/components/types";
 
-const useBreadCrumbs = () => {
+const useBreadcrumbs = () => {
   const router = useRouter();
   const [breadcrumbs, setBreadcrumbs] = useState<CrumbItem[]>([]);
 
@@ -38,4 +38,4 @@ const useBreadCrumbs = () => {
   ];
 };
 
-export default useBreadCrumbs;
+export default useBreadcrumbs;

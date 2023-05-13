@@ -14,6 +14,8 @@ import { useTranslation } from "next-i18next";
 import { Portal } from "@/core/components/Portal";
 import Skeleton from "@/core/components/Skeleton";
 import Spinner from "@/core/components/Spinner";
+import { toast } from "react-toastify";
+import useScrollPosition from "@/lib/hooks/useScrollPosition";
 
 type FormData = {
   email: string;
@@ -28,6 +30,7 @@ const validationSchema = Yup.object().shape({
 export const Test = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { x, y } = useScrollPosition();
 
   const { t } = useTranslation("home");
 
@@ -39,9 +42,26 @@ export const Test = () => {
     console.log(data);
   };
 
+  const handleShowToast = (type: "success" | "error") => {
+    console.log("🚀 ~ handleShowToast ~ type:", type);
+    toast[type]("this is toast test", {
+      autoClose: 3000,
+      position: toast.POSITION.TOP_CENTER,
+    });
+  };
+
   return (
     <>
       <h1 className="font-bold">{t("title")}</h1>
+      <h2>X: {x}px</h2>
+      <h2>Y: {y}px</h2>
+      {/* <button className="" onClick={() => handleShowToast("error")}>
+        Show toast error
+      </button>{" "}
+      <br />
+      <button className="" onClick={() => handleShowToast("success")}>
+        Show toast success
+      </button> */}
       {/* <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <TextInput

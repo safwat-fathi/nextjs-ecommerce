@@ -2,7 +2,7 @@ import { GetStaticProps, NextPage } from "next";
 import MainLayout from "@/core/components/MainLayout";
 import { NextSeo } from "next-seo";
 import Breadcrumbs from "@/core/components/Breadcrumbs";
-import useBreadCrumbs from "@/lib/hooks/useBreadcrumbs";
+import useBreadcrumbs from "@/lib/hooks/useBreadcrumbs";
 import BreadcrumbItem from "@/core/components/Breadcrumbs/BreadcrumbItem";
 
 type PageProps = {
@@ -16,7 +16,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ctx => {
 };
 
 const About: NextPage<PageProps> = props => {
-  const breadcrumbs = useBreadCrumbs();
+  const breadcrumbs = useBreadcrumbs();
 
   return (
     <>

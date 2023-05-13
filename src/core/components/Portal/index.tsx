@@ -1,14 +1,22 @@
+import useGlobalRef from "@/lib/hooks/useGlobalRef";
 import { useRef, useEffect, useState, ReactNode } from "react";
 import { createPortal } from "react-dom";
 
 export const Portal = ({ children }: { children: ReactNode }) => {
-  const ref = useRef<Element | null>(null);
+  const portalRef = useGlobalRef(
+    document.querySelector<HTMLElement>("#portal")!
+  );
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    ref.current = document.querySelector<HTMLElement>("#portal");
     setMounted(true);
   }, []);
 
-  return mounted && ref.current ? createPortal(children, ref.current) : null;
+  if (portalRef) {
+    return (
+      mounted && portalRef.current && createPortal(children, portalRef.current)
+    );
+  }
+
+  return null;
 };

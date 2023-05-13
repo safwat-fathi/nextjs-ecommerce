@@ -4,11 +4,13 @@ import { appWithTranslation } from "next-i18next";
 import { DefaultSeo } from "next-seo";
 import SEO from "../../next-seo.config";
 import { AuthProvider } from "@/lib/contexts/auth.context";
+import { ToastContainer } from "react-toastify";
 
 function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <DefaultSeo {...SEO} />
+      <ToastContainer />
       <AuthProvider>
         <Component {...pageProps} />
       </AuthProvider>
