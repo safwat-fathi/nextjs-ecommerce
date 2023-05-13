@@ -18,8 +18,8 @@ const Breadcrumbs = ({ children }: BreadcrumbsProps) => {
   });
 
   return (
-    <nav className="flex gap-2 items-start" aria-label="breadcrumb">
-      <ol className="flex items-center space-x-4">{childrenWithSeparator}</ol>
+    <nav aria-label="breadcrumb">
+      <ul className="flex items-center gap-x-4">{childrenWithSeparator}</ul>
     </nav>
   );
 };

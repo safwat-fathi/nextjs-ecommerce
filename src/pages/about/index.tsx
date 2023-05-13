@@ -1,5 +1,5 @@
 import { GetStaticProps, NextPage } from "next";
-import MainLayout from "@/core/components/MainLayout";
+import MainLayout from "@/core/Layout/MainLayout";
 import { NextSeo } from "next-seo";
 import Breadcrumbs from "@/core/components/Breadcrumbs";
 import useBreadcrumbs from "@/lib/hooks/useBreadcrumbs";

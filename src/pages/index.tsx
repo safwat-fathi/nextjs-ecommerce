@@ -2,7 +2,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Inter } from "next/font/google";
 import { Test } from "@/components/Test";
 import { GetStaticPropsContext, NextPage } from "next";
-import MainLayout from "@/core/components/MainLayout";
+import MainLayout from "@/core/Layout/MainLayout";
 import { NextSeo } from "next-seo";
 import { useContext } from "react";
 import { AuthContext } from "@/lib/contexts/auth.context";

@@ -1,4 +1,4 @@
-// import { SlideshowLightbox } from "lightbox.js-react";
+import { SlideshowLightbox } from "lightbox.js-react";
 import "lightbox.js-react/dist/index.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -15,7 +15,7 @@ import { Portal } from "@/core/components/Portal";
 import Skeleton from "@/core/components/Skeleton";
 import Spinner from "@/core/components/Spinner";
 import { toast } from "react-toastify";
-import useScrollPosition from "@/lib/hooks/useScrollPosition";
+import DataView from "@/core/components/DataView";
 
 type FormData = {
   email: string;
@@ -28,33 +28,31 @@ const validationSchema = Yup.object().shape({
 });
 
 export const Test = () => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { x, y } = useScrollPosition();
+  // const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { t } = useTranslation("home");
 
-  const methods = useForm<FormData>({
-    resolver: yupResolver(validationSchema),
-  });
+  // const methods = useForm<FormData>({
+  //   resolver: yupResolver(validationSchema),
+  // });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
-  };
+  // const onSubmit = (data: FormData) => {
+  //   console.log(data);
+  // };
 
-  const handleShowToast = (type: "success" | "error") => {
-    console.log("🚀 ~ handleShowToast ~ type:", type);
-    toast[type]("this is toast test", {
-      autoClose: 3000,
-      position: toast.POSITION.TOP_CENTER,
-    });
-  };
+  // const handleShowToast = (type: "success" | "error") => {
+  //   console.log("🚀 ~ handleShowToast ~ type:", type);
+  //   toast[type]("this is toast test", {
+  //     autoClose: 3000,
+  //     position: toast.POSITION.TOP_CENTER,
+  //   });
+  // };
 
   return (
     <>
       <h1 className="font-bold">{t("title")}</h1>
-      <h2>X: {x}px</h2>
-      <h2>Y: {y}px</h2>
+      <DataView />
       {/* <button className="" onClick={() => handleShowToast("error")}>
         Show toast error
       </button>{" "}

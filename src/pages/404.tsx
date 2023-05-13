@@ -1,4 +1,4 @@
-import ErrorLayout from "@/core/components/ErrorLayout";
+import ErrorLayout from "@/core/Layout/ErrorLayout";
 
 const Custom404 = () => {
   return (
