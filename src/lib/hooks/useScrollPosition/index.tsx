@@ -12,8 +12,6 @@ const useScrollPosition = (): ScrollPosition => {
   });
 
   const handleScroll: IntersectionObserverCallback = ([entry]) => {
-    console.log("🚀 ~ useScrollPosition ~ entry:", entry);
-
     setScrollPosition({
       x: window.pageXOffset,
       y: entry.intersectionRatio * window.innerHeight,
@@ -22,9 +20,7 @@ const useScrollPosition = (): ScrollPosition => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleScroll, {
-      root: null,
-      // threshold: 1.0,
-      // threshold: [0, 1],
+      threshold: [0, 1],
     });
 
     observer.observe(document.body);

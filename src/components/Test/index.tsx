@@ -9,13 +9,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Drawer from "@/core/components/Drawer";
 import Modal from "@/core/components/Modal";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "next-i18next";
 import { Portal } from "@/core/components/Portal";
 import Skeleton from "@/core/components/Skeleton";
 import Spinner from "@/core/components/Spinner";
 import { toast } from "react-toastify";
 import DataView from "@/core/components/DataView";
+import useWindowSize from "@/lib/hooks/useWindowSize";
 
 type FormData = {
   email: string;
@@ -28,6 +29,8 @@ const validationSchema = Yup.object().shape({
 });
 
 export const Test = () => {
+  const test = useRef(null);
+  const { height, width } = useWindowSize(test.current);
   // const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   // const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -52,7 +55,10 @@ export const Test = () => {
   return (
     <>
       <h1 className="font-bold">{t("title")}</h1>
+      <p>Width: {width}px</p>
+      <p>Height: {height}px</p>
       <DataView />
+      <textarea ref={test} name="wad" id="awd" cols={30} rows={10}></textarea>
       {/* <button className="" onClick={() => handleShowToast("error")}>
         Show toast error
       </button>{" "}
