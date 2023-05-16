@@ -29,8 +29,8 @@ const validationSchema = Yup.object().shape({
 });
 
 export const Test = () => {
-  const test = useRef(null);
-  const { height, width } = useWindowSize(test.current);
+  // const test = useRef(null);
+  // const { height, width } = useWindowSize(test.current);
   // const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   // const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -54,11 +54,9 @@ export const Test = () => {
 
   return (
     <>
-      <h1 className="font-bold">{t("title")}</h1>
-      <p>Width: {width}px</p>
-      <p>Height: {height}px</p>
+      {/* <h1 className="font-bold">{t("title")}</h1> */}
       <DataView />
-      <textarea ref={test} name="wad" id="awd" cols={30} rows={10}></textarea>
+      {/* <textarea ref={test} name="wad" id="awd" cols={30} rows={10}></textarea> */}
       {/* <button className="" onClick={() => handleShowToast("error")}>
         Show toast error
       </button>{" "}

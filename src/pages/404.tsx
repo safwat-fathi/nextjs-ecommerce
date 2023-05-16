@@ -1,11 +1,8 @@
-import ErrorLayout from "@/core/Layout/ErrorLayout";
+import renderWithLayout from "@/core/HOC/WithLayout";
+import { LayoutsENUM } from "@/core/Layout";
 
 const Custom404 = () => {
-  return (
-    <ErrorLayout>
-      <h1>Custom 404 page</h1>
-    </ErrorLayout>
-  );
+  return <h1>Custom 404 page</h1>;
 };
 
-export default Custom404;
+export default renderWithLayout(Custom404, LayoutsENUM.ERROR);

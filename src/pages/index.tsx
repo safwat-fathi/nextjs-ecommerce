@@ -2,13 +2,14 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Inter } from "next/font/google";
 import { Test } from "@/components/Test";
 import { GetStaticPropsContext, NextPage } from "next";
-import MainLayout from "@/core/Layout/MainLayout";
 import { NextSeo } from "next-seo";
-import { useContext } from "react";
-import { AuthContext } from "@/lib/contexts/auth.context";
+import { useAuth } from "@/lib/contexts/auth.context";
 import Breadcrumbs from "@/core/components/Breadcrumbs";
 import useBreadcrumbs from "@/lib/hooks/useBreadcrumbs";
 import BreadcrumbItem from "@/core/components/Breadcrumbs/BreadcrumbItem";
+import renderWithLayout from "@/core/HOC/WithLayout";
+import { LayoutsENUM } from "@/core/Layout";
+import { useTranslation } from "react-i18next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,34 +22,33 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
 }
 
 const Home: NextPage = () => {
-  const { isAuthenticated, user } = useContext(AuthContext);
+  const { t } = useTranslation("home");
+  const { isAuthenticated, user } = useAuth();
   const breadcrumbs = useBreadcrumbs();
 
   return (
     <>
       <NextSeo title="Home" />
-      <MainLayout>
-        <div className="h-[200rem]">
-          <Breadcrumbs>
-            {/* <BreadcrumbItem path="/" label="Home" /> */}
-            {breadcrumbs &&
-              breadcrumbs.map(breadcrumb => (
-                <BreadcrumbItem
-                  key={breadcrumb.path}
-                  path={breadcrumb.path}
-                  isLast={breadcrumb.isLast}
-                  label={breadcrumb.label}
-                />
-              ))}
-          </Breadcrumbs>
-          <hr />
-          <h1>Home</h1>
-          <hr />
-          <Test />
-        </div>
-      </MainLayout>
+      <div className="h-[200rem]">
+        <Breadcrumbs>
+          {/* <BreadcrumbItem path="/" label="Home" /> */}
+          {breadcrumbs &&
+            breadcrumbs.map(breadcrumb => (
+              <BreadcrumbItem
+                key={breadcrumb.path}
+                path={breadcrumb.path}
+                isLast={breadcrumb.isLast}
+                label={breadcrumb.label}
+              />
+            ))}
+        </Breadcrumbs>
+        <hr />
+        <h1>{t("title")}</h1>
+        <hr />
+        <Test />
+      </div>
     </>
   );
 };
 
-export default Home;
+export default renderWithLayout(Home, LayoutsENUM.MAIN);
