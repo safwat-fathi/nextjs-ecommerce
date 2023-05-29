@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { Test } from "@/components/Test";
 import { GetStaticPropsContext, NextPage } from "next";
 import { NextSeo } from "next-seo";
-import { useAuth } from "@/lib/contexts/auth.context";
+// import { useAuth } from "@/lib/contexts/auth.context";
 import Breadcrumbs from "@/core/components/Breadcrumbs";
 import useBreadcrumbs from "@/lib/hooks/useBreadcrumbs";
 import BreadcrumbItem from "@/core/components/Breadcrumbs/BreadcrumbItem";
@@ -23,7 +23,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
 
 const Home: NextPage = () => {
   const { t } = useTranslation("home");
-  const { isAuthenticated, user } = useAuth();
+  // const { isAuthenticated, user } = useAuth();
   const breadcrumbs = useBreadcrumbs();
 
   return (
@@ -31,7 +31,6 @@ const Home: NextPage = () => {
       <NextSeo title="Home" />
       <div className="h-[200rem]">
         <Breadcrumbs>
-          {/* <BreadcrumbItem path="/" label="Home" /> */}
           {breadcrumbs &&
             breadcrumbs.map(breadcrumb => (
               <BreadcrumbItem
@@ -43,7 +42,7 @@ const Home: NextPage = () => {
             ))}
         </Breadcrumbs>
         <hr />
-        <h1>{t("title")}</h1>
+        {/* <h1>{t("title")}</h1> */}
         <hr />
         <Test />
       </div>
