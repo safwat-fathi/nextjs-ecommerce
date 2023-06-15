@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-// import { useTranslation } from "next-i18next";
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +12,9 @@ const LanguageButton = () => {
 
   const changeLanguage = async (locale: string) => {
     setLoading(true);
+
     await router.push(router.pathname, router.asPath, { locale });
+
     setLoading(false);
   };
 

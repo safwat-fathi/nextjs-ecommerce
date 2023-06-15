@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { CrumbItem } from "@/core/components/types";
+import { CrumbItem } from "@/core/components/meta";
 
 const useBreadcrumbs = () => {
   const router = useRouter();

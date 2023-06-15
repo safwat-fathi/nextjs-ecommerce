@@ -19,10 +19,14 @@ export interface OverlayProps {
   isOpen: boolean;
   onClose: () => void;
   isStatic?: boolean;
-  children: ReactNode;
 }
+
 export interface ModalProps extends OverlayProps {
   title: string;
+}
+
+export interface DrawerProps extends OverlayProps {
+  title?: string;
 }
 
 export interface SpinnerProps {
@@ -43,3 +47,12 @@ export type CrumbItem = {
 export type BreadcrumbsProps = {
   children: ReactNode;
 };
+
+export interface DropdownOption {
+  label: string;
+  href: string;
+}
+
+export interface DropdownProps {
+  options: DropdownOption[];
+}

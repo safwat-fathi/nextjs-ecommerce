@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CrumbItem } from "../types";
+import { CrumbItem } from "../meta";
 
 const BreadcrumbItem = ({ label, path, isLast }: CrumbItem) => {
   // The last crumb is rendered as normal text since we are already on the page

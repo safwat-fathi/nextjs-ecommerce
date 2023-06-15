@@ -29,7 +29,7 @@ class HttpClient {
 
         return config;
       },
-      error => {
+      (error: any) => {
         return Promise.reject(error);
       }
     );
@@ -39,7 +39,7 @@ class HttpClient {
         this.showSuccessToaster(response.data.message || "Request succeeded");
         return response;
       },
-      error => {
+      (error: any) => {
         if (error.response.status === 401) {
           this.showErrorToaster(
             error.response?.data?.message || "Unauthorized request"

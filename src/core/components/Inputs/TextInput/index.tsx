@@ -1,4 +1,4 @@
-import { InputBaseProps } from "../../types";
+import { InputBaseProps } from "../../meta";
 import { useFormContext } from "react-hook-form";
 import clsx from "clsx";
 

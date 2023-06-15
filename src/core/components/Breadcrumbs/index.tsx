@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BreadcrumbsProps } from "../types";
+import { BreadcrumbsProps } from "../meta";
 import { Children, Fragment } from "react";
 
 const Breadcrumbs = ({ children }: BreadcrumbsProps) => {

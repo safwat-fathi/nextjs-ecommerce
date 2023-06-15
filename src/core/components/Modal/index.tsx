@@ -1,7 +1,8 @@
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
-import { ModalProps } from "../types";
+import { ModalProps } from "../meta";
+import { PropsWithChildren } from "react";
 
 const Drawer = ({
   isOpen,
@@ -9,7 +10,7 @@ const Drawer = ({
   isStatic = true,
   children,
   title,
-}: ModalProps) => {
+}: PropsWithChildren<ModalProps>) => {
   const handleClose = () => !isStatic && onClose();
 
   return (

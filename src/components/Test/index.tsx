@@ -1,5 +1,5 @@
 import { SlideshowLightbox } from "lightbox.js-react";
-import "lightbox.js-react/dist/index.css";
+// import "lightbox.js-react/dist/index.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { FormProvider, useForm } from "react-hook-form";
@@ -31,8 +31,8 @@ const validationSchema = Yup.object().shape({
 export const Test = () => {
   // const test = useRef(null);
   // const { height, width } = useWindowSize(test.current);
-  // const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { t } = useTranslation("home");
 
@@ -120,33 +120,33 @@ export const Test = () => {
           src="https://images.pexels.com/photos/13208323/pexels-photo-13208323.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         />
       </SlideshowLightbox> */}
-      {/* <button onClick={() => setIsDrawerOpen(true)}>Open Drawer</button> */}
-      {/* <button onClick={() => setIsModalOpen(true)}>Open Modal</button> */}
-      {/* <Portal>
-        <Drawer
-          isOpen={isDrawerOpen}
-          isStatic={false}
-          onClose={() => {
-            console.log("close drawer");
-            setIsDrawerOpen(false);
-          }}
-        >
-          <h1>Hiiiiiiiiiiiii</h1>
-        </Drawer>
-      </Portal> */}
-      {/* <Portal>
-        <Modal
-          isOpen={isModalOpen}
-          isStatic={false}
-          title="Biiiiiiiiiiiig Title"
-          onClose={() => {
-            console.log("close modal");
-            setIsModalOpen(false);
-          }}
-        >
-          <h1>Hiiiiiiiiiiiii from modal</h1>
-        </Modal>
-      </Portal> */}
+      <button onClick={() => setIsDrawerOpen(true)}>Open Drawer</button>
+      <button onClick={() => setIsModalOpen(true)}>Open Modal</button>
+      {/* <Portal> */}
+      <Drawer
+        isOpen={isDrawerOpen}
+        isStatic={false}
+        onClose={() => {
+          console.log("close drawer");
+          setIsDrawerOpen(false);
+        }}
+      >
+        <h1>Hiiiiiiiiiiiii</h1>
+      </Drawer>
+      {/* </Portal> */}
+      {/* <Portal> */}
+      <Modal
+        isOpen={isModalOpen}
+        isStatic={false}
+        title="Biiiiiiiiiiiig Title"
+        onClose={() => {
+          console.log("close modal");
+          setIsModalOpen(false);
+        }}
+      >
+        <h1>Hiiiiiiiiiiiii from modal</h1>
+      </Modal>
+      {/* </Portal> */}
       {/* <div className="bg-black w-16 h-16 flex justify-center items-center">
         <Spinner color="#fff" fontSize={30} />
       </div> */}

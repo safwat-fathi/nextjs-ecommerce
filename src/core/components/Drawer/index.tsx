@@ -1,14 +1,16 @@
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
-import { OverlayProps } from "../types";
+import { DrawerProps } from "../meta";
+import { PropsWithChildren } from "react";
 
 const Drawer = ({
   isOpen,
   onClose,
   isStatic = true,
+  title,
   children,
-}: OverlayProps) => {
+}: PropsWithChildren<DrawerProps>) => {
   const handleClose = () => !isStatic && onClose();
 
   return (
@@ -26,6 +28,7 @@ const Drawer = ({
       />
       {/* drawer */}
       <div
+        role="alert"
         className={clsx(
           "fixed inset-y-0 min-w-[25rem] right-0 bg-white overflow-y-auto transform transition-transform duration-300 z-50",
           {
@@ -34,7 +37,8 @@ const Drawer = ({
           }
         )}
       >
-        <div className="flex justify-end p-4">
+        <div className="flex justify-between p-4">
+          <h3>{title}</h3>
           <button
             className="text-gray-500 hover:text-gray-900 focus:outline-none focus:text-gray-900 transition-all duration-300"
             onClick={onClose}
