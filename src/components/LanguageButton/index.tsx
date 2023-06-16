@@ -6,14 +6,16 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "next-i18next";
 
 const LanguageButton = () => {
-  const [loading, setLoading] = useState(false);
   const { t } = useTranslation("common");
+
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const changeLanguage = async (locale: string) => {
     setLoading(true);
 
     await router.push(router.pathname, router.asPath, { locale });
+    document.dir = locale === "ar" ? "rtl" : "ltr";
 
     setLoading(false);
   };

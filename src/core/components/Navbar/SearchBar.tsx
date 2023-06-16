@@ -9,7 +9,7 @@ const SearchBar = () => {
 
   return (
     <>
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center gap-4">
         <div className="text-white">Logo</div>
         <input
           type="text"

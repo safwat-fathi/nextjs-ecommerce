@@ -33,7 +33,7 @@ const Dropdown = ({ options, children }: PropsWithChildren<DropdownProps>) => {
         </div>
         <div
           role="menu"
-          className="origin-top-right absolute hidden group-hover:block right-0 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+          className="origin-top-right absolute hidden group-hover:block rtl:left-0 rtl:right-auto ltr:right-0 ltr:left-auto w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
         >
           <div
             className="py-1"
