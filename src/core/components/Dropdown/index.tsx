@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 import { DropdownProps } from "../meta";
 import Link from "next/link";
+import Image from "next/image";
 
 const Dropdown = ({ options, children }: PropsWithChildren<DropdownProps>) => {
   return (
@@ -8,19 +9,13 @@ const Dropdown = ({ options, children }: PropsWithChildren<DropdownProps>) => {
       <div className="group">
         <div className="flex items-center w-full">
           {children}
-          <svg
-            className="w-5 h-5 ml-2 transition-transform duration-200 group-hover:rotate-180"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fillRule="evenodd"
-              d="M6.293 8.293a1 1 0 011.414 0L10 10.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
+          <Image
+            className="ms-2 text-blue-700 transition-transform duration-200 group-hover:rotate-180"
+            src="/icons/chevron.svg"
+            alt="chevron"
+            width={25}
+            height={25}
+          />
         </div>
         <div
           role="menu"

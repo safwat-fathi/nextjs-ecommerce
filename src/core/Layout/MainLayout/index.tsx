@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Navbar from "@/core/components/Navbar";
 import TopBar from "@/core/components/Navbar/TopBar";
 import MenuBar from "@/core/components/Navbar/MenuBar";
+import Footer from "@/core/components/Footer";
 const DynamicToTop = dynamic(() => import("@/core/components/BackToTop"), {
   ssr: false,
 });
@@ -21,9 +22,7 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
       {/* the pixel that below it ToTop button is visible */}
       <div id="pixel-to-watch"></div>
       <DynamicToTop />
-      <footer>
-        <h1>Footer</h1>
-      </footer>
+      <Footer />
     </>
   );
 };

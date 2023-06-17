@@ -7,6 +7,7 @@ import useGlobalRef from "@/lib/hooks/useGlobalRef";
 
 // TODO: add RTL support
 // ! fix: on page height change it is always visible event on redirect to a page with scrollable height
+// ! solution: maybe check if page height does not have scroll then hide the button
 const BackToTop = () => {
   const pixelRef = useGlobalRef(document.querySelector("#pixel-to-watch")!);
   const isInView = useInView(pixelRef!, {});
