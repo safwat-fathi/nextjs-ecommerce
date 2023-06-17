@@ -1,21 +1,12 @@
-import { PropsWithChildren, useState } from "react";
-import { DropdownOption, DropdownProps } from "../meta";
+import { PropsWithChildren } from "react";
+import { DropdownProps } from "../meta";
 import Link from "next/link";
 
 const Dropdown = ({ options, children }: PropsWithChildren<DropdownProps>) => {
-  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
-    null
-  );
-
-  const handleOptionClick = (option: DropdownOption) => {
-    setSelectedOption(option);
-    // onSelect(option.value);
-  };
-
   return (
     <div className="relative inline-block text-left">
       <div className="group">
-        <div className="flex items-center w-full text-white">
+        <div className="flex items-center w-full">
           {children}
           <svg
             className="w-5 h-5 ml-2 transition-transform duration-200 group-hover:rotate-180"
@@ -33,10 +24,9 @@ const Dropdown = ({ options, children }: PropsWithChildren<DropdownProps>) => {
         </div>
         <div
           role="menu"
-          className="origin-top-right absolute hidden group-hover:block rtl:left-0 rtl:right-auto ltr:right-0 ltr:left-auto w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+          className="origin-top-right absolute hidden group-hover:block rtl:left-0 rtl:right-auto ltr:right-0 ltr:left-auto w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 overflow-hidden"
         >
           <div
-            className="py-1"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="options-menu"

@@ -3,8 +3,8 @@ import ErrorLayout from "./ErrorLayout";
 import MainLayout from "./MainLayout";
 
 export enum LayoutsENUM {
-  ERROR,
   MAIN,
+  CLEAN,
 }
 
 const Layout = ({
@@ -15,7 +15,7 @@ const Layout = ({
   children: ReactNode;
 }) => {
   switch (type) {
-    case LayoutsENUM.ERROR:
+    case LayoutsENUM.CLEAN:
       return <ErrorLayout>{children}</ErrorLayout>;
     default:
       return <MainLayout>{children}</MainLayout>;

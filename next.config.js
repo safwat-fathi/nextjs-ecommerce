@@ -5,6 +5,9 @@ const nextConfig = {
   reactStrictMode: true,
   i18n,
   swcMinify: true,
+  images: {
+    domains: ["i.ibb.co"],
+  },
 };
 
 module.exports = nextConfig;

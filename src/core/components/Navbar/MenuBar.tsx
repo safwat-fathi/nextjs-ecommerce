@@ -13,19 +13,17 @@ const MenuBar = () => {
 
   return (
     <>
-      <div className="flex items-center space-x-4">
+      <div className="w-full flex justify-center items-center gap-4">
         {/* Pages */}
         <Link
           href="/"
-          className={`text-white ${router.pathname === "/" ? "font-bold" : ""}`}
+          className={` ${router.pathname === "/" ? "font-bold" : ""}`}
         >
           Home
         </Link>
         <Link
           href="/about"
-          className={`text-white ${
-            router.pathname === "/about" ? "font-bold" : ""
-          }`}
+          className={` ${router.pathname === "/about" ? "font-bold" : ""}`}
         >
           About
         </Link>

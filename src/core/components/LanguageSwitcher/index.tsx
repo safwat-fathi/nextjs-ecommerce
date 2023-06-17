@@ -27,6 +27,7 @@ const LanguageSwitcher = () => {
 
   return (
     <select
+      className="focus:outline-none bg-transparent uppercase font-bold"
       value={value}
       onChange={e => {
         setValue(e.target.value);
