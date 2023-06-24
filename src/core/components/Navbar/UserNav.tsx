@@ -10,7 +10,7 @@ const UserNav = () => {
   return (
     <>
       <nav className="contents">
-        <ul className="xl:w-48 flex items-center justify-end gap-4">
+        <ul className="w-48 flex items-center justify-end gap-4">
           <li className="relative">
             <Link href="/profile">
               <Image
@@ -61,7 +61,7 @@ const UserNav = () => {
         <h1>Cart</h1>
       </Drawer>
 
-      <Drawer
+      {/* <Drawer
         key="aw"
         title="Favorites"
         isOpen={isFavOpen}
@@ -71,7 +71,7 @@ const UserNav = () => {
         }}
       >
         <h1>Favorites</h1>
-      </Drawer>
+      </Drawer> */}
     </>
   );
 };

@@ -11,12 +11,12 @@ import Drawer from "@/core/components/Drawer";
 import Modal from "@/core/components/Modal";
 import { useRef, useState } from "react";
 import { useTranslation } from "next-i18next";
-import { Portal } from "@/core/components/Portal";
 import Skeleton from "@/core/components/Skeleton";
 import Spinner from "@/core/components/Spinner";
 import { toast } from "react-toastify";
 import DataView from "@/core/components/DataView";
 import useWindowSize from "@/lib/hooks/useWindowSize";
+import Portal from "@/core/components/Portal";
 
 type FormData = {
   email: string;
@@ -122,19 +122,6 @@ export const Test = () => {
       </SlideshowLightbox> */}
       <button onClick={() => setIsDrawerOpen(true)}>Open Drawer</button>
       <button onClick={() => setIsModalOpen(true)}>Open Modal</button>
-      {/* <Portal> */}
-      <Drawer
-        isOpen={isDrawerOpen}
-        isStatic={false}
-        onClose={() => {
-          console.log("close drawer");
-          setIsDrawerOpen(false);
-        }}
-      >
-        <h1>Hiiiiiiiiiiiii</h1>
-      </Drawer>
-      {/* </Portal> */}
-      {/* <Portal> */}
       <Modal
         isOpen={isModalOpen}
         isStatic={false}
@@ -146,7 +133,6 @@ export const Test = () => {
       >
         <h1>Hiiiiiiiiiiiii from modal</h1>
       </Modal>
-      {/* </Portal> */}
       {/* <div className="bg-black w-16 h-16 flex justify-center items-center">
         <Spinner color="#fff" fontSize={30} />
       </div> */}

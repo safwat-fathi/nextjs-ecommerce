@@ -27,7 +27,7 @@ const Footer = () => {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="transition hover:opacity-75"
                 >
                   <span className="sr-only">Facebook</span>
 
@@ -45,7 +45,7 @@ const Footer = () => {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="transition hover:opacity-75"
                 >
                   <span className="sr-only">Instagram</span>
                   <Image
@@ -59,7 +59,7 @@ const Footer = () => {
 
               <li>
                 <Link
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="transition hover:opacity-75"
                   href="https://www.twitter.com"
                   target="_blank"
                   rel="noreferrer"

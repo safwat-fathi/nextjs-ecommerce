@@ -1,36 +1,51 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { Inter } from "next/font/google";
-import { Test } from "@/components/Test";
-import { GetStaticPropsContext, NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
-// import { useAuth } from "@/lib/contexts/auth.context";
-import Breadcrumbs from "@/core/components/Breadcrumbs";
-import useBreadcrumbs from "@/lib/hooks/useBreadcrumbs";
-import BreadcrumbItem from "@/core/components/Breadcrumbs/BreadcrumbItem";
 import renderWithLayout from "@/core/HOC/WithLayout";
 import { LayoutsENUM } from "@/core/Layout";
-import { useTranslation } from "react-i18next";
+import Hero from "@/core/components/Hero";
+import Categories from "@/core/components/Category";
+import { HomeProps } from "./meta/i-home";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
+export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale }) => {
+  const categories = [
+    {
+      id: 0,
+      name: "Category 1",
+      description: "Category 1 description",
+    },
+    {
+      id: 1,
+      name: "Category 2",
+      description: "Category 2 description",
+    },
+    {
+      id: 2,
+      name: "Category 3",
+      description: "Category 3 description",
+    },
+  ];
+
   return {
     props: {
       ...(await serverSideTranslations(locale!, ["common", "home"])),
+      categories,
     },
   };
-}
+};
 
-const Home: NextPage = () => {
-  const { t } = useTranslation("home");
+const Home: NextPage<HomeProps> = ({ categories }) => {
+  // const { t } = useTranslation("home");
   // const { isAuthenticated, user } = useAuth();
-  const breadcrumbs = useBreadcrumbs();
+  // const breadcrumbs = useBreadcrumbs();
 
   return (
     <>
       <NextSeo title="Home" />
       <div className="h-[200rem]">
-        <Breadcrumbs>
+        {/* <Breadcrumbs>
           {breadcrumbs &&
             breadcrumbs.map(breadcrumb => (
               <BreadcrumbItem
@@ -40,11 +55,12 @@ const Home: NextPage = () => {
                 label={breadcrumb.label}
               />
             ))}
-        </Breadcrumbs>
+        </Breadcrumbs> */}
         <hr />
+        <Hero />
+        <Categories categories={categories} />
         {/* <h1>{t("title")}</h1> */}
-        <hr />
-        <Test />
+        {/* <Test /> */}
       </div>
     </>
   );

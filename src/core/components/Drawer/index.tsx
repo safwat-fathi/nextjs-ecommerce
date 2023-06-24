@@ -33,9 +33,9 @@ const Drawer = ({
         <div
           role="alert"
           className={clsx(
-            "fixed inset-y-0 min-w-[25rem] right-0 bg-white overflow-y-auto transform transition-transform duration-300 z-50",
+            "fixed inset-y-0 min-w-[25rem] ltr:right-0 ltl:left-auto rtl:left-0 rtl:right-auto bg-white overflow-y-auto transform transition-transform duration-300 z-50",
             {
-              "translate-x-full": !isOpen,
+              "rtl:-translate-x-full ltr:translate-x-full": !isOpen,
               "translate-x-0": isOpen,
             }
           )}

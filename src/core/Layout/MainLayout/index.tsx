@@ -14,7 +14,7 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
       <header style={{ display: "unset" }}>
         <TopBar />
         <Navbar />
-        <div className="sticky top-0">
+        <div className="shadow-lg bg-white py-4 sticky top-0">
           <MenuBar />
         </div>
       </header>
