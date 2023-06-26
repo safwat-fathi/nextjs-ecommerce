@@ -5,71 +5,34 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import { toast } from "react-toastify";
+import getConfig from "next/config";
 
-// TODO: add toasters for success and error requests
+const { publicRuntimeConfig } = getConfig();
+
 class HttpClient {
   private readonly _instance: AxiosInstance;
 
   constructor() {
     this._instance = axios.create({
-      baseURL: "https://example.com/api/v1",
+      // baseURL: publicRuntimeConfig.JOKES_API_URL,
+      baseURL: process.env.NEXT_PUBLIC_JOKES_API_URL,
+      // withCredentials: false,
       headers: {
         "Content-Type": "application/json",
       },
     });
 
     this._instance.interceptors.request.use(
-      (config: InternalAxiosRequestConfig) => {
-        const token = localStorage.getItem("token");
-
-        if (token) {
-          config.headers.Authorization = `Bearer ${token}`;
-        }
-
-        return config;
-      },
-      (error: any) => {
-        return Promise.reject(error);
-      }
+      (config: InternalAxiosRequestConfig) => config,
+      (error: any) => Promise.reject(error)
     );
 
     this._instance.interceptors.response.use(
       (response: AxiosResponse) => {
-        this.showSuccessToaster(response.data.message || "Request succeeded");
         return response;
       },
-      (error: any) => {
-        if (error.response.status === 401) {
-          this.showErrorToaster(
-            error.response?.data?.message || "Unauthorized request"
-          );
-
-          localStorage.removeItem("token");
-          window.location.href = "/login";
-        }
-
-        this.showErrorToaster(
-          error.response?.data?.message || "Request failed"
-        );
-
-        return Promise.reject(error);
-      }
+      (error: any) => Promise.reject(error)
     );
-  }
-
-  private showSuccessToaster(message: string): void {
-    toast.success(message, {
-      position: toast.POSITION.TOP_CENTER,
-      autoClose: 3000,
-    });
-  }
-
-  private showErrorToaster(message: string): void {
-    toast.error(message, {
-      position: toast.POSITION.TOP_CENTER,
-      autoClose: 3000,
-    });
   }
 
   public async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {

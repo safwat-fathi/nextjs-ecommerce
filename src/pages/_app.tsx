@@ -7,6 +7,19 @@ import SEO from "../../next-seo.config";
 import { AuthProvider } from "@/lib/contexts/auth.context";
 import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/router";
+import { SWRConfig } from "swr";
+import HttpClient from "@/core/lib/http-client";
+
+const httpClient = new HttpClient();
+
+const fetcher = async (url: string) => {
+  try {
+    const response = await httpClient.get(url);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -24,9 +37,11 @@ function App({ Component, pageProps }: AppProps) {
     <>
       <DefaultSeo {...SEO} />
       <ToastContainer />
-      <AuthProvider>
-        <Component {...pageProps} />
-      </AuthProvider>
+      <SWRConfig value={{ fetcher: fetcher }}>
+        <AuthProvider>
+          <Component {...pageProps} />
+        </AuthProvider>
+      </SWRConfig>
     </>
   );
 }
