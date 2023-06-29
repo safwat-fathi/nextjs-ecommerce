@@ -14,7 +14,6 @@ import { useTranslation } from "next-i18next";
 import Skeleton from "@/core/components/Skeleton";
 import Spinner from "@/core/components/Spinner";
 import { toast } from "react-toastify";
-import DataView from "@/core/components/DataView";
 import useWindowSize from "@/lib/hooks/useWindowSize";
 import Portal from "@/core/components/Portal";
 
@@ -55,7 +54,6 @@ export const Test = () => {
   return (
     <>
       {/* <h1 className="font-bold">{t("title")}</h1> */}
-      <DataView />
       {/* <textarea ref={test} name="wad" id="awd" cols={30} rows={10}></textarea> */}
       {/* <button className="" onClick={() => handleShowToast("error")}>
         Show toast error
