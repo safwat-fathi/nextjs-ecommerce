@@ -5,16 +5,12 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import getConfig from "next/config";
-
-const { publicRuntimeConfig } = getConfig();
 
 class HttpClient {
   private readonly _instance: AxiosInstance;
 
   constructor() {
     this._instance = axios.create({
-      // baseURL: publicRuntimeConfig.JOKES_API_URL,
       baseURL: process.env.NEXT_PUBLIC_JOKES_API_URL,
       // withCredentials: false,
       headers: {
@@ -29,7 +25,7 @@ class HttpClient {
 
     this._instance.interceptors.response.use(
       (response: AxiosResponse) => {
-        return response;
+        return response.data;
       },
       (error: any) => Promise.reject(error)
     );

@@ -34,10 +34,6 @@ export interface SpinnerProps {
   fontSize: number;
 }
 
-export interface SkeletonProps {
-  type: "grid" | "list";
-}
-
 export type CrumbItem = {
   label: ReactNode;
   isLast: boolean;

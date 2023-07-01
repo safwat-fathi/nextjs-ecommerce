@@ -1,7 +1,7 @@
 export interface Categories {
   id: number;
   name: string;
-  description: string;
+  url: string;
 }
 
 export interface HomeProps {
