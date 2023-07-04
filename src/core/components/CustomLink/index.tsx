@@ -1,7 +1,6 @@
-import { PropsWithChildren } from "react";
-import clsx from "clsx";
-
+import { HTMLProps, PropsWithChildren } from "react";
 import { BtnProps } from "../meta/i-button";
+import clsx from "clsx";
 
 const classes = {
   size: {
@@ -13,26 +12,25 @@ const classes = {
     primary:
       "bg-primary-500 hover:bg-primary-800 focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50 text-white",
     secondary:
-      "bg-secondary-500 hover:bg-secondary-800 focus:ring-2 focus:ring-secondary-500 focus:ring-opacity-50 text-white-900 hover:text-white",
+      "bg-gray-200 hover:bg-gray-800 focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 text-gray-900 hover:text-white",
     danger:
       "bg-red-500 hover:bg-red-800 focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 text-white",
   },
 };
 
 const Button = ({
-  pill = false,
-  size = "md",
-  variant = "primary",
-  disabled = false,
+  pill,
+  size,
+  variant,
+  disabled,
   children,
   ...props
 }: PropsWithChildren<BtnProps>) => {
   return (
     <button
-      disabled={disabled}
       className={clsx(
-        `focus:outline-none transition ease-in-out duration-300 rounded ${classes.size[size]} ${classes.variant[variant]}}`,
-        { "opacity-50 cursor-not-allowed": disabled, "rounded-full": pill }
+        `focus:outline-none transition ease-in-out duration-300 ${classes.size[size]} ${classes.variant[variant]}}`,
+        { disabled: "opacity-50 cursor-not-allowed", pill: "rounded-full" }
       )}
       {...props}
     >

@@ -1,8 +1,9 @@
 import Link from "next/link";
+import Button from "../Button";
 
 const Hero = () => {
   return (
-    <section className="bg-gray-900 text-white py-20">
+    <section className="bg-primary text-white py-20">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-4xl lg:text-6xl font-bold mb-6">
@@ -13,9 +14,9 @@ const Hero = () => {
           </p>
           <Link
             href="/shop"
-            className="transition bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg font-medium"
+            // className="transition bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg font-medium"
           >
-            Shop Now
+            <Button>Shop Now</Button>
           </Link>
         </div>
       </div>
