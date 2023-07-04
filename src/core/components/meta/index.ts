@@ -1,5 +1,9 @@
 import { HTMLInputTypeAttribute, ReactNode } from "react";
 
+export type Variant = "primary" | "secondary" | "danger";
+
+export type Size = "sm" | "md" | "lg" | "xl";
+
 export interface InputBaseProps {
   name: string;
   label?: string;

@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{ts,tsx}"],
+  fontFamily: {
+    poppins: ["Poppins", "sans-serif"],
+    roboto: ["Roboto", "sans-serif"],
+  },
   theme: {
     extend: {
       colors: {
@@ -11,5 +15,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };

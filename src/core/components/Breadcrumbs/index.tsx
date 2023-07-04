@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { BreadcrumbsProps } from "../meta";
 import { Children, Fragment } from "react";
 
@@ -18,7 +17,7 @@ const Breadcrumbs = ({ children }: BreadcrumbsProps) => {
   });
 
   return (
-    <nav aria-label="breadcrumb">
+    <nav aria-label="breadcrumb" role="list">
       <ul className="flex items-center gap-x-4">{childrenWithSeparator}</ul>
     </nav>
   );

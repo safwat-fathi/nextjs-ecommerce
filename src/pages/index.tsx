@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
@@ -7,13 +8,12 @@ import useSWR from "swr";
 
 import renderWithLayout from "@/core/HOC/WithLayout";
 import { LayoutsENUM } from "@/core/Layout";
-import Hero from "@/core/components/Hero";
+import Banner from "@/core/components/Banner";
 import { HomeProps } from "./meta/i-home";
 import DataView from "@/core/components/DataView";
 import { fetcher } from "@/core/lib/data-fetcher";
 import GridView from "@/core/components/DataView/GridView";
 import ListView from "@/core/components/DataView/ListView";
-import Skeleton from "@/core/components/Skeleton";
 
 export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale }) => {
   const categories = [
@@ -36,14 +36,14 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale }) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale!, ["common", "home"])),
+      ...(await serverSideTranslations(locale!, ["home"])),
       categories,
     },
   };
 };
 
 const Home: NextPage<HomeProps> = ({ categories }) => {
-  // const { t } = useTranslation("home");
+  const { t } = useTranslation("home");
   // const { isAuthenticated, user } = useAuth();
   // const breadcrumbs = useBreadcrumbs();
   const [page, setPage] = useState(0);
@@ -63,7 +63,7 @@ const Home: NextPage<HomeProps> = ({ categories }) => {
 
   return (
     <>
-      <NextSeo title="Home" />
+      <NextSeo title={t("title") as string} />
       <div className="h-[200rem]">
         {/* <Breadcrumbs>
           {breadcrumbs &&
@@ -77,7 +77,7 @@ const Home: NextPage<HomeProps> = ({ categories }) => {
             ))}
         </Breadcrumbs> */}
         <hr />
-        <Hero />
+        <Banner />
         <DataView
           error={error}
           isLoading={isLoading}
@@ -109,7 +109,7 @@ const Home: NextPage<HomeProps> = ({ categories }) => {
             </ListView>
           )}
         </DataView>
-        {/* <h1>{t("title")}</h1> */}
+        <div>{t && t("title")}</div>
         {/* <Test /> */}
       </div>
     </>

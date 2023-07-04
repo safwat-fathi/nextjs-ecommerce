@@ -1,7 +1,8 @@
 import { ButtonHTMLAttributes } from "react";
+import { Size, Variant } from ".";
 
 export interface BtnProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "danger";
-  size?: "sm" | "md" | "lg";
+  variant?: Variant;
+  size?: Size;
   pill?: boolean;
 }
