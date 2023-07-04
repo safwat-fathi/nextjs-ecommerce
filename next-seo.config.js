@@ -1,9 +1,9 @@
 /** @type {import('next-seo').DefaultSeoProps} */
 const SEO = {
-  titleTemplate: "Website Title | %s",
-  defaultTitle: "Website default title",
-  description: "Website default description",
-  themeColor: "#000",
+  titleTemplate: "dontbuy | %s",
+  defaultTitle: "Don't Buy",
+  description: "An E-commerce template",
+  themeColor: "#f53d57",
   additionalMetaTags: [
     {
       name: "viewport",
@@ -14,7 +14,7 @@ const SEO = {
     type: "website",
     locale: "ar",
     url: "https://www.url.ar/",
-    siteName: "SiteName",
+    siteName: "dontbuy",
   },
   twitter: {
     handle: "@handle",
@@ -23,4 +23,4 @@ const SEO = {
   },
 };
 
-module.exports = SEO;
+export default SEO;

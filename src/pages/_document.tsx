@@ -18,7 +18,14 @@ class MyDocument extends Document {
 
     return (
       <Html lang={locale}>
-        <Head />
+        <Head>
+          <link rel="manifest" href="/manifest.json" />
+          <link
+            rel="shortcut icon"
+            href="/favicon/favicon.ico"
+            type="image/x-icon"
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />

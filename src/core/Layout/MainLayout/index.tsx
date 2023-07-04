@@ -4,6 +4,7 @@ import Navbar from "@/core/components/Navbar";
 import TopBar from "@/core/components/Navbar/TopBar";
 import MenuBar from "@/core/components/Navbar/MenuBar";
 import Footer from "@/core/components/Footer";
+import Header from "@/core/components/Header";
 const DynamicToTop = dynamic(() => import("@/core/components/BackToTop"), {
   ssr: false,
 });
