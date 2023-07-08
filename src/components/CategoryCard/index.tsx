@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const CategoryCard = ({ label }: { label: string }) => {
+const CategoryCard = ({ imgSrc, label }: { imgSrc: string; label: string }) => {
   return (
-    <div className="relative rounded-sm overflow-hidden group">
+    <div className="relative rounded-md overflow-hidden group h-64">
       <Image
-        src="/images/logo.svg"
+        src={imgSrc}
         alt="category"
         className="w-full"
         width={100}

@@ -19,8 +19,8 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div className="w-full max-w-md xl:max-w-lg 2xl:max-w-2xl bg-gray-100 rounded-md hidden md:flex justify-between items-center h-12 px-3">
-        <select className="focus:outline-none bg-transparent uppercase font-bold text-sm">
+      <div className="w-full max-w-md xl:max-w-lg 2xl:max-w-2xl bg-gray-100 rounded-md hidden md:flex items-center h-12">
+        <select className="form-select bg-transparent focus:outline-none focus:ring-0 uppercase font-bold text-sm border-0">
           <option>All Categories</option>
           <option>Men Cloths</option>
           <option>Women Cloths</option>
@@ -28,13 +28,13 @@ const Navbar = () => {
           <option>Women Shoes</option>
         </select>
         <input
-          className="focus:outline-none bg-transparent font-semibold text-sm"
           type="text"
+          className="form-input focus:outline-none focus:ring-0 bg-transparent font-semibold text-sm border-0"
           placeholder="I'm searching for ..."
         />
-        <span
+        <button
           role="button"
-          className="text-gray-500"
+          className="w-8 h-full text-gray-500"
           onClick={() => {
             console.log("search for::");
           }}
@@ -45,7 +45,7 @@ const Navbar = () => {
             height={20}
             alt="search"
           />
-        </span>
+        </button>
       </div>
 
       <div className="lg:max-w-sm hidden lg:flex flex-col place-items-end">

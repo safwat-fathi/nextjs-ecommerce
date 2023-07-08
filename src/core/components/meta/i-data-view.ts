@@ -1,10 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
 
-export interface DataViewProps<T = any> {
+export interface IDataView {
   error: unknown;
   isLoading: boolean;
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
-  isGrid: boolean;
-  setIsGrid: Dispatch<SetStateAction<boolean>>;
+  changView?: boolean;
+  isGrid?: boolean;
+  setIsGrid?: Dispatch<SetStateAction<boolean>>;
 }

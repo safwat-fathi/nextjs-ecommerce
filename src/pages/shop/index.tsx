@@ -6,11 +6,11 @@ import { useTranslation } from "next-i18next";
 import renderWithLayout from "@/core/HOC/WithLayout";
 import Breadcrumbs from "@/core/components/Breadcrumbs";
 import BreadcrumbItem from "@/core/components/Breadcrumbs/BreadcrumbItem";
+import Typography from "@/core/components/Typography";
+import Section from "@/core/components/Section";
 import { LayoutsENUM } from "@/core/Layout";
 
 import useBreadcrumbs from "@/lib/hooks/useBreadcrumbs";
-import Typography from "@/core/components/Typography";
-import CategoryCard from "@/components/CategoryCard";
 
 export const getStaticProps: GetStaticProps<any> = async ({ locale }) => {
   return {
@@ -27,7 +27,8 @@ const Shop: NextPage<any> = () => {
   return (
     <>
       <NextSeo title={t("title") as string} />
-      <div className="h-[200rem]">
+
+      <Section>
         <Breadcrumbs>
           {breadcrumbs &&
             breadcrumbs.map(breadcrumb => (
@@ -39,14 +40,11 @@ const Shop: NextPage<any> = () => {
               />
             ))}
         </Breadcrumbs>
-        <hr />
+      </Section>
 
+      <Section>
         <Typography size="xl">{t("title")}</Typography>
-
-        <div className="grid grid-cols-3 gap-3">
-          <CategoryCard label="woooooooooow" />
-        </div>
-      </div>
+      </Section>
     </>
   );
 };

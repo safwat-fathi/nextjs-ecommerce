@@ -4,6 +4,8 @@ export type Variant = "primary" | "secondary" | "danger";
 
 export type Size = "sm" | "md" | "lg" | "xl";
 
+export type TRatingRange = 1 | 2 | 3 | 4 | 5;
+
 export interface InputBaseProps {
   name: string;
   label?: string;

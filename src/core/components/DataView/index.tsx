@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 
-import { DataViewProps } from "../meta/i-data-view";
+import { IDataView } from "../meta/i-data-view";
 import Skeleton from "../Skeleton";
 
 // TODO: load more or pagination feature
@@ -11,24 +11,27 @@ const DataView = ({
   setPage,
   isGrid,
   setIsGrid,
+  changView = true,
   children,
-}: PropsWithChildren<DataViewProps>) => {
+}: PropsWithChildren<IDataView>) => {
   const toggleView = () => {
-    setIsGrid(!isGrid);
+    if (setIsGrid) setIsGrid(!isGrid);
   };
 
   if (error) return <div>failed to load</div>;
 
   return (
-    <div className="container mx-auto px-4">
-      <div className="flex justify-end mb-4">
-        <button
-          className="text-indigo-500 hover:text-indigo-600 mr-2"
-          onClick={toggleView}
-        >
-          {isGrid ? "Switch to List" : "Switch to Grid"}
-        </button>
-      </div>
+    <>
+      {changView && (
+        <div className="flex justify-end mb-4">
+          <button
+            className="text-indigo-500 hover:text-indigo-600 mr-2"
+            onClick={toggleView}
+          >
+            {isGrid ? "Switch to List" : "Switch to Grid"}
+          </button>
+        </div>
+      )}
       {isLoading ? <Skeleton type={isGrid ? "grid" : "list"} /> : children}
       <div className="flex gap-4">
         <button
@@ -44,7 +47,7 @@ const DataView = ({
           Next
         </button>
       </div>
-    </div>
+    </>
   );
 };
 

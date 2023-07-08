@@ -1,19 +1,18 @@
-import { useState } from "react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
+import Image from "next/image";
 
-import useSWR from "swr";
-
+import ProductCard from "@/components/ProductCard";
 import renderWithLayout from "@/core/HOC/WithLayout";
 import { LayoutsENUM } from "@/core/Layout";
 import Banner from "@/core/components/Banner";
+import Categories from "@/components/Categories";
+import Typography from "@/core/components/Typography";
+import Section from "@/core/components/Section";
+
 import { HomeProps } from "./meta/i-home";
-import DataView from "@/core/components/DataView";
-import { fetcher } from "@/core/lib/data-fetcher";
-import GridView from "@/core/components/DataView/GridView";
-import ListView from "@/core/components/DataView/ListView";
 
 export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale }) => {
   const categories = [
@@ -45,73 +44,82 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale }) => {
 const Home: NextPage<HomeProps> = ({ categories }) => {
   const { t } = useTranslation("home");
   // const { isAuthenticated, user } = useAuth();
-  // const breadcrumbs = useBreadcrumbs();
-  const [page, setPage] = useState(0);
-  const [isGrid, setIsGrid] = useState(true);
-
-  {
-    /* `https://pokeapi.co/api/v2/pokemon?offset=${page}&limit=10` 
-	`https://official-joke-api.appspot.com/jokes/programming/ten` */
-  }
-  const { data, error, isLoading } = useSWR<any>(
-    [`https://pokeapi.co/api/v2/pokemon?offset=${page}&limit=10`, page],
-    fetcher,
-    {
-      fallbackData: categories,
-    }
-  );
 
   return (
     <>
       <NextSeo title={t("title") as string} />
-      <div className="h-[200rem]">
-        {/* <Breadcrumbs>
-          {breadcrumbs &&
-            breadcrumbs.map(breadcrumb => (
-              <BreadcrumbItem
-                key={breadcrumb.path}
-                path={breadcrumb.path}
-                isLast={breadcrumb.isLast}
-                label={breadcrumb.label}
-              />
-            ))}
-        </Breadcrumbs> */}
-        <hr />
+
+      <Section centered={false} role="banner">
         <Banner />
-        <DataView
-          error={error}
-          isLoading={isLoading}
-          page={page}
-          setPage={setPage}
-          isGrid={isGrid}
-          setIsGrid={setIsGrid}
-        >
-          {isGrid ? (
-            <GridView>
-              {data?.results?.map((item: any) => (
-                <div
-                  key={item.name}
-                  className="bg-white p-4 rounded-lg shadow-md"
-                >
-                  <h2 className="text-lg font-semibold">{item.name}</h2>
-                  <p className="text-lg font-semibold">{item.url}</p>
-                </div>
-              ))}
-            </GridView>
-          ) : (
-            <ListView>
-              {data?.results?.map((item: any) => (
-                <li key={item.name} className="border-b py-4">
-                  <h2 className="text-lg font-semibold">{item.name}</h2>
-                  <p className="text-lg font-semibold">{item.url}</p>
-                </li>
-              ))}
-            </ListView>
-          )}
-        </DataView>
-        <div>{t && t("title")}</div>
-        {/* <Test /> */}
-      </div>
+      </Section>
+
+      <Section>
+        <div className="py-16">
+          <div className="w-10/12 grid grid-cols-1 md:grid-cols-3 gap-6 mx-auto justify-center">
+            <div className="border border-primary rounded-sm px-3 py-6 flex justify-center items-center gap-5">
+              <Image
+                width={50}
+                height={50}
+                src="assets/images/icons/delivery-van.svg"
+                alt="Delivery"
+                className="w-12 h-12 object-contain"
+              />
+              <div>
+                <h4 className="font-medium capitalize text-lg">
+                  Free Shipping
+                </h4>
+                <p className="text-gray-500 text-sm">Order over $200</p>
+              </div>
+            </div>
+            <div className="border border-primary rounded-sm px-3 py-6 flex justify-center items-center gap-5">
+              <Image
+                width={50}
+                height={50}
+                src="assets/images/icons/money-back.svg"
+                alt="Money Back"
+                className="w-12 h-12 object-contain"
+              />
+              <div>
+                <h4 className="font-medium capitalize text-lg">Money Rturns</h4>
+                <p className="text-gray-500 text-sm">30 days money returs</p>
+              </div>
+            </div>
+            <div className="border border-primary rounded-sm px-3 py-6 flex justify-center items-center gap-5">
+              <Image
+                width={50}
+                height={50}
+                src="assets/images/icons/service-hours.svg"
+                alt="Service Hrs"
+                className="w-12 h-12 object-contain"
+              />
+              <div>
+                <h4 className="font-medium capitalize text-lg">24/7 Support</h4>
+                <p className="text-gray-500 text-sm">Customer support</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section>
+        <Typography size="xl" variant="primary" className="uppercase font-bold">
+          shop by category
+        </Typography>
+        <Categories initialData={categories} />
+      </Section>
+
+      <Section>
+        <Typography size="xl" variant="primary" className="uppercase font-bold">
+          top new arrival
+        </Typography>
+        <ProductCard />
+      </Section>
+
+      <Section>
+        <Typography size="xl">{t("title")}</Typography>
+      </Section>
+
+      {/* <Test /> */}
     </>
   );
 };
