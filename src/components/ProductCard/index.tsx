@@ -6,26 +6,24 @@ import Rating from "@/core/components/Rating";
 
 import { IProductCard } from "../meta/i-product-card";
 
-const ProductCard = () => {
-  // const ProductCard = ({
-  //   imgSrc,
-  //   price,
-  //   review,
-  //   title,
-  //   totalReviews,
-  //   oldPrice,
-  // }: IProductCard) => {
+const ProductCard = ({
+  imgSrc,
+  price,
+  rating,
+  title,
+  totalReviews,
+  oldPrice,
+}: IProductCard) => {
   const router = useRouter();
-  const { locale } = router;
 
   return (
-    <div className="relative rounded-md overflow-hidden group">
-      <div className="bg-white shadow rounded group">
-        <div className="relative">
+    <div className="bg-white relative shadow rounded-md overflow-hidden group min-h-[20rem]">
+      <div className="flex flex-col justify-between bg-white shadow rounded group h-full">
+        <div className="relative flex-1">
           <Image
             width={200}
             height={200}
-            src="/images/logo.svg"
+            src={imgSrc}
             alt="product 1"
             className="w-full"
           />
@@ -64,19 +62,22 @@ const ProductCard = () => {
         <div className="pt-4 pb-3 px-4">
           <Link href="#">
             <h4 className="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
-              Guyer Chair
+              {title}
             </h4>
           </Link>
           <div className="flex items-baseline mb-1 space-x-2">
-            <p className="text-xl text-primary font-semibold">$45.00</p>
-            <p className="text-sm text-gray-400 line-through">$55.90</p>
+            <p className="text-xl text-primary font-semibold">${price}</p>
+            <p className="text-sm text-gray-400 line-through">${oldPrice}</p>
           </div>
-          <Rating rating={2} canBeUpdated />
+          <div className="flex items-center">
+            <Rating rating={rating} />
+            <p className="text-xs text-gray-500 ml-3">({totalReviews})</p>
+          </div>
         </div>
         <button
           className="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition"
           onClick={() => {
-            console.log("awdawdawd");
+            console.log("add to cart");
           }}
         >
           Add to cart

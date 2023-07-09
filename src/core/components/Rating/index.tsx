@@ -5,10 +5,10 @@ import { boolean } from "yup";
 
 const Rating = ({
   rating,
-  canBeUpdated,
+  canBeUpdated = false,
 }: {
   rating: TRatingRange;
-  canBeUpdated: boolean;
+  canBeUpdated?: boolean;
 }) => {
   // const Rating = ({
   //   imgSrc,

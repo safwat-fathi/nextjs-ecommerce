@@ -112,13 +112,113 @@ const Home: NextPage<HomeProps> = ({ categories }) => {
         <Typography size="xl" variant="primary" className="uppercase font-bold">
           top new arrival
         </Typography>
-        <ProductCard />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <ProductCard
+            imgSrc="/images/logo.svg"
+            price={45.0}
+            oldPrice={55.0}
+            rating={2}
+            title="Guyer Chair"
+            totalReviews={100}
+          />
+          <ProductCard
+            imgSrc="/images/logo.svg"
+            price={45.0}
+            oldPrice={55.0}
+            rating={3}
+            title="Guyer Chair"
+            totalReviews={100}
+          />
+          <ProductCard
+            imgSrc="/images/logo.svg"
+            price={45.0}
+            oldPrice={55.0}
+            rating={4}
+            title="Guyer Chair"
+            totalReviews={100}
+          />
+          <ProductCard
+            imgSrc="/images/logo.svg"
+            price={45.0}
+            oldPrice={55.0}
+            rating={5}
+            title="Guyer Chair"
+            totalReviews={100}
+          />
+        </div>
       </Section>
 
       <Section>
-        <Typography size="xl">{t("title")}</Typography>
+        <Typography size="xl" variant="primary" className="uppercase font-bold">
+          recommended for you
+        </Typography>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <ProductCard
+            imgSrc="/images/logo.svg"
+            price={45.0}
+            oldPrice={55.0}
+            rating={5}
+            title="Guyer Chair"
+            totalReviews={100}
+          />
+          <ProductCard
+            imgSrc="/images/logo.svg"
+            price={45.0}
+            oldPrice={55.0}
+            rating={5}
+            title="Guyer Chair"
+            totalReviews={100}
+          />
+          <ProductCard
+            imgSrc="/images/logo.svg"
+            price={45.0}
+            oldPrice={55.0}
+            rating={5}
+            title="Guyer Chair"
+            totalReviews={100}
+          />
+          <ProductCard
+            imgSrc="/images/logo.svg"
+            price={45.0}
+            oldPrice={55.0}
+            rating={5}
+            title="Guyer Chair"
+            totalReviews={100}
+          />
+          <ProductCard
+            imgSrc="/images/logo.svg"
+            price={45.0}
+            oldPrice={55.0}
+            rating={5}
+            title="Guyer Chair"
+            totalReviews={100}
+          />
+          <ProductCard
+            imgSrc="/images/logo.svg"
+            price={45.0}
+            oldPrice={55.0}
+            rating={5}
+            title="Guyer Chair"
+            totalReviews={100}
+          />
+          <ProductCard
+            imgSrc="/images/logo.svg"
+            price={45.0}
+            oldPrice={55.0}
+            rating={5}
+            title="Guyer Chair"
+            totalReviews={100}
+          />
+          <ProductCard
+            imgSrc="/images/logo.svg"
+            price={45.0}
+            oldPrice={55.0}
+            rating={5}
+            title="Guyer Chair"
+            totalReviews={100}
+          />
+        </div>
       </Section>
-
       {/* <Test /> */}
     </>
   );

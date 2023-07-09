@@ -17,23 +17,36 @@ const MenuBar = () => {
         {/* Pages */}
         <Link
           href="/"
-          className={` ${router.pathname === "/" ? "font-bold" : ""}`}
+          className={` ${
+            router.pathname === "/" ? "font-bold text-white" : ""
+          } hover:text-white`}
         >
           Home
         </Link>
         <Link
           href="/about"
-          className={` ${router.pathname === "/about" ? "font-bold" : ""}`}
+          className={` ${
+            router.pathname === "/about" ? "font-bold text-white" : ""
+          } hover:text-white`}
         >
           About
+        </Link>
+
+        <Link
+          href="/shop"
+          className={` ${
+            router.pathname === "/shop" ? "font-bold text-white" : ""
+          } hover:text-white`}
+        >
+          Shop
         </Link>
 
         <Dropdown options={dropdownOptions}>
           <Link
             href="/categories"
             className={`cursor-pointer ${
-              router.pathname === "/categories" ? "font-bold" : ""
-            }`}
+              router.pathname === "/categories" ? "font-bold text-white" : ""
+            } hover:text-white`}
           >
             Categories
           </Link>

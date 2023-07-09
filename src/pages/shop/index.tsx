@@ -11,6 +11,7 @@ import Section from "@/core/components/Section";
 import { LayoutsENUM } from "@/core/Layout";
 
 import useBreadcrumbs from "@/lib/hooks/useBreadcrumbs";
+import Filters from "@/components/Filters";
 
 export const getStaticProps: GetStaticProps<any> = async ({ locale }) => {
   return {
@@ -44,6 +45,14 @@ const Shop: NextPage<any> = () => {
 
       <Section>
         <Typography size="xl">{t("title")}</Typography>
+      </Section>
+
+      <Section>
+        <div className="grid md:grid-cols-4 grid-cols-2 gap-6 pt-4 pb-16 items-start">
+          <div className="col-span-1 bg-white px-4 pb-6 shadow rounded overflow-hidden hidden md:block">
+            <Filters />
+          </div>
+        </div>
       </Section>
     </>
   );
