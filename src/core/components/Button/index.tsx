@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import clsx from "clsx";
 
-import { BtnProps } from "../meta/i-button";
+import { BtnProps } from "../types/i-button";
 
 const classes = {
   size: {

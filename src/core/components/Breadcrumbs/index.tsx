@@ -1,4 +1,4 @@
-import { BreadcrumbsProps } from "../meta";
+import { BreadcrumbsProps } from "../types";
 import { Children, Fragment } from "react";
 
 const Breadcrumbs = ({ children }: BreadcrumbsProps) => {

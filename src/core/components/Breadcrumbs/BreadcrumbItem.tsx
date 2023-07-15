@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CrumbItem } from "../meta";
+import { CrumbItem } from "../types";
 import Typography from "../Typography";
 
 const BreadcrumbItem = ({ label, path, isLast }: CrumbItem) => {

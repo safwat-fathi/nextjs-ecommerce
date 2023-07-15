@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import clsx from "clsx";
 
-import { SectionProps } from "../meta/i-section";
+import { SectionProps } from "../types/i-section";
 
 const Section = ({
   centered = true,

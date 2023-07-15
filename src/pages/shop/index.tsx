@@ -12,11 +12,13 @@ import { LayoutsENUM } from "@/core/Layout";
 
 import useBreadcrumbs from "@/lib/hooks/useBreadcrumbs";
 import Filters from "@/components/Filters";
+import { ProductsProvider } from "@/lib/contexts/products.context";
+import Products from "@/components/Products";
 
 export const getStaticProps: GetStaticProps<any> = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale!, ["shop"])),
+      ...(await serverSideTranslations(locale!, ["common", "shop"])),
     },
   };
 };
@@ -48,11 +50,16 @@ const Shop: NextPage<any> = () => {
       </Section>
 
       <Section>
-        <div className="grid md:grid-cols-4 grid-cols-2 gap-6 pt-4 pb-16 items-start">
-          <div className="col-span-1 bg-white px-4 pb-6 shadow rounded overflow-hidden hidden md:block">
-            <Filters />
+        <ProductsProvider>
+          <div className="grid md:grid-cols-4 grid-cols-2 gap-6 pt-4 pb-16 items-start">
+            <div className="col-span-1 bg-white px-4 pb-6 shadow rounded overflow-hidden hidden md:block">
+              <Filters />
+            </div>
+            <div className="col-span-3">
+              <Products />
+            </div>
           </div>
-        </div>
+        </ProductsProvider>
       </Section>
     </>
   );

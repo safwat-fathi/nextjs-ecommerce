@@ -1,4 +1,4 @@
-import { SelectInputProps } from "../../meta";
+import { SelectInputProps } from "../../types";
 
 // TODO: handle unselected value
 // TODO: handle register with react hook form

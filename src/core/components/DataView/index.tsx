@@ -1,7 +1,9 @@
 import { PropsWithChildren } from "react";
 
-import { IDataView } from "../meta/i-data-view";
+import ErrorFallback from "../ErrorFallback";
+
 import Skeleton from "../Skeleton";
+import { IDataView } from "../types/i-data-view";
 
 // TODO: load more or pagination feature
 const DataView = ({
@@ -18,7 +20,9 @@ const DataView = ({
     if (setIsGrid) setIsGrid(!isGrid);
   };
 
-  if (error) return <div>failed to load</div>;
+  if (error) {
+    return <ErrorFallback error={error} />;
+  }
 
   return (
     <>

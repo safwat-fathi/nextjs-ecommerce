@@ -1,4 +1,4 @@
-import { SkeletonProps } from "../meta/i-skeleton";
+import { SkeletonProps } from "../types/i-skeleton";
 import GridSkeleton from "./GridSkeleton";
 import ListSkeleton from "./ListSkeleton";
 

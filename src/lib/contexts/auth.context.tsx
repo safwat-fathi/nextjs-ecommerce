@@ -1,8 +1,14 @@
 import { AuthService } from "@/services/auth.service";
 
 import { useRouter } from "next/router";
-import { ReactNode, createContext, useContext, useEffect, useState } from "react";
-import { IAuthContext, User } from "./types/index.";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { IAuthContext, IUser } from "./types/index.";
 
 const AuthContext = createContext<IAuthContext>({
   user: null,
@@ -12,8 +18,10 @@ const AuthContext = createContext<IAuthContext>({
   logout: async () => {},
 });
 
+const useAuth = () => useContext(AuthContext);
+
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
   const [loading, setLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -80,6 +88,4 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const useAuth = () => useContext(AuthContext)
-
-export {AuthContext, AuthProvider, useAuth}
+export { AuthContext, AuthProvider, useAuth };

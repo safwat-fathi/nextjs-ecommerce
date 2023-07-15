@@ -1,7 +1,7 @@
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
-import { DrawerProps } from "../meta";
+import { DrawerProps } from "../types";
 import { PropsWithChildren } from "react";
 import dynamic from "next/dynamic";
 const DynamicPortal = dynamic(() => import("../Portal"), { ssr: false });

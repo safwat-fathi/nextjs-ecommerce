@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { DropdownProps } from "../meta";
+import { DropdownProps } from "../types";
 import Link from "next/link";
 import Image from "next/image";
 

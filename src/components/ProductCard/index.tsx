@@ -3,8 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import Rating from "@/core/components/Rating";
-
-import { IProductCard } from "../meta/i-product-card";
+import { IProduct } from "@/types/i-products";
 
 const ProductCard = ({
   imgSrc,
@@ -13,7 +12,7 @@ const ProductCard = ({
   title,
   totalReviews,
   oldPrice,
-}: IProductCard) => {
+}: IProduct) => {
   const router = useRouter();
 
   return (

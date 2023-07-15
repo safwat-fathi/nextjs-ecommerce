@@ -3,7 +3,6 @@ import useSWR from "swr";
 
 import DataView from "@/core/components/DataView";
 import GridView from "@/core/components/DataView/GridView";
-import ListView from "@/core/components/DataView/ListView";
 
 import { fetcher } from "@/core/lib/data-fetcher";
 import CategoryCard from "../CategoryCard";

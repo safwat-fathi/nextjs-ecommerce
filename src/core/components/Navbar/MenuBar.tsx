@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Dropdown from "../Dropdown";
-import { DropdownOption } from "../meta";
+import { DropdownOption } from "../types";
 
 const dropdownOptions: DropdownOption[] = [
   { label: "Home", href: "/" },

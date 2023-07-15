@@ -11,7 +11,7 @@ class HttpClient {
 
   constructor() {
     this._instance = axios.create({
-      baseURL: process.env.NEXT_PUBLIC_JOKES_API_URL,
+      baseURL: process.env.NEXT_PUBLIC_BASE_API,
       // withCredentials: false,
       headers: {
         "Content-Type": "application/json",

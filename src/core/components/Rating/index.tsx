@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { TRatingRange } from "../meta";
+import { TRatingRange } from "../types";
 import Star from "./Star";
 import { boolean } from "yup";
 

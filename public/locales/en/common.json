@@ -1,4 +1,6 @@
 {
   "name": "name",
-  "changeLanguage": "change language"
+  "changeLanguage": "change language",
+  "oops": "Oops, something went wrong",
+  "tryAgain": "We apologize for the inconvenience. Please try again later"
 }

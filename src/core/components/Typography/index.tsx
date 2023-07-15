@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import clsx from "clsx";
 
-import { TypoProps } from "../meta/i-typography";
+import { TypoProps } from "../types/i-typography";
 
 const classes = {
   size: {
