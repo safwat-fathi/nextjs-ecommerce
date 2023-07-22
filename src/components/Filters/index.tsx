@@ -1,8 +1,8 @@
 import { ChangeEvent } from "react";
 
 import { useProducts } from "@/lib/contexts/products.context";
-
-import { objToURLParams } from "@/lib/utils/string";
+import { IProductsFilters } from "@/types/i-product";
+import { ICategory } from "@/types/i-category";
 
 const brandsData = [
   {
@@ -22,47 +22,58 @@ const brandsData = [
   },
 ];
 
-const categoriesData = [
+const categoriesData: ICategory[] = [
   {
-    id: 0,
-    name: "Bedroom",
-    count: 10,
+    _id: "64baa25b328ab1c619fb1a9c",
+    name: "Cloths",
+    description: "All Cloths",
+    sub: [
+      {
+        _id: "64baa25b328ab1c619fb1a9f",
+        name: "Shirts",
+        description: "All Shirts",
+        sub: [],
+        parent: "64baa25b328ab1c619fb1a9c",
+      },
+    ],
+    parent: null,
   },
   {
-    id: 1,
-    name: "Sofa",
-    count: 5,
+    _id: "64baa25b328ab1c619fb1aa1",
+    name: "Shoes",
+    description: "All Shoes",
+    sub: [],
+    parent: null,
   },
   {
-    id: 2,
-    name: "Outdoor",
-    count: 17,
-  },
-  {
-    id: 3,
-    name: "Office",
-    count: 3,
+    _id: "64baa25b328ab1c619fb1aa0",
+    name: "Food",
+    description: "All food",
+    sub: [],
+    parent: null,
   },
 ];
 
 // TODO: test useProducts with this filters against an open api
 const Filters = () => {
-  const { filters, setFilters } = useProducts();
+  const { filter, setFilter } = useProducts();
 
   const handleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
 
-    const { categories } = filters;
+    const { categories } = filter;
 
     if (checked) {
-      setFilters(prevState => ({
+      setFilter((prevState: IProductsFilters) => ({
         ...prevState,
-        categories: [...categories, name],
+        categories: { in: [...categories.in, name] },
       }));
     } else {
-      setFilters(prevState => ({
+      setFilter((prevState: IProductsFilters) => ({
         ...prevState,
-        categories: categories.filter(item => item !== name),
+        categories: {
+          in: categories.in.filter((item: string) => item !== name),
+        },
       }));
     }
   };
@@ -70,25 +81,37 @@ const Filters = () => {
   const handleBrandChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
 
-    const { brands } = filters;
+    const { brands } = filter;
 
     if (checked) {
-      setFilters(prevState => ({
+      setFilter((prevState: IProductsFilters) => ({
         ...prevState,
-        brands: [...brands, name],
+        brands: { in: [...brands.in, name] },
       }));
     } else {
-      setFilters(prevState => ({
+      setFilter((prevState: IProductsFilters) => ({
         ...prevState,
-        brands: brands.filter(item => item !== name),
+        brands: { in: brands.in.filter((item: string) => item !== name) },
       }));
     }
   };
 
   const handlePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const {} = e.target;
+    const { value, name } = e.target;
 
-    const { price } = filters;
+    const { price } = filter;
+
+    if (value.length) {
+      setFilter((prevState: IProductsFilters) => ({
+        ...prevState,
+        price: { ...price, [name]: +value },
+      }));
+    } else {
+      setFilter((prevState: IProductsFilters) => ({
+        ...prevState,
+        price: { ...price, [name]: null },
+      }));
+    }
   };
 
   return (
@@ -99,14 +122,14 @@ const Filters = () => {
             Categories
           </h3>
           {categoriesData.map(category => (
-            <div key={category.id} className="space-y-2">
+            <div key={category._id} className="space-y-2">
               <div className="flex items-center gap-2">
                 <input
                   type="checkbox"
                   id={category.name}
-                  name={category.name}
+                  name={category._id}
                   onChange={handleCategoryChange}
-                  checked={filters?.categories.includes(category.name)}
+                  checked={filter?.categories.in.includes(category._id)}
                   className="text-primary focus:ring-0 rounded-sm cursor-pointer"
                 />
                 <label
@@ -115,9 +138,9 @@ const Filters = () => {
                 >
                   {category.name}
                 </label>
-                <div className="ml-auto text-gray-600 text-sm">
+                {/* <div className="ml-auto text-gray-600 text-sm">
                   ({category.count})
-                </div>
+                </div> */}
               </div>
             </div>
           ))}
@@ -135,7 +158,7 @@ const Filters = () => {
                   id={brand.name}
                   name={brand.name}
                   onChange={handleBrandChange}
-                  checked={filters?.categories.includes(brand.name)}
+                  checked={filter?.categories.in.includes(brand.name)}
                   className="text-primary focus:ring-0 rounded-sm cursor-pointer"
                 />
                 <label
@@ -159,16 +182,20 @@ const Filters = () => {
           <div className="mt-4 flex items-center">
             <input
               type="text"
-              name="min"
+              name="gte"
               id="min"
+              value={filter.price.gte || ""}
+              onChange={handlePriceChange}
               className="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm"
               placeholder="min"
             />
             <span className="mx-3 text-gray-500">-</span>
             <input
               type="text"
-              name="max"
+              name="lte"
               id="max"
+              value={filter.price.lte || ""}
+              onChange={handlePriceChange}
               className="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm"
               placeholder="max"
             />

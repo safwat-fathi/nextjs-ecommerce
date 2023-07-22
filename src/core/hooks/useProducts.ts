@@ -5,7 +5,7 @@
 
 // const useProducts = () => {
 //   const [products, setProducts] = useState([]);
-//   const [filters, setFilters] = useState<{
+//   const [filters, setFilter] = useState<{
 //     color: string;
 //     size: string;
 //     brand: string;
@@ -21,7 +21,7 @@
 //     if (!isLoading) setProducts(data);
 //   }, [data]);
 
-//   return { products, setFilters, error, isLoading, page, setPage };
+//   return { products, setFilter, error, isLoading, page, setPage };
 // };
 
 // export default useProducts;

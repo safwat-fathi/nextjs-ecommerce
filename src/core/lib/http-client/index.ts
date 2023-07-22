@@ -31,43 +31,49 @@ class HttpClient {
     );
   }
 
-  public async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+  public async get<T>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T, any>> {
     const response = await this._instance.get<T>(url, config);
 
-    return response.data;
+    return response;
   }
 
   public async post<T>(
     url: string,
     data?: any,
     config?: AxiosRequestConfig
-  ): Promise<T> {
+  ): Promise<AxiosResponse<T, any>> {
     const response = await this._instance.post<T>(url, data, config);
 
-    return response.data;
+    return response;
   }
 
   public async put<T>(
     url: string,
     data?: any,
     config?: AxiosRequestConfig
-  ): Promise<T> {
+  ): Promise<AxiosResponse<T, any>> {
     const response = await this._instance.put<T>(url, data, config);
 
-    return response.data;
+    return response;
   }
 
-  public async delete<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+  public async delete<T>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T, any>> {
     const response = await this._instance.delete<T>(url, config);
 
-    return response.data;
+    return response;
   }
 
   public async upload<T>(
     url: string,
     formData: FormData,
     onUploadProgress?: (progressEvent: AxiosProgressEvent) => void
-  ): Promise<T> {
+  ): Promise<AxiosResponse<T, any>> {
     const response = await this._instance.post<T>(url, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -75,7 +81,7 @@ class HttpClient {
       onUploadProgress,
     });
 
-    return response.data;
+    return response;
   }
 }
 

@@ -8,7 +8,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { IAuthContext, IUser } from "./types/index.";
+import { IAuthContext, IUser } from "./types";
 
 const AuthContext = createContext<IAuthContext>({
   user: null,

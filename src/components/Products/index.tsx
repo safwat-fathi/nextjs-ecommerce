@@ -8,7 +8,7 @@ import ProductCard from "../ProductCard";
 import { useProducts } from "@/lib/contexts/products.context";
 
 const Products = () => {
-  const { error, isLoading, page, setPage, products } = useProducts();
+  const { error, isLoading, page, setPage, products, meta } = useProducts();
 
   const [isGrid, setIsGrid] = useState(true);
 
@@ -18,6 +18,7 @@ const Products = () => {
       isLoading={isLoading}
       page={page}
       setPage={setPage}
+      meta={meta}
       isGrid={isGrid}
       setIsGrid={setIsGrid}
     >

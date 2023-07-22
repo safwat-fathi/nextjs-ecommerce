@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
 import { TRatingRange } from "@/core/components/types";
+import { IBasePaginatedResponse } from "./i-base-response";
 
 export interface IProduct {
   imgSrc: string;
@@ -12,8 +13,8 @@ export interface IProduct {
 }
 
 export interface IProductsFilters {
-  brands: string[];
-  categories: string[];
+  brands: { in: string[] };
+  categories: { in: string[] };
   price: {
     gte: number | null;
     lte: number | null;
@@ -23,11 +24,12 @@ export interface IProductsFilters {
 }
 
 export interface IProductsContext {
-  filters: IProductsFilters;
+  filter: IProductsFilters;
   products: IProduct[];
   page: number;
+  meta: IBasePaginatedResponse["meta"] | null;
   setPage: Dispatch<SetStateAction<number>>;
-  setFilters: Dispatch<SetStateAction<IProductsFilters>>;
+  setFilter: Dispatch<SetStateAction<IProductsFilters>>;
   setProducts: Dispatch<SetStateAction<IProduct[]>>;
   error: any;
   isLoading: boolean;

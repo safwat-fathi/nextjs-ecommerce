@@ -21,10 +21,13 @@ const Categories = ({ initialData }: { initialData: any[] }) => {
 
   return (
     <DataView
+      changView={false}
+      hasPagination={false}
       error={error}
       isLoading={isLoading}
       page={page}
       setPage={setPage}
+      meta={null}
       isGrid={isGrid}
       setIsGrid={setIsGrid}
     >

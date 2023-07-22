@@ -1,19 +1,21 @@
 import { PropsWithChildren } from "react";
 
+import Button from "../Button";
+import Skeleton from "../Skeleton";
 import ErrorFallback from "../ErrorFallback";
 
-import Skeleton from "../Skeleton";
 import { IDataView } from "../types/i-data-view";
 
 // TODO: load more or pagination feature
 const DataView = ({
   error,
   isLoading,
-  page,
   setPage,
+  meta,
   isGrid,
   setIsGrid,
   changView = true,
+  hasPagination = true,
   children,
 }: PropsWithChildren<IDataView>) => {
   const toggleView = () => {
@@ -28,29 +30,30 @@ const DataView = ({
     <>
       {changView && (
         <div className="flex justify-end mb-4">
-          <button
-            className="text-indigo-500 hover:text-indigo-600 mr-2"
-            onClick={toggleView}
-          >
+          <Button onClick={toggleView} variant="outlined">
             {isGrid ? "Switch to List" : "Switch to Grid"}
-          </button>
+          </Button>
         </div>
       )}
       {isLoading ? <Skeleton type={isGrid ? "grid" : "list"} /> : children}
-      <div className="flex gap-4">
-        <button
-          onClick={() => setPage(prev => (prev > 0 ? prev - page : prev))}
-          disabled={page === 0}
-        >
-          Previous
-        </button>
-        <button
-          onClick={() => setPage(prev => prev + 10)}
-          // disabled={!(data as any).next}
-        >
-          Next
-        </button>
-      </div>
+      {hasPagination && (
+        <div className="mt-6 flex gap-4 justify-end">
+          <Button
+            onClick={() => setPage(prev => prev - 1)}
+            disabled={!meta?.has_previous}
+            variant="outlined"
+          >
+            Previous
+          </Button>
+          <Button
+            onClick={() => setPage(prev => prev + 1)}
+            disabled={!meta?.has_next}
+            variant="outlined"
+          >
+            Next
+          </Button>
+        </div>
+      )}
     </>
   );
 };
