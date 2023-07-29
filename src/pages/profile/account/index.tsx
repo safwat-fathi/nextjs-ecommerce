@@ -1,12 +1,12 @@
 import { GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
 
 import renderWithLayout from "@/core/HOC/WithLayout";
 import { LayoutsENUM } from "@/core/Layout";
-
+import { useTranslation } from "next-i18next";
 import Section from "@/core/components/Section";
+import Link from "next/link";
 
 type PageProps = {
   name: string;
@@ -21,7 +21,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ctx => {
   };
 };
 
-const Profile: NextPage<PageProps> = () => {
+const Account: NextPage<PageProps> = () => {
   const { t } = useTranslation("profile");
 
   return (
@@ -35,9 +35,9 @@ const Profile: NextPage<PageProps> = () => {
               <h3 className="font-medium text-gray-800 text-lg">
                 Personal Profile
               </h3>
-              <a href="#" className="text-primary">
+              <Link href="/profile/info" className="text-primary">
                 Edit
-              </a>
+              </Link>
             </div>
             <div className="space-y-1">
               <h4 className="text-gray-700 font-medium">John Doe</h4>
@@ -51,9 +51,9 @@ const Profile: NextPage<PageProps> = () => {
               <h3 className="font-medium text-gray-800 text-lg">
                 Shipping address
               </h3>
-              <a href="#" className="text-primary">
+              <Link href="/addresses" className="text-primary">
                 Edit
-              </a>
+              </Link>
             </div>
             <div className="space-y-1">
               <h4 className="text-gray-700 font-medium">John Doe</h4>
@@ -68,9 +68,9 @@ const Profile: NextPage<PageProps> = () => {
               <h3 className="font-medium text-gray-800 text-lg">
                 Billing address
               </h3>
-              <a href="#" className="text-primary">
+              <Link href="/addresses" className="text-primary">
                 Edit
-              </a>
+              </Link>
             </div>
             <div className="space-y-1">
               <h4 className="text-gray-700 font-medium">John Doe</h4>
@@ -85,4 +85,4 @@ const Profile: NextPage<PageProps> = () => {
   );
 };
 
-export default renderWithLayout(Profile, LayoutsENUM.PROFILE);
+export default renderWithLayout(Account, LayoutsENUM.PROFILE);

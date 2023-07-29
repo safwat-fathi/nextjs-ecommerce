@@ -14,7 +14,7 @@ import { useTranslation } from "next-i18next";
 import Skeleton from "@/core/components/Skeleton";
 import Spinner from "@/core/components/Spinner";
 import { toast } from "react-toastify";
-import useWindowSize from "@/lib/hooks/useWindowSize";
+import useWindowSize from "@/core/hooks/useWindowSize";
 import Portal from "@/core/components/Portal";
 
 type FormData = {

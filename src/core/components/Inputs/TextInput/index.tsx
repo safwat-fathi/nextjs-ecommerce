@@ -1,17 +1,16 @@
-import { InputBaseProps } from "../../types";
 import { useFormContext } from "react-hook-form";
 import clsx from "clsx";
+
+import { InputBaseProps } from "../../types";
 
 const TextInput = ({
   label,
   name,
-  type = "text",
-  placeholder,
   icon,
   className,
   required,
-  ...rest
-}: InputBaseProps) => {
+  ...props
+}: Omit<InputBaseProps, "type">) => {
   const { register, formState } = useFormContext();
 
   return (
@@ -25,8 +24,7 @@ const TextInput = ({
         {icon}
         <input
           {...register(name)}
-          // type={type}
-          placeholder={placeholder}
+          type="text"
           className={clsx(
             {
               [`${className}`]: className,
@@ -37,7 +35,7 @@ const TextInput = ({
             },
             `w-full placeholder-gray-600 text-gray-700 bg-white border  rounded-md shadow-sm focus:outline-none focus:ring-1 sm:text-sm`
           )}
-          {...rest}
+          {...props}
         />
       </div>
       {formState.errors[name] && (

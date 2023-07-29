@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
-import useInView from "@/lib/hooks/useInView";
-import useGlobalRef from "@/lib/hooks/useGlobalRef";
+
+import useGlobalRef from "@/core/hooks/useGlobalRef";
+import useInView from "@/core/hooks/useInView";
 
 // TODO: add RTL support
 // ! fix: on page height change it is always visible event on redirect to a page with scrollable height

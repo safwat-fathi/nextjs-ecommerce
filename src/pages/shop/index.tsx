@@ -10,7 +10,7 @@ import Typography from "@/core/components/Typography";
 import Section from "@/core/components/Section";
 import { LayoutsENUM } from "@/core/Layout";
 
-import useBreadcrumbs from "@/lib/hooks/useBreadcrumbs";
+import useBreadcrumbs from "@/core/hooks/useBreadcrumbs";
 import Filters from "@/components/Filters";
 import { ProductsProvider } from "@/lib/contexts/products.context";
 import Products from "@/components/Products";
@@ -31,7 +31,7 @@ const Shop: NextPage<any> = () => {
     <>
       <NextSeo title={t("title") as string} />
 
-      <Section>
+      {/* <Section>
         <Breadcrumbs>
           {breadcrumbs &&
             breadcrumbs.map(breadcrumb => (
@@ -43,7 +43,7 @@ const Shop: NextPage<any> = () => {
               />
             ))}
         </Breadcrumbs>
-      </Section>
+      </Section> */}
 
       <Section>
         <Typography size="xl">{t("title")}</Typography>

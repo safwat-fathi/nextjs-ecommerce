@@ -12,11 +12,11 @@ const classes = {
   },
   variant: {
     primary:
-      "bg-primary-500 enabled:hover:bg-primary-800 focus:ring-primary-500 focus:ring-opacity-50 text-white",
+      "text-white enabled:hover:bg-transparent bg-primary border border-primary rounded-md enabled:hover:text-primary focus:ring-primary-500 focus:ring-opacity-50",
     secondary:
-      "bg-secondary-500 enabled:hover:bg-secondary-800 focus:ring-secondary-500 focus:ring-opacity-50 text-white-900 enabled:hover:text-white",
+      "text-white enabled:hover:text-secondary bg-secondary enabled:hover:bg-transparent border border-transparent enabled:hover:border-secondary focus:ring-secondary-500 focus:ring-opacity-50",
     danger:
-      "bg-red-500 enabled:hover:bg-red-800 focus:ring-red-500 focus:ring-opacity-50 text-white",
+      "text-primary bg-transparent border border-transparent enabled:hover:border-primary focus:ring-red-500 focus:ring-opacity-50",
     outlined:
       "bg-transparent text-primary-800 enabled:hover:bg-primary-500 enabled:hover:text-white enabled:hover:border-transparent border border-primary-500 focus:ring-opacity-50 font-semibold",
   },
@@ -27,6 +27,7 @@ const Button = ({
   size = "md",
   variant = "primary",
   disabled = false,
+  className,
   children,
   ...props
 }: PropsWithChildren<BtnProps>) => {
@@ -34,7 +35,7 @@ const Button = ({
     <button
       disabled={disabled}
       className={clsx(
-        `focus:ring-2 focus:outline-none transition ease-in-out duration-300 rounded ${classes.size[size]} ${classes.variant[variant]}}`,
+        `${className} focus:ring-2 focus:outline-none enabled:transition enabled:ease-in-out duration-300 rounded capitalize ${classes.size[size]} ${classes.variant[variant]}}`,
         {
           "opacity-50 cursor-not-allowed": disabled,
           "rounded-full": pill,

@@ -1,4 +1,4 @@
-import useGlobalRef from "@/lib/hooks/useGlobalRef";
+import useGlobalRef from "@/core/hooks/useGlobalRef";
 import { useEffect, useState, ReactNode } from "react";
 import { createPortal } from "react-dom";
 

@@ -1,12 +1,18 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { CrumbItem } from "@/core/components/meta";
+
+import { CrumbItem } from "@/core/components/types";
 
 const useBreadcrumbs = () => {
   const router = useRouter();
   const [breadcrumbs, setBreadcrumbs] = useState<CrumbItem[]>([]);
+  const [isHome, setIsHome] = useState(true);
 
-  useEffect(() => {
+  const breadcrumbWithoutHyphens = (breadcrumb: string) => {
+    return breadcrumb.split("-").join(" ");
+  };
+
+  useLayoutEffect(() => {
     // remove query params from URL
     const pathWithoutQuery = router.asPath.split("?")[0];
 
@@ -19,23 +25,29 @@ const useBreadcrumbs = () => {
 
     // build array with href & label object
     const currBreadcrumbs = pathArray.map((currPath, index) => {
-      const path = "/" + pathArray.slice(0, index + 1).join("/");
+      const path = "/" + currPath;
+      const label = breadcrumbWithoutHyphens(
+        currPath.charAt(0).toUpperCase() + path.slice(2)
+      );
 
       return {
         path,
         isLast: index === pathArray.length - 1,
-        label: currPath.charAt(0).toUpperCase() + path.slice(2),
+        label,
       };
     });
 
     setBreadcrumbs(currBreadcrumbs);
+    setIsHome(currBreadcrumbs.length === 0);
   }, [router.asPath]);
 
-  // return breadcrumbs;
-  return [
-    { path: "/", label: "Home", isLast: breadcrumbs.length === 0 },
-    ...breadcrumbs,
-  ];
+  return {
+    breadcrumbs: [
+      { path: "/", label: "Home", isLast: breadcrumbs.length === 0 },
+      ...breadcrumbs,
+    ],
+    isHome,
+  };
 };
 
 export default useBreadcrumbs;

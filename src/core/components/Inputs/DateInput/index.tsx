@@ -1,29 +1,30 @@
 import { useFormContext } from "react-hook-form";
 import clsx from "clsx";
 
-import { SelectInputProps } from "../../types";
+import { InputBaseProps } from "../../types";
 
-// TODO: handle unselected value
-// TODO: handle register with react hook form
-// TODO: handle style
-const SelectInput = ({
+const DateInput = ({
   label,
   name,
   icon,
-  options,
   className,
+  required,
   ...props
-}: SelectInputProps) => {
+}: Omit<InputBaseProps, "type">) => {
   const { register, formState } = useFormContext();
 
   return (
-    <div className="form-group">
-      {label && <label htmlFor={name}>{label}</label>}
+    <div className="mb-6">
+      {label && (
+        <label htmlFor={name}>
+          {label} {required && <span className="text-red-500">*</span>}
+        </label>
+      )}
       <div className="relative">
         {icon}
-        <select
+        <input
           {...register(name)}
-          name={name}
+          type="date"
           className={clsx(
             {
               [`${className}`]: className,
@@ -35,13 +36,7 @@ const SelectInput = ({
             `w-full placeholder-gray-600 text-gray-700 bg-white border  rounded-md shadow-sm focus:outline-none focus:ring-1 sm:text-sm`
           )}
           {...props}
-        >
-          {options.map(option => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+        />
       </div>
       {formState.errors[name] && (
         <span className="absolute text-sm text-red-500">
@@ -52,4 +47,4 @@ const SelectInput = ({
   );
 };
 
-export default SelectInput;
+export default DateInput;

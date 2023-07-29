@@ -1,14 +1,22 @@
 import { ReactNode } from "react";
 import dynamic from "next/dynamic";
+
+import BreadcrumbItem from "@/core/components/Breadcrumbs/BreadcrumbItem";
+import Breadcrumbs from "@/core/components/Breadcrumbs";
 import Navbar from "@/core/components/Navbar";
 import TopBar from "@/core/components/Navbar/TopBar";
 import MenuBar from "@/core/components/Navbar/MenuBar";
 import Footer from "@/core/components/Footer";
+import Section from "@/core/components/Section";
 const DynamicToTop = dynamic(() => import("@/core/components/BackToTop"), {
   ssr: false,
 });
 
+import useBreadcrumbs from "@/core/hooks/useBreadcrumbs";
+
 const MainLayout = ({ children }: { children: ReactNode }) => {
+  const { breadcrumbs, isHome } = useBreadcrumbs();
+
   return (
     <>
       <header style={{ display: "unset" }}>
@@ -18,6 +26,23 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
           <MenuBar />
         </div>
       </header>
+
+      {!isHome && (
+        <Section className="mb-0">
+          <Breadcrumbs>
+            {breadcrumbs &&
+              breadcrumbs.map(breadcrumb => (
+                <BreadcrumbItem
+                  key={breadcrumb.path}
+                  path={breadcrumb.path}
+                  isLast={breadcrumb.isLast}
+                  label={breadcrumb.label}
+                />
+              ))}
+          </Breadcrumbs>
+        </Section>
+      )}
+
       <main>{children}</main>
       {/* the pixel that below it ToTop button is visible */}
       <div id="pixel-to-watch"></div>

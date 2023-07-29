@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute, ReactNode } from "react";
+import { HTMLInputTypeAttribute, InputHTMLAttributes, ReactNode } from "react";
 
 export type Variant = "primary" | "secondary" | "danger" | "outlined";
 
@@ -6,18 +6,17 @@ export type Size = "sm" | "md" | "lg" | "xl";
 
 export type TRatingRange = 1 | 2 | 3 | 4 | 5;
 
-export interface InputBaseProps {
+export interface InputBaseProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label?: string;
-  type: HTMLInputTypeAttribute;
-  placeholder?: string;
   icon?: ReactNode;
-  className?: string;
-  required?: boolean;
 }
 
 export interface SelectInputProps
-  extends Omit<InputBaseProps, "type" | "placeholder"> {
+  extends InputHTMLAttributes<HTMLSelectElement> {
+  name: string;
+  label?: string;
+  icon?: ReactNode;
   options: { value: string | number; label: string }[];
 }
 
