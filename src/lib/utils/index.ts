@@ -1,3 +1,14 @@
+export const flatDeepByKey = (arr: any[], key: string) =>
+  arr.reduce((prev, el) => {
+    prev.push(el);
+
+    if (el[key]) {
+      prev.push(...flatDeepByKey(el[key], key));
+    }
+
+    return prev;
+  }, []);
+
 export const blobToData = (
   blob: Blob
 ): Promise<string | ArrayBuffer | null> => {
