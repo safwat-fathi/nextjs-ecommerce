@@ -1,10 +1,12 @@
+import { PropsWithChildren, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
-import { DrawerProps } from "../types";
-import { PropsWithChildren } from "react";
-import dynamic from "next/dynamic";
+
 const DynamicPortal = dynamic(() => import("../Portal"), { ssr: false });
+
+import { DrawerProps } from "../types";
 
 const Drawer = ({
   isOpen,
@@ -14,6 +16,15 @@ const Drawer = ({
   children,
 }: PropsWithChildren<DrawerProps>) => {
   const handleClose = () => !isStatic && onClose();
+
+  useEffect(() => {
+    if (isOpen) document.body.style.overflow = "hidden";
+    if (!isOpen) document.body.style.overflow = "unset";
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   return (
     <DynamicPortal>
@@ -40,8 +51,8 @@ const Drawer = ({
             }
           )}
         >
-          <div className="flex justify-between p-4">
-            <h3>{title}</h3>
+          <div className="flex items-center justify-between p-4">
+            <h4 className="text-lg font-medium capitalize">{title}</h4>
             <button
               className="text-gray-500 hover:text-gray-900 focus:outline-none focus:text-gray-900 transition-all duration-300"
               onClick={onClose}

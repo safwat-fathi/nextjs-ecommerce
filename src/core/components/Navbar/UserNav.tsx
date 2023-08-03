@@ -1,11 +1,13 @@
 import { useState } from "react";
-import Drawer from "../Drawer";
 import Link from "next/link";
 import Image from "next/image";
 
+import Drawer from "../Drawer";
+import Wishlist from "@/components/Wishlist";
+
 const UserNav = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isFavOpen, setIsFavOpen] = useState(false);
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false);
 
   return (
     <>
@@ -22,7 +24,7 @@ const UserNav = () => {
             </Link>
           </li>
           <li className="relative">
-            <button onClick={() => setIsFavOpen(true)}>
+            <button onClick={() => setIsWishlistOpen(true)}>
               <div className="absolute -top-3 -right-2 z-10 bg-yellow-400 text-xs font-bold px-1 py-0.5 rounded-sm">
                 3
               </div>
@@ -61,17 +63,17 @@ const UserNav = () => {
         <h1>Cart</h1>
       </Drawer>
 
-      {/* <Drawer
+      <Drawer
         key="aw"
-        title="Favorites"
-        isOpen={isFavOpen}
+        title="My Wishlist"
+        isOpen={isWishlistOpen}
         isStatic={false}
         onClose={() => {
-          setIsFavOpen(false);
+          setIsWishlistOpen(false);
         }}
       >
-        <h1>Favorites</h1>
-      </Drawer> */}
+        <Wishlist />
+      </Drawer>
     </>
   );
 };

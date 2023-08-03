@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import { CrumbItem } from "@/core/components/types";
@@ -12,7 +12,7 @@ const useBreadcrumbs = () => {
     return breadcrumb.split("-").join(" ");
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // remove query params from URL
     const pathWithoutQuery = router.asPath.split("?")[0];
 

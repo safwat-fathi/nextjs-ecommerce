@@ -12,7 +12,7 @@ const Categories = ({ initialData }: { initialData: any[] }) => {
   const [isGrid, setIsGrid] = useState(true);
 
   const { data, error, isLoading } = useSWR<any>(
-    [`https://pokeapi.co/api/v2/pokemon?offset=${page}&limit=10`, page],
+    [`ahttps://pokeapi.co/api/v2/pokemon?offset=${page}&limit=10`, page],
     fetcher,
     {
       fallbackData: initialData,

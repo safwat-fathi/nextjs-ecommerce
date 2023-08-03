@@ -14,7 +14,7 @@ const classes = {
     primary:
       "text-white enabled:hover:bg-transparent bg-primary border border-primary rounded-md enabled:hover:text-primary focus:ring-primary-500 focus:ring-opacity-50",
     secondary:
-      "text-white enabled:hover:text-secondary bg-secondary enabled:hover:bg-transparent border border-transparent enabled:hover:border-secondary focus:ring-secondary-500 focus:ring-opacity-50",
+      "text-white enabled:hover:text-secondary bg-secondary enabled:hover:bg-white border border-transparent enabled:hover:border-secondary focus:ring-secondary-500 focus:ring-opacity-50",
     danger:
       "text-primary bg-transparent border border-transparent enabled:hover:border-primary focus:ring-red-500 focus:ring-opacity-50",
     outlined:

@@ -15,11 +15,11 @@ export type Routes = {
 
 export const routes: Routes = {
   auth: {
-    login: "/test/login",
-    logout: "/test/logout",
+    login: "/login",
+    logout: "/logout",
   },
   products: {
-    index: "/test/products",
-    get: (prodId: string) => `/test/${prodId}`,
+    index: "/products",
+    get: (prodId: string) => `/products/${prodId}`,
   },
 };

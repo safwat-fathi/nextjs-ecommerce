@@ -12,7 +12,7 @@ const Banner = () => {
           Discover amazing products at unbeatable prices.
         </p>
         <Link href="/shop">
-          <Button>Shop Now</Button>
+          <Button variant="secondary">Shop Now</Button>
         </Link>
       </div>
     </div>
