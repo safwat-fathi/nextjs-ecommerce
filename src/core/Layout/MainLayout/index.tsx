@@ -22,7 +22,7 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
       <header style={{ display: "unset" }}>
         <TopBar />
         <Navbar />
-        <div className="z-10 shadow-lg bg-gray-800 text-gray-200 py-4 sticky top-0">
+        <div className="z-10 shadow-lg bg-gray-800 text-gray-200 sticky top-0">
           <MenuBar />
         </div>
       </header>

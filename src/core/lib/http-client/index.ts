@@ -6,17 +6,31 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 
+import { getStorage } from "@/lib/utils";
+
 class HttpClient {
   private readonly _instance: AxiosInstance;
+  private _accessToken: string | null = null;
+  private _lang: string;
+  private _contentType: string;
 
-  constructor() {
+  constructor(lang: string, contentType = "application/json") {
+    this._lang = lang;
+    this._contentType = contentType;
+    this._accessToken = getStorage("accessToken") as string;
+
     this._instance = axios.create({
       baseURL: process.env.NEXT_PUBLIC_BASE_API,
       // withCredentials: false,
       headers: {
-        "Content-Type": "application/json",
+        "Accept-Language": this._lang,
       },
     });
+
+    this._instance.defaults.headers.common["Content-Type"] = this._contentType;
+    this._instance.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${this._accessToken}`;
 
     this._instance.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => config,

@@ -1,12 +1,13 @@
-import "@/styles/globals.scss";
 import { useEffect } from "react";
 import type { AppProps } from "next/app";
 import { appWithTranslation } from "next-i18next";
 import { DefaultSeo } from "next-seo";
 import SEO from "../../next-seo.config";
-import { AuthProvider } from "@/lib/contexts/auth.context";
+import { AuthProvider } from "@/lib/contexts/auth";
 import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/router";
+
+import "@/styles/globals.scss";
 
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter();

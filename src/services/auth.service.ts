@@ -1,21 +1,31 @@
 import HttpClient from "@/core/lib/http-client";
 import { IAuthService } from "./types/services";
-import { User } from "@/lib/contexts/types/index.";
+import { IUser } from "@/types/i-user";
+import { AxiosResponse } from "axios";
 
 const httpClient = new HttpClient();
 
 export class AuthService implements IAuthService {
-  async login(email: string, password: string): Promise<User> {
-    const user = (await httpClient.post(
-      "/test/login",
-      { email, password },
-      { headers: { "Content-Type": "application/json" } }
-    )) as User;
+  async login(email: string, password: string): Promise<IUser | null> {
+    try {
+      const user = (await httpClient.post("/test/login", {
+        email,
+        password,
+      })) as AxiosResponse<IUser, any>;
 
-    return user;
+      return user.data;
+    } catch (error) {
+      throw new Error("login@AuthService");
+    }
   }
 
-  async logout(): Promise<void> {
-    await httpClient.get("/test/logout");
+  async logout(): Promise<boolean | null> {
+    try {
+      await httpClient.get("/test/logout");
+
+      return true;
+    } catch (error) {
+      throw new Error("logout@AuthService");
+    }
   }
 }

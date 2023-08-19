@@ -1,6 +1,6 @@
-import { User } from "@/lib/contexts/types/index.";
+import { IUser } from "@/types/i-user";
 
 export interface IAuthService {
-  login(email: string, password: string): Promise<User>;
-  logout(): Promise<void>;
+  login(email: string, password: string): Promise<IUser | null>;
+  logout(): Promise<boolean | null>;
 }

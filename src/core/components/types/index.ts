@@ -50,8 +50,8 @@ export type BreadcrumbsProps = {
 };
 
 export interface DropdownOption {
-  label: string;
-  href: string;
+  logo: string;
+  slug: string;
 }
 
 export interface DropdownProps {

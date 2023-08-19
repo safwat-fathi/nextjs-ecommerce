@@ -2,6 +2,8 @@ import { PropsWithChildren } from "react";
 import clsx from "clsx";
 
 import { BtnProps } from "../types/i-button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const classes = {
   size: {
@@ -28,6 +30,7 @@ const Button = ({
   variant = "primary",
   disabled = false,
   className,
+  loading,
   children,
   ...props
 }: PropsWithChildren<BtnProps>) => {
@@ -43,7 +46,11 @@ const Button = ({
       )}
       {...props}
     >
-      {children}
+      {loading ? (
+        <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
+      ) : (
+        children
+      )}
     </button>
   );
 };

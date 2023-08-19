@@ -12,7 +12,9 @@ const Banner = () => {
           Discover amazing products at unbeatable prices.
         </p>
         <Link href="/shop">
-          <Button variant="secondary">Shop Now</Button>
+          <Button variant="secondary" className="min-w-[7rem]">
+            Shop Now
+          </Button>
         </Link>
       </div>
     </div>

@@ -1,43 +1,38 @@
-import { PropsWithChildren } from "react";
 import { DropdownProps } from "../types";
 import Link from "next/link";
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
-const Dropdown = ({ options, children }: PropsWithChildren<DropdownProps>) => {
+const Dropdown = ({ options }: DropdownProps) => {
   return (
-    <div className="relative inline-block text-left">
-      <div className="group">
-        <div className="flex items-center w-full">
-          {children}
-          <Image
-            className="ms-2 text-blue-700 transition-transform duration-200 group-hover:rotate-180"
-            src="/icons/chevron.svg"
-            alt="chevron"
-            width={25}
-            height={25}
-          />
-        </div>
-        <div
-          role="menu"
-          className="origin-top-right absolute hidden group-hover:block rtl:left-0 rtl:right-auto ltr:right-0 ltr:left-auto w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 overflow-hidden"
-        >
-          <div
-            role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="options-menu"
+    <div className="px-8 bg-primary flex items-center cursor-pointer relative group">
+      <span className="text-white">
+        <FontAwesomeIcon icon={faBars} />
+      </span>
+      {/* <span className="capitalize ml-2 text-white">All Categories</span> */}
+      <Link href="/categories" className="flex items-center gap-4 px-6 py-3">
+        <span className="capitalize ml-2 text-white">All Categories</span>
+      </Link>
+
+      <div className="absolute w-full left-0 top-full bg-white shadow-md divide-y divide-gray-300 divide-dashed opacity-0 group-hover:opacity-100 transition duration-300 invisible group-hover:visible">
+        {options.map(option => (
+          <Link
+            href={`/shop/${option.slug}`}
+            className="flex items-center gap-4 px-6 py-3 hover:bg-gray-100 transition"
           >
-            {options.map(option => (
-              <Link
-                key={option.label}
-                href={option.href}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
-                role="menuitem"
-              >
-                {option.label}
-              </Link>
-            ))}
-          </div>
-        </div>
+            <Image
+              width={50}
+              height={50}
+              src={option.logo}
+              alt="sofa"
+              className="w-5 h-5 object-contain"
+            />
+            <span className="text-gray-600 text-sm capitalize">
+              {option.slug}
+            </span>
+          </Link>
+        ))}
       </div>
     </div>
   );

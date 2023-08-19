@@ -17,13 +17,9 @@ const Quantity = () => {
     if (counter > 1) setCounter(counter - 1);
   };
 
-  const handleChangeCounter = (
-    e: ChangeEvent<HTMLInputElement> | undefined
-  ) => {
-    if (e && e.target && +e.target.value) {
-      const isInRange = +e.target.value > 0 && +e.target.value < 11;
-      if (isInRange) setCounter(+e?.target.value);
-    }
+  const handleChangeCounter = (e: ChangeEvent<HTMLInputElement>) => {
+    const isInRange = +e.target.value > 0 && +e.target.value < 11;
+    if (isInRange) setCounter(+e?.target.value);
   };
 
   return (
@@ -36,7 +32,7 @@ const Quantity = () => {
         -
       </div>
       <input
-        className="h-8 w-8 text-base flex items-center justify-center outline-none focus:outline-none"
+        className="text-center h-8 w-8 text-base flex items-center justify-center outline-none focus:outline-none"
         value={counter}
         onChange={handleChangeCounter}
         min={1}

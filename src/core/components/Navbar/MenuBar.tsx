@@ -3,9 +3,36 @@ import { useRouter } from "next/router";
 import Dropdown from "../Dropdown";
 import { DropdownOption } from "../types";
 
-const dropdownOptions: DropdownOption[] = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+// const dropdownOptions: DropdownOption[] = [
+//   { label: "Home", href: "/" },
+//   { label: "About", href: "/about" },
+// ];
+
+const options = [
+  {
+    logo: "/icons/sofa.svg",
+    slug: "sofa",
+  },
+  {
+    logo: "/icons/terrace.svg",
+    slug: "terrace",
+  },
+  {
+    logo: "/icons/bed.svg",
+    slug: "bed",
+  },
+  {
+    logo: "/icons/bed-2.svg",
+    slug: "mattress",
+  },
+  {
+    logo: "/icons/office.svg",
+    slug: "office",
+  },
+  {
+    logo: "/icons/outdoor-cafe.svg",
+    slug: "outdoor",
+  },
 ];
 
 const MenuBar = () => {
@@ -41,16 +68,7 @@ const MenuBar = () => {
           Shop
         </Link>
 
-        <Dropdown options={dropdownOptions}>
-          <Link
-            href="/categories"
-            className={`cursor-pointer ${
-              router.pathname === "/categories" ? "font-bold text-white" : ""
-            } hover:text-white`}
-          >
-            Categories
-          </Link>
-        </Dropdown>
+        <Dropdown options={options} />
       </div>
     </>
   );
