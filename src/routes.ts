@@ -1,25 +1,16 @@
-export type AuthRoutes = {
-  login: string;
-  logout: string;
-};
+export type TRoutes = (typeof routes)[keyof typeof routes];
 
-export type ProductsRoutes = {
-  index: string;
-  get(prodId: string): string;
-};
+const auth = {
+  login: "/login",
+  logout: "/logout",
+} as const;
 
-export type Routes = {
-  auth: AuthRoutes;
-  products: ProductsRoutes;
-};
+const products = {
+  index: "/products",
+  get: (prodId: string) => `/products/${prodId}`,
+} as const;
 
-export const routes: Routes = {
-  auth: {
-    login: "/login",
-    logout: "/logout",
-  },
-  products: {
-    index: "/products",
-    get: (prodId: string) => `/products/${prodId}`,
-  },
-};
+export const routes = {
+  ...auth,
+  ...products,
+} as const;
