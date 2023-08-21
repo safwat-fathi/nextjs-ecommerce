@@ -12,22 +12,20 @@ class HttpClient {
   private readonly _instance: AxiosInstance;
   private _accessToken: string | null = null;
   private _lang: string;
-  private _contentType: string;
 
-  constructor(lang: string, contentType = "application/json") {
-    this._lang = lang;
-    this._contentType = contentType;
+  constructor() {
+    this._lang = getStorage("lang") as string;
     this._accessToken = getStorage("accessToken") as string;
 
     this._instance = axios.create({
       baseURL: process.env.NEXT_PUBLIC_BASE_API,
-      // withCredentials: false,
+      withCredentials: true,
       headers: {
         "Accept-Language": this._lang,
+        "X-Language": this._lang,
       },
     });
 
-    this._instance.defaults.headers.common["Content-Type"] = this._contentType;
     this._instance.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${this._accessToken}`;
@@ -39,55 +37,49 @@ class HttpClient {
 
     this._instance.interceptors.response.use(
       (response: AxiosResponse) => {
-        return response.data;
+        return response;
       },
       (error: any) => Promise.reject(error)
     );
   }
 
-  public async get<T>(
-    url: string,
-    config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<T, any>> {
+  public async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
     const response = await this._instance.get<T>(url, config);
 
-    return response;
+    return response.data;
   }
 
   public async post<T>(
     url: string,
     data?: any,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<T, any>> {
+  ): Promise<T> {
     const response = await this._instance.post<T>(url, data, config);
 
-    return response;
+    return response.data;
   }
 
   public async put<T>(
     url: string,
     data?: any,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<T, any>> {
+  ): Promise<T> {
     const response = await this._instance.put<T>(url, data, config);
 
-    return response;
+    return response.data;
   }
 
-  public async delete<T>(
-    url: string,
-    config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<T, any>> {
+  public async delete<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
     const response = await this._instance.delete<T>(url, config);
 
-    return response;
+    return response.data;
   }
 
   public async upload<T>(
     url: string,
     formData: FormData,
     onUploadProgress?: (progressEvent: AxiosProgressEvent) => void
-  ): Promise<AxiosResponse<T, any>> {
+  ): Promise<T> {
     const response = await this._instance.post<T>(url, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -95,7 +87,7 @@ class HttpClient {
       onUploadProgress,
     });
 
-    return response;
+    return response.data;
   }
 }
 

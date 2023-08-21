@@ -1,15 +1,18 @@
 import {
+  PropsWithChildren,
   ReactNode,
   createContext,
   useContext,
   useEffect,
   useReducer,
 } from "react";
-import { IAuth, IAuthContext } from "./types/i-auth";
+import { AuthActionsTypes, IAuth, IAuthContext } from "./types/i-auth";
 import { AuthReducer } from "./reducer";
+import { getStorage } from "@/lib/utils";
 
 const initialState: IAuth = {
   token: null,
+  user: null,
   isAuthenticated: false,
   loading: false,
 };
@@ -29,7 +32,21 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     // TODO: check if user already logged in useEffect (from localStorage)
     // TODO: if logged update isAuthenticated & user
-    console.log(state.token);
+    const isAuth = !!getStorage("accessToken") as unknown;
+    console.log("AuthProvider::isAuth", isAuth);
+
+    if (isAuth) {
+      const accessToken = getStorage("accessToken") as string;
+      console.log("🚀 ~ useEffect ~ accessToken:", accessToken);
+      const user = getStorage("user") as any;
+      console.log("🚀 ~ useEffect ~ user:", user);
+      dispatch({
+        type: AuthActionsTypes.LOGIN,
+        payload: { accessToken, user },
+      });
+    } else {
+      console.log("AuthProvider::", "no auth found");
+    }
   }, []);
 
   // const handleLogin = async (email: string, password: string) => {

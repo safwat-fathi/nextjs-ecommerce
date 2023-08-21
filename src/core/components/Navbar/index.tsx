@@ -2,9 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import UserNav from "./UserNav";
 import GuestNav from "./GuestNav";
+import { getStorage } from "@/lib/utils";
 
-const Navbar = () => {
+const Navbar = ({ isAuth }: { isAuth: boolean }) => {
+  console.log("🚀 ~ Navbar ~ isAuth:", isAuth);
+  // const userSignedIn = !!getStorage("accessToken");
   const userSignedIn = true;
+  // console.log("🚀 ~ Navbar ~ userSignedIn:", userSignedIn);
 
   return (
     <div className="container mx-auto flex justify-between items-center">

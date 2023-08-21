@@ -31,9 +31,11 @@ export const setStorage = (
   req?: GetServerSidePropsContext["req"],
   res?: GetServerSidePropsContext["res"]
 ) => {
+  const stringifiedValue = JSON.stringify(value);
+
   // Server-side rendering (SSR)
   if (typeof window === "undefined") {
-    setCookie(key, value, {
+    setCookie(key, stringifiedValue, {
       req,
       res,
       httpOnly: true,
@@ -41,14 +43,14 @@ export const setStorage = (
     });
   } else {
     // Client-side rendering (CSR)
-    localStorage.setItem(key, value);
+    localStorage.setItem(key, stringifiedValue);
   }
 };
 
-export const getStorage = (key: string) => {
+export const getStorage = (key: string, req?: any, res?: any) => {
   // Server-side rendering (SSR)
   if (typeof window === "undefined") {
-    const item = getCookie(key);
+    const item = getCookie(key, { req, res });
 
     return item;
   } else {

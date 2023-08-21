@@ -18,6 +18,7 @@ const Dropdown = ({ options }: DropdownProps) => {
       <div className="absolute w-full left-0 top-full bg-white shadow-md divide-y divide-gray-300 divide-dashed opacity-0 group-hover:opacity-100 transition duration-300 invisible group-hover:visible">
         {options.map(option => (
           <Link
+            key={option.slug}
             href={`/shop/${option.slug}`}
             className="flex items-center gap-4 px-6 py-3 hover:bg-gray-100 transition"
           >

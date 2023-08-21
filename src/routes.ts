@@ -1,8 +1,8 @@
 export type TRoutes = (typeof routes)[keyof typeof routes];
 
 const auth = {
-  login: "/login",
-  logout: "/logout",
+  login: "/auth/login",
+  logout: "/auth/logout",
 } as const;
 
 const products = {

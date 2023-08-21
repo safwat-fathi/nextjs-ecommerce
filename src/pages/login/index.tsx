@@ -8,6 +8,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { useState } from "react";
+import AuthService from "@/services/auth.service";
+import { setStorage } from "@/lib/utils";
+import { useRouter } from "next/router";
+import clsx from "clsx";
 
 type PageProps = {
   name: string;
@@ -23,19 +27,54 @@ export const getStaticProps: GetStaticProps<PageProps> = async ctx => {
 };
 
 const Login: NextPage<PageProps> = props => {
+  const authService = new AuthService();
+
+  const router = useRouter();
+
   const { t } = useTranslation("login");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | any[] | null>(null);
 
   const handleLogin = async () => {
-    console.log("sign in>>>>>");
-    const;
+    try {
+      // await authService.logout();
+      const res = await authService.login(email, password);
+
+      if (res?.success) {
+        setStorage("accessToken", res.data.accessToken);
+        setStorage("user", res.data.user);
+        // TODO: redirect to home
+        router.push("/");
+
+        setError(null);
+      }
+
+      // TODO: change user nav state
+      // TODO: show notification of success
+    } catch (error: any) {
+      const errRes = error?.response?.data;
+
+      if (errRes) {
+        if (Array.isArray(errRes.error)) {
+          const errs = errRes.error.map(
+            (err: { param: string; message: string }) => err.message
+          );
+
+          setError(errs);
+        }
+
+        setError(errRes.error);
+      }
+
+      console.error(`Error@handleLogin ${error}`);
+    }
   };
 
   return (
     <>
-      <NextSeo title="Login" />
+      <NextSeo title={t("title") as string} />
       <section className="bg-white dark:bg-gray-900">
         <div className="min-h-screen flex w-full max-w-sm mx-auto overflow-hidden bg-white shadow-lg dark:bg-gray-800 lg:max-w-4xl">
           <div
@@ -129,12 +168,28 @@ const Login: NextPage<PageProps> = props => {
                 />
               </div>
 
+              <div
+                className={clsx("mt-6 bg-white p-4 rounded", {
+                  hidden: !error,
+                  block: error,
+                })}
+              >
+                {error ? (
+                  Array.isArray(error) ? (
+                    error.map(err => (
+                      <p key={err.message} className="text-red-600">
+                        * {err.message}
+                      </p>
+                    ))
+                  ) : (
+                    <p className="text-red-600">* {error}</p>
+                  )
+                ) : null}
+              </div>
+
               <div className="mt-6">
                 <button
                   onClick={handleLogin}
-                  // onClick={() => {
-                  //   console.log("sign in>>>>>");
-                  // }}
                   className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
                 >
                   Sign In

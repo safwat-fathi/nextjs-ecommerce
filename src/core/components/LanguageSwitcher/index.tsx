@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "next-i18next";
+import { setStorage } from "@/lib/utils";
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
@@ -19,11 +20,16 @@ const LanguageSwitcher = () => {
   const switchToLocale = useCallback(
     (locale: string) => {
       const path = router.asPath;
-      document.dir = locale === "ar" ? "rtl" : "ltr";
+      // document.dir = locale === "ar" ? "rtl" : "ltr";
+      setStorage("lang", locale);
       return router.push(path, path, { locale });
     },
     [router]
   );
+
+  useEffect(() => {
+    setStorage("lang", currentLanguage);
+  }, []);
 
   return (
     <select

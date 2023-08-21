@@ -7,11 +7,10 @@ export interface IAuthCredentials {
 }
 
 export interface IAuth {
-  token: IUser | null;
+  token: string | null;
+  user: IUser | null;
   isAuthenticated: boolean;
   loading: boolean;
-  // login(email: string, password: string): Promise<void>;
-  // logout(): Promise<void>;
 }
 
 export enum AuthActionsTypes {
@@ -26,8 +25,10 @@ export interface IAuthAction {
 }
 
 export interface ILoginAction extends IAuthAction {
-  // payload: IAuthCredentials;
-  payload: IUser;
+  payload: {
+    accessToken: string;
+    user: IUser;
+  };
 }
 
 // export interface ILogoutAction extends IAuthAction {

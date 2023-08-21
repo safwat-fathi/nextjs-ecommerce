@@ -7,7 +7,12 @@ export const AuthReducer = (state: IAuth, action: TAuthActions): IAuth => {
   switch (type) {
     case AuthActionsTypes.LOGIN:
       if (payload) {
-        return { ...state, isAuthenticated: true, token: payload as IUser };
+        return {
+          ...state,
+          isAuthenticated: true,
+          token: payload.accessToken,
+          user: payload.user,
+        };
       }
 
       throw new Error("invalid payload type@AuthReducer");
