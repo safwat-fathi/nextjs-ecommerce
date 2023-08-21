@@ -18,17 +18,14 @@ class HttpClient {
     this._accessToken = getStorage("accessToken") as string;
 
     this._instance = axios.create({
-      baseURL: process.env.NEXT_PUBLIC_BASE_API,
+      baseURL: process.env.NEXT_PUBLIC_BASE_DEV_API,
       withCredentials: true,
       headers: {
         "Accept-Language": this._lang,
         "X-Language": this._lang,
+        Authorization: `Bearer ${this._accessToken}`,
       },
     });
-
-    this._instance.defaults.headers.common[
-      "Authorization"
-    ] = `Bearer ${this._accessToken}`;
 
     this._instance.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => config,

@@ -19,11 +19,13 @@ import SizePicker from "@/core/components/Inputs/SizePicker";
 import ColorPicker from "@/core/components/Inputs/ColorPicker";
 import Quantity from "@/core/components/Inputs/Quantity";
 
-// TODO: get product data query 'productId'
+// TODO: get product data query 'slug'
 export const getServerSideProps: GetServerSideProps<any> = async ({
   locale,
   query,
 }) => {
+  const slug = query.slug;
+  console.log("🚀 ~ slug:", slug);
   return {
     props: {
       ...(await serverSideTranslations(locale!, ["common", "product"])),

@@ -1,4 +1,4 @@
-import { GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { FormProvider, useForm } from "react-hook-form";
@@ -12,19 +12,26 @@ import TextInput from "@/core/components/Inputs/TextInput";
 
 type PageProps = {
   name: string;
+  resetToken: string | null;
 };
 
-export const getStaticProps: GetStaticProps<PageProps> = async ctx => {
+export const getServerSideProps: GetServerSideProps<PageProps> = async ctx => {
+  const { query } = ctx;
+  const { resetToken } = query;
+
   return {
     props: {
       name: "wwww",
+      resetToken: resetToken ? (resetToken as string) : null,
       ...(await serverSideTranslations(ctx.locale!, ["common", "profile"])),
     },
   };
 };
 
-const ChangePassword: NextPage<PageProps> = () => {
+const ChangePassword: NextPage<PageProps> = ({ resetToken }) => {
+  console.log("🚀 ~ resetToken:", resetToken);
   const { t } = useTranslation("profile");
+
   const methods = useForm();
   const onSubmit = (data: any) => console.log(data);
 

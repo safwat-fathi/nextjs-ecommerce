@@ -13,6 +13,8 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
+import Button from "@/core/components/Button";
+import AuthService from "@/services/auth.service";
 
 const ProfileSidebar = () => {
   const router = useRouter();
@@ -27,6 +29,8 @@ const ProfileSidebar = () => {
   const isPaymentMethods = router.asPath.includes("payment-methods");
   const isWishlist = router.asPath.includes("wishlist");
 
+  const authService = new AuthService();
+
   useEffect(() => {
     // remove query params from URL
     const pathWithoutQuery = router.asPath.split("?")[0];
@@ -40,7 +44,15 @@ const ProfileSidebar = () => {
     pathArray = pathArray.filter(path => path !== "");
     // console.log("🚀 ~ useEffect ~ pathArray:", pathArray);
   }, [router.asPath]);
-  console.log("🚀 ~ ProfileSidebar ~ router.asPath:", router.asPath);
+
+  const handleLogout = async () => {
+    try {
+      await authService.logout();
+      router.push("/");
+    } catch (error) {
+      console.error(`Error@handleLogout ${error}`);
+    }
+  };
 
   return (
     <>
@@ -147,13 +159,13 @@ const ProfileSidebar = () => {
         </div>
 
         <div className="space-y-1 pl-8 pt-4">
-          <Link
-            href="/profile/logout"
+          <Button
+            onClick={handleLogout}
             className="flex gap-4 items-center hover:text-primary font-medium capitalize transition"
           >
             <FontAwesomeIcon width={15} height={15} icon={faRightFromBracket} />
             Logout
-          </Link>
+          </Button>
         </div>
       </div>
     </>
