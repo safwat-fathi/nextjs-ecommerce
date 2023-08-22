@@ -29,25 +29,25 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // const router = useRouter();
 
-  useEffect(() => {
-    // TODO: check if user already logged in useEffect (from localStorage)
-    // TODO: if logged update isAuthenticated & user
-    const isAuth = !!getStorage("accessToken") as unknown;
-    console.log("AuthProvider::isAuth", isAuth);
+  // useEffect(() => {
+  //   // TODO: check if user already logged in useEffect (from localStorage)
+  //   // TODO: if logged update isAuthenticated & user
+  //   const isAuth = !!getStorage("accessToken") as unknown;
+  //   console.log("AuthProvider::isAuth", isAuth);
 
-    if (isAuth) {
-      const accessToken = getStorage("accessToken") as string;
-      console.log("🚀 ~ useEffect ~ accessToken:", accessToken);
-      const user = getStorage("user") as any;
-      console.log("🚀 ~ useEffect ~ user:", user);
-      dispatch({
-        type: AuthActionsTypes.LOGIN,
-        payload: { accessToken, user },
-      });
-    } else {
-      console.log("AuthProvider::", "no auth found");
-    }
-  }, []);
+  //   if (isAuth) {
+  //     const accessToken = getStorage("accessToken") as string;
+  //     console.log("🚀 ~ useEffect ~ accessToken:", accessToken);
+  //     const user = getStorage("user") as any;
+  //     console.log("🚀 ~ useEffect ~ user:", user);
+  //     dispatch({
+  //       type: AuthActionsTypes.LOGIN,
+  //       payload: { accessToken, user },
+  //     });
+  //   } else {
+  //     console.log("AuthProvider::", "no auth found");
+  //   }
+  // }, []);
 
   // const handleLogin = async (email: string, password: string) => {
   //   try {
@@ -89,16 +89,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   // };
 
   return (
-    <AuthContext.Provider
-      // value={{
-      //   user,
-      //   loading,
-      //   isAuthenticated,
-      //   login: handleLogin,
-      //   logout: handleLogout,
-      // }}
-      value={{ state, dispatch }}
-    >
+    <AuthContext.Provider value={{ state, dispatch }}>
       {children}
     </AuthContext.Provider>
   );

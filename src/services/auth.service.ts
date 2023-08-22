@@ -1,13 +1,22 @@
 import HttpClient from "@/core/lib/http-client";
 import { IAuthService, TLoginRes, TLogoutRes } from "./types/services";
-import { AxiosResponse } from "axios";
-import { routes } from "@/routes";
+import axios, { AxiosResponse } from "axios";
+import { ROUTES } from "@/routes";
 
-const httpClient = new HttpClient();
+const httpClient = new HttpClient(process.env.NEXT_PUBLIC_BASE_FRONT_DEV_API);
 
 class AuthService implements IAuthService {
   async login(email: string, password: string): Promise<TLoginRes> {
-    const res = await httpClient.post<TLoginRes>(routes.login, {
+    // const url = new URL(
+    //   ROUTES.login,
+    //   process.env.NEXT_PUBLIC_BASE_FRONT_DEV_API
+    // );
+
+    // const res = await axios.post<TLoginRes>(url.toString(), {
+    //   email,
+    //   password,
+    // });
+    const res = await httpClient.post<TLoginRes>(ROUTES.login, {
       email,
       password,
     });
@@ -16,9 +25,9 @@ class AuthService implements IAuthService {
   }
 
   async logout(): Promise<TLogoutRes> {
-    const res = await httpClient.get<TLogoutRes>(routes.logout);
+    const res = await httpClient.get<TLogoutRes>(ROUTES.logout);
 
-    return res.data;
+    return res;
   }
 }
 

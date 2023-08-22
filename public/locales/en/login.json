@@ -1,3 +1,4 @@
 {
-  "title": "هذه هى صفحة الملف الشخصى"
+  "title": "login page",
+  "error": "{{error}} and {{count}} more errors"
 }

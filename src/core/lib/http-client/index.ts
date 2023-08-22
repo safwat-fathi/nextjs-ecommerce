@@ -12,13 +12,15 @@ class HttpClient {
   private readonly _instance: AxiosInstance;
   private _accessToken: string | null = null;
   private _lang: string;
+  private _baseURL: string;
 
-  constructor() {
+  constructor(baseUrl = process.env.NEXT_PUBLIC_BASE_DEV_API) {
     this._lang = getStorage("lang") as string;
     this._accessToken = getStorage("accessToken") as string;
+    this._baseURL = baseUrl;
 
     this._instance = axios.create({
-      baseURL: process.env.NEXT_PUBLIC_BASE_DEV_API,
+      baseURL: this._baseURL,
       withCredentials: true,
       headers: {
         "Accept-Language": this._lang,

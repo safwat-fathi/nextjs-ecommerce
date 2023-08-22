@@ -1,5 +1,6 @@
 import { setCookie, getCookie, deleteCookie } from "cookies-next";
 import { GetServerSidePropsContext } from "next";
+import { toast, TypeOptions, ToastPosition } from "react-toastify";
 
 export const flatDeepByKey = (arr: any[], key: string) =>
   arr.reduce((prev, el) => {
@@ -67,4 +68,16 @@ export const removeStorage = (key: string) => {
     // Client-side rendering (CSR)
     return localStorage.removeItem(key);
   }
+};
+
+export const notify = (
+  msg: string,
+  type: TypeOptions,
+  position: ToastPosition
+) => {
+  toast(msg, {
+    type,
+    position,
+    autoClose: 5000,
+  });
 };

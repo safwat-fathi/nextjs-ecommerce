@@ -9,7 +9,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { useState } from "react";
 import AuthService from "@/services/auth.service";
-import { setStorage } from "@/lib/utils";
+import { notify, setStorage } from "@/lib/utils";
 import { useRouter } from "next/router";
 import clsx from "clsx";
 
@@ -26,46 +26,59 @@ export const getStaticProps: GetStaticProps<PageProps> = async ctx => {
   };
 };
 
-const Login: NextPage<PageProps> = props => {
-  const authService = new AuthService();
+const authService = new AuthService();
 
+const Login: NextPage<PageProps> = () => {
   const router = useRouter();
 
   const { t } = useTranslation("login");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | any[] | null>(null);
 
   const handleLogin = async () => {
     try {
-      // await authService.logout();
       const res = await authService.login(email, password);
 
-      if (res?.success) {
+      if (res) {
         setStorage("accessToken", res.data.accessToken);
         setStorage("user", res.data.user);
+        // TODO: show notification of success
+        notify(
+          "Logged in successfully",
+          "success",
+          router.locale === "ar" ? "top-left" : "top-right"
+        );
         // TODO: redirect to home
         router.push("/");
-
-        setError(null);
       }
 
       // TODO: change user nav state
-      // TODO: show notification of success
     } catch (error: any) {
+      console.log("🚀 ~ handleLogin ~ error:", error);
       const errRes = error?.response?.data;
 
       if (errRes) {
-        if (Array.isArray(errRes.error)) {
-          const errs = errRes.error.map(
-            (err: { param: string; message: string }) => err.message
-          );
+        // if (Array.isArray(errRes.error)) {
+        //   const errs: any[] = errRes.error.map(
+        //     (err: { param: string; message: string }) => err.message
+        //   );
 
-          setError(errs);
-        }
+        //   notify(
+        //     // `${errs[0]} and ${errs.length - 1} more errors`,
+        //     t("error", { error: errs[0], count: errs.length - 1 }),
+        //     "error",
+        //     router.locale === "ar" ? "top-left" : "top-right"
+        //   );
 
-        setError(errRes.error);
+        //   return;
+        // }
+
+        notify(
+          errRes.err,
+          "error",
+          router.locale === "ar" ? "top-left" : "top-right"
+        );
       }
 
       console.error(`Error@handleLogin ${error}`);
@@ -167,7 +180,7 @@ const Login: NextPage<PageProps> = props => {
                   onChange={e => setPassword(e.target.value)}
                 />
               </div>
-
+              {/* 
               <div
                 className={clsx("mt-6 bg-white p-4 rounded", {
                   hidden: !error,
@@ -185,7 +198,7 @@ const Login: NextPage<PageProps> = props => {
                     <p className="text-red-600">* {error}</p>
                   )
                 ) : null}
-              </div>
+              </div> */}
 
               <div className="mt-6">
                 <button
