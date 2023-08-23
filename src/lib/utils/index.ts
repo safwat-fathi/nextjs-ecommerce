@@ -1,5 +1,10 @@
-import { setCookie, getCookie, deleteCookie } from "cookies-next";
-import { GetServerSidePropsContext } from "next";
+import { GetSSPropsReq, GetSSPropsRes } from "@/types/app";
+import {
+  setCookie,
+  getCookie,
+  deleteCookie,
+  CookieValueTypes,
+} from "cookies-next";
 import { toast, TypeOptions, ToastPosition } from "react-toastify";
 
 export const flatDeepByKey = (arr: any[], key: string) =>
@@ -29,9 +34,9 @@ export const blobToData = (
 export const setStorage = (
   key: string,
   value: any,
-  req?: GetServerSidePropsContext["req"],
-  res?: GetServerSidePropsContext["res"]
-) => {
+  req?: GetSSPropsReq,
+  res?: GetSSPropsRes
+): void => {
   const stringifiedValue = JSON.stringify(value);
 
   // Server-side rendering (SSR)
@@ -48,7 +53,18 @@ export const setStorage = (
   }
 };
 
-export const getStorage = (key: string, req?: any, res?: any) => {
+export function getStorage(key: string): string;
+export function getStorage(
+  key: string,
+  req: GetSSPropsReq,
+  res: GetSSPropsRes
+): CookieValueTypes;
+
+export function getStorage(
+  key: string,
+  req?: GetSSPropsReq,
+  res?: GetSSPropsRes
+) {
   // Server-side rendering (SSR)
   if (typeof window === "undefined") {
     const item = getCookie(key, { req, res });
@@ -58,15 +74,19 @@ export const getStorage = (key: string, req?: any, res?: any) => {
     // Client-side rendering (CSR)
     return localStorage.getItem(key);
   }
-};
+}
 
-export const removeStorage = (key: string) => {
+export const removeStorage = (
+  key: string,
+  req?: GetSSPropsReq,
+  res?: GetSSPropsRes
+): void => {
   // Server-side rendering (SSR)
   if (typeof window === "undefined") {
-    deleteCookie(key);
+    deleteCookie(key, { req, res });
   } else {
     // Client-side rendering (CSR)
-    return localStorage.removeItem(key);
+    localStorage.removeItem(key);
   }
 };
 

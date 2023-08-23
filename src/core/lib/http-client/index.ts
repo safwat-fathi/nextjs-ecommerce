@@ -7,16 +7,19 @@ import axios, {
 } from "axios";
 
 import { getStorage } from "@/lib/utils";
+import CONSTANTS from "@/constants";
+import { TNullable } from "@/types/app";
 
 class HttpClient {
   private readonly _instance: AxiosInstance;
-  private _accessToken: string | null = null;
-  private _lang: string;
-  private _baseURL: string;
+  private _accessToken: TNullable<string>;
+  private _lang: TNullable<string>;
+  private _baseURL: TNullable<string>;
 
-  constructor(baseUrl = process.env.NEXT_PUBLIC_BASE_DEV_API) {
-    this._lang = getStorage("lang") as string;
-    this._accessToken = getStorage("accessToken") as string;
+  constructor(baseUrl = process.env.NEXT_PUBLIC_BASE_DEV_API, lang?: string) {
+    this._lang = getStorage(CONSTANTS.LANG) || lang || "";
+    console.log("🚀 ~ constructor ~ this._lang:", this._lang);
+    this._accessToken = getStorage(CONSTANTS.ACCESS_TOKEN);
     this._baseURL = baseUrl;
 
     this._instance = axios.create({
@@ -24,7 +27,7 @@ class HttpClient {
       withCredentials: true,
       headers: {
         "Accept-Language": this._lang,
-        "X-Language": this._lang,
+        // "X-Language": this._lang,
         Authorization: `Bearer ${this._accessToken}`,
       },
     });

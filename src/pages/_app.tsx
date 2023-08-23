@@ -8,6 +8,8 @@ import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/router";
 
 import "@/styles/globals.scss";
+import { setStorage } from "@/lib/utils";
+import CONSTANTS from "@/constants";
 
 type AppOwnProps = { isAuth: boolean };
 
@@ -18,6 +20,9 @@ function MyApp({ Component, pageProps }: AppProps & AppOwnProps) {
 
   useEffect(() => {
     const locale = router.locale as "en" | "ar";
+
+    setStorage(CONSTANTS.LANG, locale);
+
     const dir = locale === "ar" ? "rtl" : "ltr";
 
     const html = document.querySelector("html") as HTMLElement;

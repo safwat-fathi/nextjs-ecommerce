@@ -1,7 +1,7 @@
 import { GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 import CategoriesWrapper from "@/components/Categories";
 import Typography from "@/core/components/Typography";

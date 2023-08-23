@@ -1,20 +1,25 @@
 // Next.js API route support: https://nextjs.org/docs/api-ROUTES/introduction
 import CONSTANTS from "@/constants";
 import HttpClient from "@/core/lib/http-client";
-import { setStorage } from "@/lib/utils";
+import { getStorage, removeStorage, setStorage } from "@/lib/utils";
 import { ROUTES } from "@/routes";
 import { IBaseSingleResponse } from "@/types/i-base-response";
 import { IUser } from "@/types/i-user";
+import axios from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
-import cookie from "cookie";
 
 type Data = {
   email: string;
 };
 
-const httpClient = new HttpClient(process.env.NEXT_PUBLIC_BASE_DEV_API);
-
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  console.log("req.cookies.NEXT_LOCALE API", req.cookies.NEXT_LOCALE);
+  // setStorage(CONSTANTS.LANG, req.cookies.NEXT_LOCALE);
+  const httpClient = new HttpClient(
+    process.env.NEXT_PUBLIC_BASE_DEV_API,
+    req.cookies.NEXT_LOCALE
+  );
+
   try {
     const { email, password } = req.body;
 
@@ -24,33 +29,47 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         .json({ success: false, message: "Credentials is missing" });
     }
 
+    // const loginRes = await httpClient.post<
+    //   IBaseSingleResponse<{
+    //     accessToken: string;
+    //     user: IUser;
+    //   }>
+    // >(
+    //   "http://localhost:8000/api/auth/login",
+    //   { email, password },
+    //   { headers: req.headers }
+    // );
     const loginRes = await httpClient.post<
       IBaseSingleResponse<{
         accessToken: string;
         user: IUser;
       }>
-    >(ROUTES.login, { email, password }, { withCredentials: true });
+    >(
+      "http://localhost:8000/api/auth/login",
+      { email, password },
+      { withCredentials: true, headers: { Cookie: req.headers.cookie } }
+    );
+    console.log("🚀 ~ handleLogin ~ loginRes:", loginRes);
 
-    console.log("🚀 ~ loginRes:", loginRes);
-
+    // console.log("🚀 ~ loginloginRes.data:", loginRes.data);
     if (loginRes.success) {
-      res.setHeader(
-        "Set-Cookie",
-        cookie.serialize("token", loginRes.data.accessToken, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV !== "development",
-          maxAge: 60 * 60 * 24 * 7, // 1 week
-          sameSite: "strict",
-          path: "/",
-        })
-      );
+      // if (loginRes.success) {
+      // res.setHeader(
+      //   "Set-Cookie",
+      //   cookie.serialize("token", loginRes?.data.accessToken, {
+      //     httpOnly: true,
+      //     secure: process.env.NODE_ENV !== "development",
+      //     maxAge: 60 * 60 * 24 * 7, // 1 week
+      //     sameSite: "strict",
+      //     path: "/",
+      //   })
+      // );
 
-      // setStorage(CONSTANTS.ACCESS_TOKEN, loginRes.data.accessToken, req, res);
+      // removeStorage(CONSTANTS.ACCESS_TOKEN, req, res);
+      // setStorage("userToken", loginRes.data.accessToken, req, res);
       setStorage(CONSTANTS.USER, loginRes.data.user, req, res);
 
-      res.status(200).json({
-        ...loginRes.data.user,
-      });
+      res.status(200).json(loginRes);
     } else {
       res.status(500).json(loginRes);
     }
@@ -59,7 +78,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       err:
         (Array.isArray(err?.response?.data?.error)
           ? err?.response?.data?.error[0].message
-          : err?.response?.data?.message) || "Internal server error",
+          : err?.response?.data?.message) ||
+        err?.response?.data?.error ||
+        "Internal server error",
     });
   }
 };

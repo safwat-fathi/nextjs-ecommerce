@@ -1,18 +1,20 @@
-export interface IBaseResponse {
-  success: boolean;
-  message?: string;
-  error?: string | string[];
-}
-// export interface IBaseErrorResponse {
-//   success: boolean;
-//   error: string | string[];
-// }
+import { NotArray } from "./app";
 
-export interface IBaseSingleResponse<T = any> extends IBaseResponse {
-  data: T;
+interface IBaseSuccessResponse {
+  success: true;
+  message: string;
+}
+interface IBaseErrorResponse {
+  success: false;
+  error: string | string[];
 }
 
-export interface IBasePaginatedResponse<T = any> extends IBaseResponse {
+export type IBaseResponse = IBaseSuccessResponse | IBaseErrorResponse;
+export type IBaseSingleResponse<T> = IBaseResponse & {
+  data: NotArray<T>;
+};
+
+export type IBasePaginatedResponse<T> = IBaseResponse & {
   data: T[];
   links: {};
   meta: {
@@ -23,10 +25,16 @@ export interface IBasePaginatedResponse<T = any> extends IBaseResponse {
     has_next: boolean;
     next: number;
   };
-}
-
-const a: IBaseResponse = {
-  success: true,
-  error: "awd",
-  message: "awd",
 };
+
+// const a: IBaseSingleResponse<{token: string; }> = {
+//   success: true,
+// 	data: {token: 'awdawd'},
+// 	message: 'awdawawd'
+// };
+
+// const b: IBasePaginatedResponse<{token: string}> = {
+//   success: true,
+// 	data: [{token: 'awd'}, {token: 'awdawdawdawd'}],
+// 	message: 'awdawawd'
+// };

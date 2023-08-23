@@ -2,12 +2,14 @@ import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "next-i18next";
 import { setStorage } from "@/lib/utils";
+import { setCookie } from "cookies-next";
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
   const { language: currentLanguage } = i18n;
   const router = useRouter();
   const locales = router.locales ?? [currentLanguage];
+  console.log("🚀 ~ LanguageSwitcher ~ currentLangua	ge:", currentLanguage);
 
   const [value, setValue] = useState<string>(i18n.language);
 
@@ -22,6 +24,7 @@ const LanguageSwitcher = () => {
       const path = router.asPath;
       // document.dir = locale === "ar" ? "rtl" : "ltr";
       setStorage("lang", locale);
+      setCookie("NEXT_LOCALE", locale);
       return router.push(path, path, { locale });
     },
     [router]
@@ -29,7 +32,12 @@ const LanguageSwitcher = () => {
 
   useEffect(() => {
     setStorage("lang", currentLanguage);
+    setCookie("NEXT_LOCALE", currentLanguage);
   }, []);
+
+  useEffect(() => {
+    // setCookie("NEXT_LOCALE", router.locale);
+  }, [router.locale]);
 
   return (
     <select

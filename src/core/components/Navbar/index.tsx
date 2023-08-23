@@ -5,7 +5,7 @@ import GuestNav from "./GuestNav";
 import { getStorage } from "@/lib/utils";
 
 const Navbar = ({ isAuth }: { isAuth: boolean }) => {
-  console.log("🚀 ~ Navbar ~ isAuth:", isAuth);
+  // console.log("🚀 ~ Navbar ~ isAuth:", isAuth);
   // const userSignedIn = !!getStorage("accessToken");
   const userSignedIn = true;
   // console.log("🚀 ~ Navbar ~ userSignedIn:", userSignedIn);

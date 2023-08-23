@@ -3,7 +3,7 @@ import { NextSeo } from "next-seo";
 import renderWithLayout from "@/core/HOC/WithLayout";
 import { LayoutsENUM } from "@/core/Layout";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 type PageProps = {
   name: string;

@@ -1,23 +1,30 @@
-import { GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 import renderWithLayout from "@/core/HOC/WithLayout";
 import { LayoutsENUM } from "@/core/Layout";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { useState } from "react";
 import AuthService from "@/services/auth.service";
-import { notify, setStorage } from "@/lib/utils";
+import { getStorage, notify, setStorage } from "@/lib/utils";
 import { useRouter } from "next/router";
 import clsx from "clsx";
+import CONSTANTS from "@/constants";
+import axios from "axios";
 
 type PageProps = {
   name: string;
 };
 
 export const getStaticProps: GetStaticProps<PageProps> = async ctx => {
+  // export const getStaticProps: GetServerSideProps<PageProps> = async ctx => {
+  // console.log("🚀 ~ awdawd");
+  // const { req, res } = ctx;
+
+  // const token = getStorage(CONSTANTS.ACCESS_TOKEN, req, res);
+  // console.log("🚀 ~ token:", token);
   return {
     props: {
       name: "wwww",
@@ -39,19 +46,27 @@ const Login: NextPage<PageProps> = () => {
   const handleLogin = async () => {
     try {
       const res = await authService.login(email, password);
+      console.log("🚀 ~ handleLogin ~ res:", res);
 
-      if (res) {
+      if (res.success) {
         setStorage("accessToken", res.data.accessToken);
         setStorage("user", res.data.user);
-        // TODO: show notification of success
+
         notify(
           "Logged in successfully",
           "success",
           router.locale === "ar" ? "top-left" : "top-right"
         );
-        // TODO: redirect to home
+
         router.push("/");
       }
+      // const res = await axios.post(
+      //   // "http://localhost:8000/api/auth/login",
+      //   "/api/auth/login",
+      //   { email, password },
+      //   { withCredentials: true }
+      // );
+      // console.log("🚀 ~ handleLogin ~ res:", res);
 
       // TODO: change user nav state
     } catch (error: any) {

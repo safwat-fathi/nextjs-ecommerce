@@ -7,27 +7,18 @@ const httpClient = new HttpClient(process.env.NEXT_PUBLIC_BASE_FRONT_DEV_API);
 
 class AuthService implements IAuthService {
   async login(email: string, password: string): Promise<TLoginRes> {
-    // const url = new URL(
-    //   ROUTES.login,
-    //   process.env.NEXT_PUBLIC_BASE_FRONT_DEV_API
-    // );
-
-    // const res = await axios.post<TLoginRes>(url.toString(), {
-    //   email,
-    //   password,
-    // });
-    const res = await httpClient.post<TLoginRes>(ROUTES.login, {
+    const res = await axios.post<TLoginRes>(ROUTES.login, {
       email,
       password,
     });
 
-    return res;
+    return res.data;
   }
 
   async logout(): Promise<TLogoutRes> {
-    const res = await httpClient.get<TLogoutRes>(ROUTES.logout);
+    const res = await axios.get<TLogoutRes>(ROUTES.logout);
 
-    return res;
+    return res.data;
   }
 }
 
