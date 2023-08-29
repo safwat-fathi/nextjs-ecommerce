@@ -22,14 +22,8 @@ type PageProps = {
 // export const getStaticProps: GetStaticProps<PageProps> = async ctx => {
 export const getServerSideProps: GetServerSideProps<PageProps> = async ctx => {
   const { req, res } = ctx;
-  // console.log("🚀 ~ req:", req);
 
   const token = getStorage(CONSTANTS.ACCESS_TOKEN, req, res);
-  console.log("🚀 ~ token:", token);
-  // console.log("🚀 ~ token:", token);
-  // removeStorage("userToken", req, res);
-  // removeStorage("accessToken", req, res);
-  // removeStorage("token", req, res);
 
   if (token) {
     return {
