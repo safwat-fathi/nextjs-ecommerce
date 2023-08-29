@@ -14,6 +14,7 @@ const classes = {
     primary: "text-white",
     secondary: "text-secondary",
     danger: "text-red",
+    outlined: "",
   },
 };
 

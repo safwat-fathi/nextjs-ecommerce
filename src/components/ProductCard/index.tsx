@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import Rating from "@/core/components/Rating";
-import { IProduct } from "@/types/i-products";
+import { IProduct } from "@/types/i-product";
 
 const ProductCard = ({
   imgSrc,

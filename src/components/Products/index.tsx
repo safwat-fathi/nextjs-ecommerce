@@ -25,6 +25,7 @@ const Products = () => {
       <GridView>
         {products.map(item => (
           <ProductCard
+            key={item.title}
             title={item.title}
             imgSrc={item.imgSrc}
             price={item.price}
