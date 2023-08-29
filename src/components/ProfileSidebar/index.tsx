@@ -15,6 +15,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import Button from "@/core/components/Button";
 import AuthService from "@/services/auth.service";
+import { setStorage } from "@/lib/utils";
+import CONSTANTS from "@/constants";
 
 const ProfileSidebar = () => {
   const router = useRouter();
@@ -48,6 +50,10 @@ const ProfileSidebar = () => {
   const handleLogout = async () => {
     try {
       await authService.logout();
+
+      setStorage(CONSTANTS.IS_AUTHENTICATED, false);
+      setStorage(CONSTANTS.USER, null);
+
       router.push("/");
     } catch (error) {
       console.error(`Error@handleLogout ${error}`);

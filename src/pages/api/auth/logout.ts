@@ -15,7 +15,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     if (logoutRes.success) {
-      removeStorage(CONSTANTS.ACCESS_TOKEN, req, res);
+      // removeStorage(CONSTANTS.TOKEN, req, res);
+      // removeStorage(CONSTANTS.ACCESS_TOKEN, req, res);
       removeStorage(CONSTANTS.USER, req, res);
 
       res.status(200).json(logoutRes);

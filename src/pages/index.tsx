@@ -1,6 +1,6 @@
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
 
@@ -13,8 +13,15 @@ import Typography from "@/core/components/Typography";
 import Section from "@/core/components/Section";
 
 import { HomeProps } from "./meta/i-home";
+import { getStorage } from "@/lib/utils";
+import CONSTANTS from "@/constants";
 
-export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps<HomeProps> = async ctx => {
+  const { locale, req, res } = ctx;
+
+  // const token = getStorage(CONSTANTS.TOKEN, req, res);
+  // console.log("🚀 ~ token:", token);
+
   const categories = [
     {
       id: 0,
@@ -37,6 +44,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale }) => {
     props: {
       ...(await serverSideTranslations(locale!, ["common", "home"])),
       categories,
+      // isAuthenticated: token ? true : false,
     },
   };
 };

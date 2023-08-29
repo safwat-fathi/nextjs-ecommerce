@@ -18,7 +18,6 @@ class HttpClient {
 
   constructor(baseUrl = process.env.NEXT_PUBLIC_BASE_DEV_API, lang?: string) {
     this._lang = getStorage(CONSTANTS.LANG) || lang || "";
-    console.log("🚀 ~ constructor ~ this._lang:", this._lang);
     this._accessToken = getStorage(CONSTANTS.ACCESS_TOKEN);
     this._baseURL = baseUrl;
 

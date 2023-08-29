@@ -13,7 +13,7 @@ type Data = {
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log("req.cookies.NEXT_LOCALE API", req.cookies.NEXT_LOCALE);
+  // console.log("req.cookies.NEXT_LOCALE API", req.cookies.NEXT_LOCALE);
   // setStorage(CONSTANTS.LANG, req.cookies.NEXT_LOCALE);
   const httpClient = new HttpClient(
     process.env.NEXT_PUBLIC_BASE_DEV_API,
@@ -29,45 +29,28 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         .json({ success: false, message: "Credentials is missing" });
     }
 
-    // const loginRes = await httpClient.post<
-    //   IBaseSingleResponse<{
-    //     accessToken: string;
-    //     user: IUser;
-    //   }>
-    // >(
-    //   "http://localhost:8000/api/auth/login",
-    //   { email, password },
-    //   { headers: req.headers }
-    // );
+    console.log("🚀 ~ req.headers.cookie:", req.headers.cookie);
     const loginRes = await httpClient.post<
       IBaseSingleResponse<{
         accessToken: string;
         user: IUser;
       }>
     >(
-      "http://localhost:8000/api/auth/login",
+      // "http://localhost:8000/api/auth/login",
+      `${process.env.NEXT_PUBLIC_BASE_DEV_API}${ROUTES.login}`,
       { email, password },
-      { withCredentials: true, headers: { Cookie: req.headers.cookie } }
+      { headers: { Cookie: req.headers.cookie } }
     );
-    console.log("🚀 ~ handleLogin ~ loginRes:", loginRes);
-
-    // console.log("🚀 ~ loginloginRes.data:", loginRes.data);
     if (loginRes.success) {
-      // if (loginRes.success) {
-      // res.setHeader(
-      //   "Set-Cookie",
-      //   cookie.serialize("token", loginRes?.data.accessToken, {
-      //     httpOnly: true,
-      //     secure: process.env.NODE_ENV !== "development",
-      //     maxAge: 60 * 60 * 24 * 7, // 1 week
-      //     sameSite: "strict",
-      //     path: "/",
-      //   })
-      // );
-
-      // removeStorage(CONSTANTS.ACCESS_TOKEN, req, res);
+      // setStorage(CONSTANTS.ACCESS_TOKEN, loginRes.data.accessToken, req, res);
+      // setStorage(CONSTANTS.TOKEN, loginRes.data.accessToken, req, res);
       // setStorage("userToken", loginRes.data.accessToken, req, res);
-      setStorage(CONSTANTS.USER, loginRes.data.user, req, res);
+      // setStorage(CONSTANTS.USER, loginRes.data.user, req, res);
+
+      // removeStorage("userToken", req, res);
+      // removeStorage(CONSTANTS.USER, req, res);
+      // removeStorage(CONSTANTS.TOKEN, req, res);
+      // removeStorage(CONSTANTS.ACCESS_TOKEN, req, res);
 
       res.status(200).json(loginRes);
     } else {

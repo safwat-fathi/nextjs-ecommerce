@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import App, { AppContext, AppInitialProps, AppProps } from "next/app";
+import type { AppProps } from "next/app";
 import { appWithTranslation } from "next-i18next";
 import { DefaultSeo } from "next-seo";
 import SEO from "../../next-seo.config";
@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps & AppOwnProps) {
   useEffect(() => {
     const locale = router.locale as "en" | "ar";
 
-    setStorage(CONSTANTS.LANG, locale);
+    // setStorage(CONSTANTS.LANG, locale);
 
     const dir = locale === "ar" ? "rtl" : "ltr";
 

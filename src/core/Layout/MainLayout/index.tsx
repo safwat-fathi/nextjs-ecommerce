@@ -3,7 +3,10 @@ import dynamic from "next/dynamic";
 
 import BreadcrumbItem from "@/core/components/Breadcrumbs/BreadcrumbItem";
 import Breadcrumbs from "@/core/components/Breadcrumbs";
-import Navbar from "@/core/components/Navbar";
+// import Navbar from "@/core/components/Navbar";
+const DynamicNavbar = dynamic(() => import("@/core/components/Navbar"), {
+  ssr: false,
+});
 import TopBar from "@/core/components/Navbar/TopBar";
 import MenuBar from "@/core/components/Navbar/MenuBar";
 import Footer from "@/core/components/Footer";
@@ -21,7 +24,8 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
     <>
       <header style={{ display: "unset" }}>
         <TopBar />
-        <Navbar />
+        {/* <Navbar /> */}
+        <DynamicNavbar />
         <div className="z-10 shadow-lg bg-gray-800 text-gray-200 sticky top-0">
           <MenuBar />
         </div>

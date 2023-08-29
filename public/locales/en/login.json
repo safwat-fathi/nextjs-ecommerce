@@ -1,4 +1,5 @@
 {
   "title": "login page",
-  "error": "{{error}} and {{count}} more errors"
+  "error": "{{error}} and {{count}} more errors",
+  "success": "Logged in successfully"
 }

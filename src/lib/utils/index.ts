@@ -72,7 +72,7 @@ export function getStorage(
     return item;
   } else {
     // Client-side rendering (CSR)
-    return localStorage.getItem(key);
+    return localStorage.getItem(key) ?? false;
   }
 }
 

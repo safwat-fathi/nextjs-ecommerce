@@ -3,11 +3,15 @@ import Link from "next/link";
 import UserNav from "./UserNav";
 import GuestNav from "./GuestNav";
 import { getStorage } from "@/lib/utils";
+import CONSTANTS from "@/constants";
 
-const Navbar = ({ isAuth }: { isAuth: boolean }) => {
+// const Navbar = ({ isAuth }: { isAuth: boolean }) => {
+const Navbar = () => {
   // console.log("🚀 ~ Navbar ~ isAuth:", isAuth);
-  // const userSignedIn = !!getStorage("accessToken");
-  const userSignedIn = true;
+  // const userSignedIn = false;
+  const userSignedIn = getStorage(CONSTANTS.IS_AUTHENTICATED);
+  console.log("🚀 ~ Navbar ~ userSignedIn:", userSignedIn);
+  // const userSignedIn = true;
   // console.log("🚀 ~ Navbar ~ userSignedIn:", userSignedIn);
 
   return (
@@ -60,6 +64,7 @@ const Navbar = ({ isAuth }: { isAuth: boolean }) => {
       </div>
 
       {userSignedIn ? <UserNav /> : <GuestNav />}
+      {/* {state.isAuthenticated ? <UserNav /> : <GuestNav />} */}
 
       {/* <div className="ml-4 hidden sm:flex flex-col font-bold">
           <span className="text-xs text-gray-400">Your Cart</span>

@@ -8,23 +8,36 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import AuthService from "@/services/auth.service";
-import { getStorage, notify, setStorage } from "@/lib/utils";
+import { getStorage, notify, removeStorage, setStorage } from "@/lib/utils";
 import { useRouter } from "next/router";
-import clsx from "clsx";
 import CONSTANTS from "@/constants";
-import axios from "axios";
+import { useAuth } from "@/lib/contexts/auth";
+import { AuthActionsTypes } from "@/lib/contexts/auth/types/i-auth";
 
 type PageProps = {
   name: string;
 };
 
-export const getStaticProps: GetStaticProps<PageProps> = async ctx => {
-  // export const getStaticProps: GetServerSideProps<PageProps> = async ctx => {
-  // console.log("🚀 ~ awdawd");
-  // const { req, res } = ctx;
+// export const getStaticProps: GetStaticProps<PageProps> = async ctx => {
+export const getServerSideProps: GetServerSideProps<PageProps> = async ctx => {
+  const { req, res } = ctx;
+  // console.log("🚀 ~ req:", req);
 
   // const token = getStorage(CONSTANTS.ACCESS_TOKEN, req, res);
   // console.log("🚀 ~ token:", token);
+  // removeStorage("userToken", req, res);
+  // removeStorage("accessToken", req, res);
+  // removeStorage("token", req, res);
+
+  // if (token) {
+  //   return {
+  //     redirect: {
+  //       permanent: false,
+  //       destination: "/",
+  //     },
+  //   };
+  // }
+
   return {
     props: {
       name: "wwww",
@@ -33,40 +46,44 @@ export const getStaticProps: GetStaticProps<PageProps> = async ctx => {
   };
 };
 
-const authService = new AuthService();
-
 const Login: NextPage<PageProps> = () => {
+  const authService = new AuthService();
+
   const router = useRouter();
 
   const { t } = useTranslation("login");
+
+  const { dispatch } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
     try {
+      // dispatch({type: AuthActionsTypes.LOADING_START})
+
       const res = await authService.login(email, password);
       console.log("🚀 ~ handleLogin ~ res:", res);
 
       if (res.success) {
-        setStorage("accessToken", res.data.accessToken);
-        setStorage("user", res.data.user);
+        // setStorage("accessToken", res.data.accessToken);
+        setStorage(CONSTANTS.USER, res.data.user);
+        setStorage(CONSTANTS.IS_AUTHENTICATED, true);
+
+        dispatch({
+          type: AuthActionsTypes.LOGIN,
+          payload: res.data.user,
+        });
 
         notify(
-          "Logged in successfully",
+          t("success"),
           "success",
           router.locale === "ar" ? "top-left" : "top-right"
         );
 
-        router.push("/");
+        // dispatch({type: AuthActionsTypes.LOADING_END})
+        // router.push("/");
       }
-      // const res = await axios.post(
-      //   // "http://localhost:8000/api/auth/login",
-      //   "/api/auth/login",
-      //   { email, password },
-      //   { withCredentials: true }
-      // );
-      // console.log("🚀 ~ handleLogin ~ res:", res);
 
       // TODO: change user nav state
     } catch (error: any) {

@@ -1,5 +1,4 @@
 import {
-  PropsWithChildren,
   ReactNode,
   createContext,
   useContext,
@@ -9,9 +8,10 @@ import {
 import { AuthActionsTypes, IAuth, IAuthContext } from "./types/i-auth";
 import { AuthReducer } from "./reducer";
 import { getStorage } from "@/lib/utils";
+import CONSTANTS from "@/constants";
 
 const initialState: IAuth = {
-  token: null,
+  // token: null,
   user: null,
   isAuthenticated: false,
   loading: false,
@@ -87,6 +87,15 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   //     setLoading(false);
   //   }
   // };
+
+  // useEffect(() => {
+  //   const isAuthenticated = getStorage(CONSTANTS.USER);
+  //   console.log("🚀 ~ useEffect ~ isAuthenticated:", isAuthenticated);
+
+  //   if (isAuthenticated)
+  //     dispatch({ type: AuthActionsTypes.SET_AUTHENTICATED, payload: true });
+  //   else dispatch({ type: AuthActionsTypes.SET_AUTHENTICATED, payload: false });
+  // }, []);
 
   return (
     <AuthContext.Provider value={{ state, dispatch }}>

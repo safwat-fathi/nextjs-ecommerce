@@ -1,9 +1,6 @@
-import HttpClient from "@/core/lib/http-client";
 import { IAuthService, TLoginRes, TLogoutRes } from "./types/services";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { ROUTES } from "@/routes";
-
-const httpClient = new HttpClient(process.env.NEXT_PUBLIC_BASE_FRONT_DEV_API);
 
 class AuthService implements IAuthService {
   async login(email: string, password: string): Promise<TLoginRes> {

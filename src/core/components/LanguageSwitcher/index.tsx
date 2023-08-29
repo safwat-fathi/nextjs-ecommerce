@@ -9,7 +9,6 @@ const LanguageSwitcher = () => {
   const { language: currentLanguage } = i18n;
   const router = useRouter();
   const locales = router.locales ?? [currentLanguage];
-  console.log("🚀 ~ LanguageSwitcher ~ currentLangua	ge:", currentLanguage);
 
   const [value, setValue] = useState<string>(i18n.language);
 
@@ -22,9 +21,10 @@ const LanguageSwitcher = () => {
   const switchToLocale = useCallback(
     (locale: string) => {
       const path = router.asPath;
-      // document.dir = locale === "ar" ? "rtl" : "ltr";
+
       setStorage("lang", locale);
       setCookie("NEXT_LOCALE", locale);
+
       return router.push(path, path, { locale });
     },
     [router]
@@ -34,10 +34,6 @@ const LanguageSwitcher = () => {
     setStorage("lang", currentLanguage);
     setCookie("NEXT_LOCALE", currentLanguage);
   }, []);
-
-  useEffect(() => {
-    // setCookie("NEXT_LOCALE", router.locale);
-  }, [router.locale]);
 
   return (
     <select
