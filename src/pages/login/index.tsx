@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import CONSTANTS from "@/constants";
 import { useAuth } from "@/lib/contexts/auth";
 import { AuthActionsTypes } from "@/lib/contexts/auth/types/i-auth";
+import { setCookie } from "cookies-next";
 
 type PageProps = {
   name: string;
@@ -23,20 +24,21 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async ctx => {
   const { req, res } = ctx;
   // console.log("🚀 ~ req:", req);
 
-  // const token = getStorage(CONSTANTS.ACCESS_TOKEN, req, res);
+  const token = getStorage(CONSTANTS.ACCESS_TOKEN, req, res);
+  console.log("🚀 ~ token:", token);
   // console.log("🚀 ~ token:", token);
   // removeStorage("userToken", req, res);
   // removeStorage("accessToken", req, res);
   // removeStorage("token", req, res);
 
-  // if (token) {
-  //   return {
-  //     redirect: {
-  //       permanent: false,
-  //       destination: "/",
-  //     },
-  //   };
-  // }
+  if (token) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/",
+      },
+    };
+  }
 
   return {
     props: {
@@ -66,9 +68,10 @@ const Login: NextPage<PageProps> = () => {
       console.log("🚀 ~ handleLogin ~ res:", res);
 
       if (res.success) {
-        // setStorage("accessToken", res.data.accessToken);
         setStorage(CONSTANTS.USER, res.data.user);
         setStorage(CONSTANTS.IS_AUTHENTICATED, true);
+
+        setCookie(CONSTANTS.ACCESS_TOKEN, res.data.accessToken);
 
         dispatch({
           type: AuthActionsTypes.LOGIN,
@@ -82,7 +85,7 @@ const Login: NextPage<PageProps> = () => {
         );
 
         // dispatch({type: AuthActionsTypes.LOADING_END})
-        // router.push("/");
+        router.push("/");
       }
 
       // TODO: change user nav state
@@ -107,7 +110,7 @@ const Login: NextPage<PageProps> = () => {
         // }
 
         notify(
-          errRes.err,
+          errRes.error,
           "error",
           router.locale === "ar" ? "top-left" : "top-right"
         );

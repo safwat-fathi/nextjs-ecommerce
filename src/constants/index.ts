@@ -4,6 +4,7 @@ const CONSTANTS = {
   ACCESS_TOKEN: "accessToken",
   USER: "user",
   LANG: "lang",
+  NEXT_LOCALE: "NEXT_LOCALE",
 } as const;
 
 export default CONSTANTS;

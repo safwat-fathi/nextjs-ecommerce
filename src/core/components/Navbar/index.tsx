@@ -10,7 +10,7 @@ const Navbar = () => {
   // console.log("🚀 ~ Navbar ~ isAuth:", isAuth);
   // const userSignedIn = false;
   const userSignedIn = getStorage(CONSTANTS.IS_AUTHENTICATED);
-  console.log("🚀 ~ Navbar ~ userSignedIn:", userSignedIn);
+  console.log("🚀 ~ Navbar ~ userSignedIn:", typeof userSignedIn);
   // const userSignedIn = true;
   // console.log("🚀 ~ Navbar ~ userSignedIn:", userSignedIn);
 
