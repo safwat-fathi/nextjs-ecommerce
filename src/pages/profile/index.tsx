@@ -1,4 +1,4 @@
-import { GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
@@ -7,12 +7,27 @@ import renderWithLayout from "@/core/HOC/WithLayout";
 import { LayoutsENUM } from "@/core/Layout";
 
 import Section from "@/core/components/Section";
+import { getCookie } from "cookies-next";
+import CONSTANTS from "@/constants";
 
 type PageProps = {
   name: string;
 };
 
-export const getStaticProps: GetStaticProps<PageProps> = async ctx => {
+export const getServerSideProps: GetServerSideProps<PageProps> = async ctx => {
+  const { req, res } = ctx;
+
+  const token = getCookie(CONSTANTS.ACCESS_TOKEN, { req, res });
+
+  if (!token) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/",
+      },
+    };
+  }
+
   return {
     props: {
       name: "wwww",

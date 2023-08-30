@@ -1,9 +1,16 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 
-import Drawer from "../Drawer";
-import Wishlist from "@/components/Wishlist";
+// import Drawer from "../Drawer";
+const DynamicDrawer = dynamic(() => import("../Drawer"), {
+  ssr: false,
+});
+// import Wishlist from "@/components/Wishlist";
+const DynamicWishlist = dynamic(() => import("@/components/Wishlist"), {
+  ssr: false,
+});
 
 const UserNav = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -51,7 +58,7 @@ const UserNav = () => {
           </li>
         </ul>
       </nav>
-      <Drawer
+      <DynamicDrawer
         key="awdawd"
         title="Cart"
         isOpen={isCartOpen}
@@ -61,9 +68,9 @@ const UserNav = () => {
         }}
       >
         <h1>Cart</h1>
-      </Drawer>
+      </DynamicDrawer>
 
-      <Drawer
+      <DynamicDrawer
         key="aw"
         title="My Wishlist"
         isOpen={isWishlistOpen}
@@ -72,8 +79,8 @@ const UserNav = () => {
           setIsWishlistOpen(false);
         }}
       >
-        <Wishlist />
-      </Drawer>
+        <DynamicWishlist />
+      </DynamicDrawer>
     </>
   );
 };

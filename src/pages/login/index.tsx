@@ -1,4 +1,4 @@
-import { GetServerSideProps, GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 import renderWithLayout from "@/core/HOC/WithLayout";
 import { LayoutsENUM } from "@/core/Layout";
@@ -8,12 +8,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import AuthService from "@/services/auth.service";
-import { getStorage, notify, removeStorage, setStorage } from "@/lib/utils";
+import { notify, setStorage } from "@/lib/utils";
 import { useRouter } from "next/router";
 import CONSTANTS from "@/constants";
 import { useAuth } from "@/lib/contexts/auth";
 import { AuthActionsTypes } from "@/lib/contexts/auth/types/i-auth";
-import { setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 
 type PageProps = {
   name: string;
@@ -23,7 +23,7 @@ type PageProps = {
 export const getServerSideProps: GetServerSideProps<PageProps> = async ctx => {
   const { req, res } = ctx;
 
-  const token = getStorage(CONSTANTS.ACCESS_TOKEN, req, res);
+  const token = getCookie(CONSTANTS.ACCESS_TOKEN, { req, res });
 
   if (token) {
     return {
@@ -56,16 +56,14 @@ const Login: NextPage<PageProps> = () => {
 
   const handleLogin = async () => {
     try {
-      // dispatch({type: AuthActionsTypes.LOADING_START})
-
       const res = await authService.login(email, password);
-      console.log("🚀 ~ handleLogin ~ res:", res);
 
       if (res.success) {
         setStorage(CONSTANTS.USER, res.data.user);
         setStorage(CONSTANTS.IS_AUTHENTICATED, true);
 
         setCookie(CONSTANTS.ACCESS_TOKEN, res.data.accessToken);
+        setCookie(CONSTANTS.IS_AUTHENTICATED, true);
 
         dispatch({
           type: AuthActionsTypes.LOGIN,

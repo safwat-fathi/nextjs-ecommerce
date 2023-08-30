@@ -3,9 +3,12 @@ import dynamic from "next/dynamic";
 
 import BreadcrumbItem from "@/core/components/Breadcrumbs/BreadcrumbItem";
 import Breadcrumbs from "@/core/components/Breadcrumbs";
-// import Navbar from "@/core/components/Navbar";
+import Spinner from "@/core/components/Spinner";
 const DynamicNavbar = dynamic(() => import("@/core/components/Navbar"), {
   ssr: false,
+  loading: () => (
+    <Spinner className="h-12 p-2" color="#000" fontSize={30} height={30} />
+  ),
 });
 import TopBar from "@/core/components/Navbar/TopBar";
 import MenuBar from "@/core/components/Navbar/MenuBar";

@@ -37,6 +37,8 @@ export interface DrawerProps extends OverlayProps {
 export interface SpinnerProps {
   color: string;
   fontSize: number;
+  className?: string;
+  height?: number;
 }
 
 export type CrumbItem = {

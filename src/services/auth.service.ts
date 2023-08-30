@@ -5,7 +5,6 @@ import { getCookie } from "cookies-next";
 import CONSTANTS from "@/constants";
 
 class AuthService implements IAuthService {
-  // private _router = useRouter();
   private _lang = getCookie(CONSTANTS.NEXT_LOCALE);
 
   async login(email: string, password: string): Promise<TLoginRes> {

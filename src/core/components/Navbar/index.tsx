@@ -5,14 +5,8 @@ import GuestNav from "./GuestNav";
 import { getStorage } from "@/lib/utils";
 import CONSTANTS from "@/constants";
 
-// const Navbar = ({ isAuth }: { isAuth: boolean }) => {
 const Navbar = () => {
-  // console.log("🚀 ~ Navbar ~ isAuth:", isAuth);
-  // const userSignedIn = false;
   const userSignedIn = getStorage(CONSTANTS.IS_AUTHENTICATED);
-  console.log("🚀 ~ Navbar ~ userSignedIn:", typeof userSignedIn);
-  // const userSignedIn = true;
-  // console.log("🚀 ~ Navbar ~ userSignedIn:", userSignedIn);
 
   return (
     <div className="container mx-auto flex justify-between items-center">
@@ -21,7 +15,7 @@ const Navbar = () => {
           <Image
             src="/images/logo.svg"
             width={150}
-            height={250}
+            height={50}
             alt="company logo"
           />
         </Link>

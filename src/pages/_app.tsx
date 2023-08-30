@@ -8,20 +8,17 @@ import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/router";
 
 import "@/styles/globals.scss";
-import { setStorage } from "@/lib/utils";
+import { getCookie } from "cookies-next";
 import CONSTANTS from "@/constants";
+import { removeStorage } from "@/lib/utils";
 
-type AppOwnProps = { isAuth: boolean };
+// type AppOwnProps = { isAuth: boolean };
 
-function MyApp({ Component, pageProps }: AppProps & AppOwnProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  // const isAuth = getStorage("accessToken");
-  // console.log("🚀 ~ MyApp ~ isAuth:", isAuth);
 
   useEffect(() => {
     const locale = router.locale as "en" | "ar";
-
-    // setStorage(CONSTANTS.LANG, locale);
 
     const dir = locale === "ar" ? "rtl" : "ltr";
 
@@ -29,14 +26,23 @@ function MyApp({ Component, pageProps }: AppProps & AppOwnProps) {
     html.setAttribute("dir", dir);
   }, [router.locale]);
 
+  useEffect(() => {
+    const isAuthenticated = getCookie(CONSTANTS.IS_AUTHENTICATED);
+
+    if (!isAuthenticated) {
+      removeStorage(CONSTANTS.IS_AUTHENTICATED);
+      removeStorage(CONSTANTS.USER);
+    }
+  }, []);
+
   return (
     // <SSRProvider>
     <>
       <DefaultSeo {...SEO} />
       <ToastContainer />
-      <AuthProvider>
-        <Component {...pageProps} />
-      </AuthProvider>
+      {/* <AuthProvider> */}
+      <Component {...pageProps} />
+      {/* </AuthProvider> */}
     </>
   );
 }

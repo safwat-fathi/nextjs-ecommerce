@@ -7,8 +7,9 @@ import {
 } from "react";
 import { AuthActionsTypes, IAuth, IAuthContext } from "./types/i-auth";
 import { AuthReducer } from "./reducer";
-import { getStorage } from "@/lib/utils";
+import { getStorage, removeStorage } from "@/lib/utils";
 import CONSTANTS from "@/constants";
+import { getCookie } from "cookies-next";
 
 const initialState: IAuth = {
   // token: null,
@@ -95,6 +96,22 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   //   if (isAuthenticated)
   //     dispatch({ type: AuthActionsTypes.SET_AUTHENTICATED, payload: true });
   //   else dispatch({ type: AuthActionsTypes.SET_AUTHENTICATED, payload: false });
+  // }, []);
+  // useEffect(() => {
+  //   // const ACCESS_TOKEN = getCookie(CONSTANTS.ACCESS_TOKEN);
+  //   // console.log("🚀 ~ useEffect ~ ACCESS_TOKEN:", ACCESS_TOKEN);
+  //   const IS_AUTHENTICATED = getCookie(CONSTANTS.IS_AUTHENTICATED);
+  //   console.log("🚀 ~ useEffect ~ IS_AUTHENTICATED:", IS_AUTHENTICATED);
+  //   // const TOKEN = getCookie(CONSTANTS.TOKEN);
+  //   // console.log("🚀 ~ useEffect ~ TOKEN:", TOKEN);
+  //   // const USER = getCookie(CONSTANTS.USER);
+  //   // console.log("🚀 ~ useEffect ~ USER:", USER);
+  //   if (!IS_AUTHENTICATED) {
+  //     console.log("is not auth");
+
+  //     removeStorage(CONSTANTS.IS_AUTHENTICATED);
+  //     removeStorage(CONSTANTS.USER);
+  //   }
   // }, []);
 
   return (

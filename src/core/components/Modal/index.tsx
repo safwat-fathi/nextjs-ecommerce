@@ -6,7 +6,7 @@ import { PropsWithChildren } from "react";
 import dynamic from "next/dynamic";
 const DynamicPortal = dynamic(() => import("../Portal"), { ssr: false });
 
-const Drawer = ({
+const Modal = ({
   isOpen,
   onClose,
   isStatic = true,
@@ -55,4 +55,4 @@ const Drawer = ({
   );
 };
 
-export default Drawer;
+export default Modal;

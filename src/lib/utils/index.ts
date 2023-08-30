@@ -1,10 +1,4 @@
 import { GetSSPropsReq, GetSSPropsRes } from "@/types/app";
-import {
-  setCookie,
-  getCookie,
-  deleteCookie,
-  CookieValueTypes,
-} from "cookies-next";
 import { toast, TypeOptions, ToastPosition } from "react-toastify";
 
 export const flatDeepByKey = (arr: any[], key: string) =>
@@ -30,66 +24,34 @@ export const blobToData = (
   });
 };
 
-// Storage utils
-export const setStorage = (
-  key: string,
-  value: any,
-  req?: GetSSPropsReq,
-  res?: GetSSPropsRes
-): void => {
+// Storage utils for client-side rendering (CSR)
+export const setStorage = (key: string, value: any): void => {
   const stringifiedValue = JSON.stringify(value);
 
-  // Server-side rendering (SSR)
-  if (typeof window === "undefined") {
-    setCookie(key, stringifiedValue, {
-      req,
-      res,
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24, // max age is 24 hrs
-    });
-  } else {
-    // Client-side rendering (CSR)
-    localStorage.setItem(key, stringifiedValue);
-  }
+  localStorage.setItem(key, stringifiedValue);
 };
 
-export function getStorage(key: string): string;
-export function getStorage(
-  key: string,
-  req: GetSSPropsReq,
-  res: GetSSPropsRes
-): CookieValueTypes;
+// export function getStorage(key: string): string;
+// export function getStorage(
+//   key: string,
+//   req: GetSSPropsReq,
+//   res: GetSSPropsRes
+// ): CookieValueTypes;
+// export function getStorage(
 
-export function getStorage(
-  key: string,
-  req?: GetSSPropsReq,
-  res?: GetSSPropsRes
-) {
-  // Server-side rendering (SSR)
-  if (typeof window === "undefined") {
-    const item = getCookie(key, { req, res });
-
-    return item;
-  } else {
-    // Client-side rendering (CSR)
+export const getStorage = (key: string) => {
+  if (typeof window !== "undefined") {
     return JSON.parse(localStorage.getItem(key) || "") ?? false;
   }
-}
+};
 
-export const removeStorage = (
-  key: string,
-  req?: GetSSPropsReq,
-  res?: GetSSPropsRes
-): void => {
-  // Server-side rendering (SSR)
-  if (typeof window === "undefined") {
-    deleteCookie(key, { req, res });
-  } else {
-    // Client-side rendering (CSR)
-    localStorage.removeItem(key);
+export const removeStorage = (key: string): void => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem(key, "null");
   }
 };
 
+// notify util
 export const notify = (
   msg: string,
   type: TypeOptions,
