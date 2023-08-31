@@ -38,7 +38,7 @@ const Button = ({
     <button
       disabled={disabled}
       className={clsx(
-        `${className} focus:ring-2 focus:outline-none enabled:transition enabled:ease-in-out duration-300 rounded capitalize ${classes.size[size]} ${classes.variant[variant]}}`,
+        `${className} focus:ring-2 focus:outline-none enabled:transition enabled:ease-in-out duration-300 rounded ${classes.size[size]} ${classes.variant[variant]}}`,
         {
           "opacity-50 cursor-not-allowed": disabled,
           "rounded-full": pill,

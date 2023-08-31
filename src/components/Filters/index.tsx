@@ -25,30 +25,30 @@ const brandsData = [
 const categoriesData: ICategory[] = [
   {
     _id: "64baa25b328ab1c619fb1a9c",
-    name: "Cloths",
-    description: "All Cloths",
+    name: "fragrances",
+    description: "All Fragrances",
     sub: [
-      {
-        _id: "64baa25b328ab1c619fb1a9f",
-        name: "Shirts",
-        description: "All Shirts",
-        sub: [],
-        parent: "64baa25b328ab1c619fb1a9c",
-      },
+      // {
+      //   _id: "64baa25b328ab1c619fb1a9f",
+      //   name: "Shirts",
+      //   description: "All Shirts",
+      //   sub: [],
+      //   parent: "64baa25b328ab1c619fb1a9c",
+      // },
     ],
     parent: null,
   },
   {
     _id: "64baa25b328ab1c619fb1aa1",
-    name: "Shoes",
-    description: "All Shoes",
+    name: "electronics",
+    description: "All Electronics",
     sub: [],
     parent: null,
   },
   {
     _id: "64baa25b328ab1c619fb1aa0",
-    name: "Food",
-    description: "All food",
+    name: "smartphones",
+    description: "All Smartphones",
     sub: [],
     parent: null,
   },
@@ -56,7 +56,7 @@ const categoriesData: ICategory[] = [
 
 // TODO: test useProducts with this filters against an open api
 const Filters = () => {
-  const { filter, setFilter } = useProducts();
+  const { filter, setFilter, setPage } = useProducts();
 
   const handleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
@@ -76,6 +76,9 @@ const Filters = () => {
         },
       }));
     }
+
+    // reset page on filter change
+    setPage(1);
   };
 
   const handleBrandChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -126,10 +129,13 @@ const Filters = () => {
               <div className="flex items-center gap-2">
                 <input
                   type="checkbox"
-                  id={category.name}
-                  name={category._id}
+                  id={category._id}
+                  name={category.name}
+                  // id={category.name}
+                  // name={category._id}
                   onChange={handleCategoryChange}
-                  checked={filter?.categories.in.includes(category._id)}
+                  // checked={filter?.categories.in.includes(category._id)}
+                  checked={filter?.categories.in.includes(category.name)}
                   className="text-primary focus:ring-0 rounded-sm cursor-pointer"
                 />
                 <label

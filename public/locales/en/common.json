@@ -1,6 +1,14 @@
 {
   "name": "name",
-  "changeLanguage": "change language",
+  "change-language": "change language",
   "oops": "Oops, something went wrong",
-  "tryAgain": "We apologize for the inconvenience. Please try again later"
+  "try-again": "We apologize for the inconvenience. Please try again later",
+  "error": "{{error}} and {{count}} more errors",
+  "contact-us": "contact us",
+  "go-back": "Go back",
+  "take-me-home": "Take me home",
+  "next": "Next",
+  "prev": "Previous",
+  "switch-to-list": "Show as a list",
+  "switch-to-grid": "Show as a grid"
 }

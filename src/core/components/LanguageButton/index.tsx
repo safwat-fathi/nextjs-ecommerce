@@ -11,7 +11,7 @@ const LanguageButton = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const changeLanguage = async (locale: string) => {
+  const change-language = async (locale: string) => {
     setLoading(true);
 
     await router.push(router.pathname, router.asPath, { locale });
@@ -26,7 +26,7 @@ const LanguageButton = () => {
         "ms-2 min-w-[5rem] flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
         loading && "opacity-50 cursor-not-allowed"
       )}
-      onClick={() => changeLanguage(router.locale === "en" ? "ar" : "en")}
+      onClick={() => change-language(router.locale === "en" ? "ar" : "en")}
     >
       {loading ? (
         <FontAwesomeIcon
@@ -34,7 +34,7 @@ const LanguageButton = () => {
           icon={faSpinner}
         />
       ) : (
-        t("changeLanguage")
+        t("change-language")
       )}
     </button>
   );

@@ -13,7 +13,7 @@ class AuthService implements IAuthService {
     //   password,
     // });
     const res = await axios.post<TLoginRes>(
-      `${process.env.NEXT_PUBLIC_BASE_DEV_API}${ROUTES.login}`,
+      `${process.env.NEXT_PUBLIC_BASE_DEV_API}${ROUTES.auth.login}`,
       {
         email,
         password,
@@ -35,7 +35,7 @@ class AuthService implements IAuthService {
 
   async logout(): Promise<TLogoutRes> {
     const res = await axios.get<TLogoutRes>(
-      `${process.env.NEXT_PUBLIC_BASE_DEV_API}${ROUTES.logout}`,
+      `${process.env.NEXT_PUBLIC_BASE_DEV_API}${ROUTES.auth.logout}`,
       {
         withCredentials: true,
         headers: {

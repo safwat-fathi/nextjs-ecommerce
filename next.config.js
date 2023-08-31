@@ -6,7 +6,7 @@ const nextConfig = {
   i18n,
   swcMinify: true,
   images: {
-    domains: ["i.ibb.co"],
+    domains: ["i.ibb.co", "i.dummyjson.com"],
   },
   // async headers() {
   //   return [

@@ -6,9 +6,10 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 
-import { getStorage } from "@/lib/utils";
 import CONSTANTS from "@/constants";
 import { TNullable } from "@/types/app";
+import { getCookie } from "cookies-next";
+import { getStorage } from "@/lib/utils";
 
 class HttpClient {
   private readonly _instance: AxiosInstance;
@@ -16,9 +17,20 @@ class HttpClient {
   private _lang: TNullable<string>;
   private _baseURL: TNullable<string>;
 
-  constructor(baseUrl = process.env.NEXT_PUBLIC_BASE_DEV_API, lang?: string) {
-    this._lang = getStorage(CONSTANTS.LANG) || lang || "";
-    this._accessToken = getStorage(CONSTANTS.ACCESS_TOKEN);
+  constructor(
+    token?: string,
+    lang?: string,
+    baseUrl = process.env.NEXT_PUBLIC_BASE_DEV_API
+  ) {
+    this._accessToken =
+      (getCookie(CONSTANTS.ACCESS_TOKEN) as string) || token || null;
+
+    this._lang =
+      (getCookie(CONSTANTS.NEXT_LOCALE) as string) ||
+      getStorage(CONSTANTS.LANG) ||
+      lang ||
+      null;
+
     this._baseURL = baseUrl;
 
     this._instance = axios.create({

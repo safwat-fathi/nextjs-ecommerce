@@ -1,6 +1,6 @@
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { GetServerSideProps, GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
 
@@ -13,11 +13,9 @@ import Typography from "@/core/components/Typography";
 import Section from "@/core/components/Section";
 
 import { HomeProps } from "./meta/i-home";
-import { getStorage } from "@/lib/utils";
-import CONSTANTS from "@/constants";
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async ctx => {
-  const { locale, req, res } = ctx;
+  const { locale } = ctx;
 
   // const token = getStorage(CONSTANTS.TOKEN, req, res);
   // console.log("🚀 ~ token:", token);
@@ -51,7 +49,12 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async ctx => {
 
 const Home: NextPage<HomeProps> = ({ categories }) => {
   const { t } = useTranslation("home");
-  // const { isAuthenticated, user } = useAuth();
+
+  // useEffect(() => {
+  //   (async () => {
+  //     await httpClient.get("http://localhost:8000/api/auth/verification");
+  //   })();
+  // }, []);
 
   return (
     <>

@@ -15,12 +15,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import Button from "@/core/components/Button";
 import AuthService from "@/services/auth.service";
-import { notify, removeStorage, setStorage } from "@/lib/utils";
+import { notify, removeStorage } from "@/lib/utils";
 import CONSTANTS from "@/constants";
 import { deleteCookie } from "cookies-next";
+import { useTranslation } from "react-i18next";
 
 const ProfileSidebar = () => {
   const router = useRouter();
+
+  const { t } = useTranslation("profile");
+
   const isAccount =
     router.asPath.includes("info") ||
     router.asPath.includes("addresses") ||
@@ -37,7 +41,6 @@ const ProfileSidebar = () => {
   useEffect(() => {
     // remove query params from URL
     const pathWithoutQuery = router.asPath.split("?")[0];
-    // console.log("🚀 ~ useEffect ~ pathWithoutQuery:", pathWithoutQuery);
 
     // convert URL path to array
     let pathArray = pathWithoutQuery.split("/");
@@ -54,11 +57,17 @@ const ProfileSidebar = () => {
 
       removeStorage(CONSTANTS.IS_AUTHENTICATED);
       removeStorage(CONSTANTS.USER);
+      removeStorage(CONSTANTS.ACCESS_TOKEN);
 
       deleteCookie(CONSTANTS.ACCESS_TOKEN);
+      deleteCookie(CONSTANTS.USER);
       deleteCookie(CONSTANTS.IS_AUTHENTICATED);
 
-      notify();
+      notify(
+        t("success-logout"),
+        "success",
+        router.locale === "ar" ? "top-left" : "top-right"
+      );
 
       router.push("/");
     } catch (error) {

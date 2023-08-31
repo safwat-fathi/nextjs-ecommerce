@@ -5,6 +5,7 @@ import Skeleton from "../Skeleton";
 import ErrorFallback from "../ErrorFallback";
 
 import { IDataView } from "../types/i-data-view";
+import { useTranslation } from "next-i18next";
 
 // TODO: load more or pagination feature
 const DataView = ({
@@ -18,6 +19,8 @@ const DataView = ({
   hasPagination = true,
   children,
 }: PropsWithChildren<IDataView>) => {
+  const { t } = useTranslation("common");
+
   const toggleView = () => {
     if (setIsGrid) setIsGrid(!isGrid);
   };
@@ -29,9 +32,9 @@ const DataView = ({
   return (
     <>
       {changView && (
-        <div className="flex justify-end mb-4">
+        <div className="absolute -top-16 flex justify-end mb-4">
           <Button onClick={toggleView} variant="outlined">
-            {isGrid ? "Switch to List" : "Switch to Grid"}
+            {isGrid ? t("switch-to-list") : t("switch-to-grid")}
           </Button>
         </div>
       )}
@@ -43,14 +46,14 @@ const DataView = ({
             disabled={!meta?.has_previous}
             variant="outlined"
           >
-            Previous
+            {t("prev")}
           </Button>
           <Button
             onClick={() => setPage(prev => prev + 1)}
             disabled={!meta?.has_next}
             variant="outlined"
           >
-            Next
+            {t("next")}
           </Button>
         </div>
       )}

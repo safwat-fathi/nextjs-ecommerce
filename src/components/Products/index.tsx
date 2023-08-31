@@ -25,13 +25,14 @@ const Products = () => {
       <GridView>
         {products.map(item => (
           <ProductCard
-            key={item.title}
-            title={item.title}
-            imgSrc={item.imgSrc}
+            key={item._id}
+            name={item.name}
+            thumbnail={item.thumbnail}
             price={item.price}
-            oldPrice={item.oldPrice}
+            // oldPrice={item.}
             rating={item.rating}
-            totalReviews={item.totalReviews}
+            // totalReviews={item.}
+            // images={item.images}
           />
         ))}
       </GridView>

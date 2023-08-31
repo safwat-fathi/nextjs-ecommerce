@@ -7,14 +7,22 @@ import {
 } from "react";
 import useSWR from "swr";
 
-import { fetcher } from "@/core/lib/data-fetcher";
+// import { fetcher } from "@/core/lib/data-fetcher";
 
 import { IProductsContext, IProductsFilters } from "./types/index";
 
 // import { objToURLParams } from "../utils/string";
 
 import { IProduct } from "@/types/i-product";
-import { IBasePaginatedResponse } from "@/types/i-base-response";
+import {
+  IBasePaginatedResponse,
+  IBaseResponseMeta,
+} from "@/types/i-base-response";
+import { ROUTES } from "@/routes";
+import { TNullable } from "@/types/app";
+import HttpClient from "@/core/lib/http-client";
+
+const httpClient = new HttpClient();
 
 const INITIAL_FILTERS: IProductsFilters = {
   brands: { in: [] },
@@ -39,24 +47,43 @@ const ProductsContext = createContext<IProductsContext>({
 
 const useProducts = () => useContext(ProductsContext);
 
-const ProductsProvider = ({ children }: { children: ReactNode }) => {
-  const [products, setProducts] = useState<IProduct[]>([]);
+const ProductsProvider = ({
+  initialData,
+  children,
+}: {
+  initialData: IBasePaginatedResponse<IProduct>;
+  children: ReactNode;
+}) => {
+  const [products, setProducts] = useState<IProduct[]>(initialData?.data);
   const [filter, setFilter] = useState<IProductsFilters>(INITIAL_FILTERS);
   const [page, setPage] = useState(1);
-  const [meta, setMeta] = useState<IBasePaginatedResponse["meta"] | null>(null);
+  const [meta, setMeta] = useState<TNullable<IBaseResponseMeta>>(
+    initialData?.meta
+  );
 
-  const { data, error, isLoading } = useSWR(
-    ["/products", page, filter],
+  const {
+    data: productsData,
+    error,
+    isLoading,
+  } = useSWR(
+    [ROUTES.products.index, page, filter],
     ([url, page, filter]: [string, number, IProductsFilters]) =>
-      fetcher(url, { params: { filter, page } })
+      httpClient.get<IBasePaginatedResponse<IProduct>>(url, {
+        params: { filter, page },
+      }),
+    {
+      fallbackData: initialData,
+      revalidateOnFocus: false,
+      revalidateOnMount: false,
+    }
   );
 
   useEffect(() => {
-    if (!isLoading) {
-      setProducts((data as IBasePaginatedResponse).data);
-      setMeta((data as IBasePaginatedResponse).meta);
+    if (!isLoading && productsData?.success) {
+      setProducts(productsData.data);
+      setMeta(productsData.meta);
     }
-  }, [data]);
+  }, [productsData, isLoading]);
 
   return (
     <ProductsContext.Provider

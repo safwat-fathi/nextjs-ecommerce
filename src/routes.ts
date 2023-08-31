@@ -1,16 +1,16 @@
 export type TRoutes = (typeof ROUTES)[keyof typeof ROUTES];
 
 const auth = {
-  login: "/api/auth/login",
-  logout: "/api/auth/logout",
+  login: "/auth/login",
+  logout: "/auth/logout",
 } as const;
 
 const products = {
-  index: "/api/products",
-  get: (prodId: string) => `/products/${prodId}`,
+  index: "/products",
+  getProduct: (prodSlug: string) => `/products/${prodSlug}`,
 } as const;
 
 export const ROUTES = {
-  ...auth,
-  ...products,
-} as const;
+  auth: { ...auth },
+  products: { ...products },
+};

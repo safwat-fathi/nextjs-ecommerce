@@ -56,14 +56,22 @@ const Login: NextPage<PageProps> = () => {
 
   const handleLogin = async () => {
     try {
+      // await authService.logout();
       const res = await authService.login(email, password);
 
       if (res.success) {
         setStorage(CONSTANTS.USER, res.data.user);
         setStorage(CONSTANTS.IS_AUTHENTICATED, true);
 
-        setCookie(CONSTANTS.ACCESS_TOKEN, res.data.accessToken);
-        setCookie(CONSTANTS.IS_AUTHENTICATED, true);
+        setCookie(CONSTANTS.ACCESS_TOKEN, res.data.accessToken, {
+          maxAge: 1000 * 60 * 60 * 24,
+        });
+        setCookie(CONSTANTS.IS_AUTHENTICATED, true, {
+          maxAge: 1000 * 60 * 60 * 24,
+        });
+        setCookie(CONSTANTS.USER, res.data.user, {
+          maxAge: 1000 * 60 * 60 * 24,
+        });
 
         dispatch({
           type: AuthActionsTypes.LOGIN,
@@ -76,7 +84,6 @@ const Login: NextPage<PageProps> = () => {
           router.locale === "ar" ? "top-left" : "top-right"
         );
 
-        // dispatch({type: AuthActionsTypes.LOADING_END})
         router.push("/");
       }
 

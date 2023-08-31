@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import BreadcrumbItem from "@/core/components/Breadcrumbs/BreadcrumbItem";
 import Breadcrumbs from "@/core/components/Breadcrumbs";
 import Spinner from "@/core/components/Spinner";
+// import Navbar from "@/core/components/Navbar";
 const DynamicNavbar = dynamic(() => import("@/core/components/Navbar"), {
   ssr: false,
   loading: () => (

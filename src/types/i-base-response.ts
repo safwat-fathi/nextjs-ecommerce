@@ -14,17 +14,19 @@ export type IBaseSingleResponse<T> = IBaseResponse & {
   data: NotArray<T>;
 };
 
+export type IBaseResponseMeta = {
+  current_page: number;
+  total_pages: number;
+  has_previous: boolean;
+  previous: number;
+  has_next: boolean;
+  next: number;
+};
+
 export type IBasePaginatedResponse<T> = IBaseResponse & {
   data: T[];
   links: {};
-  meta: {
-    current_page: number;
-    total_pages: number;
-    has_previous: boolean;
-    previous: number;
-    has_next: boolean;
-    next: number;
-  };
+  meta: IBaseResponseMeta;
 };
 
 // const a: IBaseSingleResponse<{token: string; }> = {

@@ -1,15 +1,28 @@
 import { Dispatch, SetStateAction } from "react";
 
 import { TRatingRange } from "@/core/components/types";
-import { IBasePaginatedResponse } from "./i-base-response";
+import { IBasePaginatedResponse, IBaseResponseMeta } from "./i-base-response";
+import { TNullable } from "./app";
 
 export interface IProduct {
-  imgSrc: string;
-  title: string;
+  // imgSrc: string;
+  // title: string;
+  // price: number;
+  // oldPrice?: number;
+  // rating: TRatingRange;
+  // totalReviews: number;
+  _id: string;
+  name: string;
+  brand: string;
+  description: string;
+  slug: string;
   price: number;
-  oldPrice?: number;
-  rating: TRatingRange;
-  totalReviews: number;
+  stock: number;
+  rating: number;
+  discountPercentage: number;
+  thumbnail: string;
+  images: string[];
+  categories: string[];
 }
 
 export interface IProductsFilters {
@@ -27,7 +40,7 @@ export interface IProductsContext {
   filter: IProductsFilters;
   products: IProduct[];
   page: number;
-  meta: IBasePaginatedResponse["meta"] | null;
+  meta: TNullable<IBaseResponseMeta>;
   setPage: Dispatch<SetStateAction<number>>;
   setFilter: Dispatch<SetStateAction<IProductsFilters>>;
   setProducts: Dispatch<SetStateAction<IProduct[]>>;

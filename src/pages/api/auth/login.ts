@@ -29,18 +29,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         .json({ success: false, message: "Credentials is missing" });
     }
 
-    console.log("🚀 ~ req.headers.cookie:", req.headers.cookie);
+    const url = `${process.env.NEXT_PUBLIC_BASE_DEV_API}${ROUTES.login}`;
+
     const loginRes = await httpClient.post<
       IBaseSingleResponse<{
         accessToken: string;
         user: IUser;
       }>
-    >(
-      // "http://localhost:8000/api/auth/login",
-      `${process.env.NEXT_PUBLIC_BASE_DEV_API}${ROUTES.login}`,
-      { email, password },
-      { headers: { Cookie: req.headers.cookie } }
-    );
+    >(url, { email, password }, { headers: { Cookie: req.headers.cookie } });
     if (loginRes.success) {
       // setStorage(CONSTANTS.ACCESS_TOKEN, loginRes.data.accessToken, req, res);
       // setStorage(CONSTANTS.TOKEN, loginRes.data.accessToken, req, res);

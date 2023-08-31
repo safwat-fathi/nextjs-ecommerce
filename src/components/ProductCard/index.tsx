@@ -6,13 +6,14 @@ import Rating from "@/core/components/Rating";
 import { IProduct } from "@/types/i-product";
 
 const ProductCard = ({
-  imgSrc,
   price,
   rating,
-  title,
-  totalReviews,
-  oldPrice,
-}: IProduct) => {
+  // description,
+  thumbnail,
+  name,
+}: // totalReviews,
+// oldPrice,
+Partial<IProduct>) => {
   const router = useRouter();
 
   return (
@@ -22,7 +23,7 @@ const ProductCard = ({
           <Image
             width={200}
             height={200}
-            src={imgSrc}
+            src={thumbnail!}
             alt="product 1"
             className="w-full"
           />
@@ -61,16 +62,16 @@ const ProductCard = ({
         <div className="pt-4 pb-3 px-4">
           <Link href="#">
             <h4 className="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
-              {title}
+              {name}
             </h4>
           </Link>
           <div className="flex items-baseline mb-1 space-x-2">
             <p className="text-xl text-primary font-semibold">${price}</p>
-            <p className="text-sm text-gray-400 line-through">${oldPrice}</p>
+            {/* <p className="text-sm text-gray-400 line-through">${oldPrice}</p> */}
           </div>
           <div className="flex items-center">
-            <Rating rating={rating} />
-            <p className="text-xs text-gray-500 ml-3">({totalReviews})</p>
+            <Rating rating={rating!} />
+            {/* <p className="text-xs text-gray-500 ml-3">({totalReviews})</p> */}
           </div>
         </div>
         <button

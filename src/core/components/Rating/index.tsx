@@ -6,7 +6,8 @@ const Rating = ({
   rating,
   canBeUpdated = false,
 }: {
-  rating: TRatingRange;
+  // rating: TRatingRange;
+  rating: number;
   canBeUpdated?: boolean;
 }) => {
   // const Rating = ({

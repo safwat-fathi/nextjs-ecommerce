@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 
-export type Fetcher = (
+export type Fetcher = <T>(
   url: string,
   options?: AxiosRequestConfig
-) => Promise<unknown>;
+) => Promise<T>;
