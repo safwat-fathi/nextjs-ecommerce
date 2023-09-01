@@ -19,7 +19,7 @@ const ColorPicker = () => {
     "#000": false,
     "#fff": false,
   });
-  console.log("🚀 ~ ColorPicker ~ isActive:", isActive);
+  // console.log("🚀 ~ ColorPicker ~ isActive:", isActive);
 
   return (
     <div className="form-group">

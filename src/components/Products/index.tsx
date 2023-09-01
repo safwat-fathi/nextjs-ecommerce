@@ -29,6 +29,7 @@ const Products = () => {
             name={item.name}
             thumbnail={item.thumbnail}
             price={item.price}
+            slug={item.slug}
             // oldPrice={item.}
             rating={item.rating}
             // totalReviews={item.}

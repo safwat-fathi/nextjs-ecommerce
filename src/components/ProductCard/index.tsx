@@ -11,6 +11,7 @@ const ProductCard = ({
   // description,
   thumbnail,
   name,
+  slug,
 }: // totalReviews,
 // oldPrice,
 Partial<IProduct>) => {
@@ -32,7 +33,7 @@ Partial<IProduct>) => {
                     justify-center gap-2 opacity-0 group-hover:opacity-100 transition"
           >
             <Link
-              href="#"
+              href={`/shop/${slug}`}
               className="text-white text-lg px-4 rounded-full bg-primary flex items-center gap-2 hover:bg-gray-800 transition"
             >
               <Image

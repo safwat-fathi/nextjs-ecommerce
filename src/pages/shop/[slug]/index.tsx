@@ -18,22 +18,46 @@ import { LayoutsENUM } from "@/core/Layout";
 import SizePicker from "@/core/components/Inputs/SizePicker";
 import ColorPicker from "@/core/components/Inputs/ColorPicker";
 import Quantity from "@/core/components/Inputs/Quantity";
+import HttpClient from "@/core/lib/http-client";
+import { ROUTES } from "@/routes";
+import { IProduct } from "@/types/i-product";
+import { IBaseSingleResponse } from "@/types/i-base-response";
+import Rating from "@/core/components/Rating";
+
+const httpClient = new HttpClient();
 
 // TODO: get product data query 'slug'
-export const getServerSideProps: GetServerSideProps<any> = async ({
-  locale,
-  query,
-}) => {
-  const slug = query.slug;
-  console.log("🚀 ~ slug:", slug);
-  return {
-    props: {
-      ...(await serverSideTranslations(locale!, ["common", "product"])),
-    },
-  };
+export const getServerSideProps: GetServerSideProps<any> = async ctx => {
+  const { locale, query } = ctx;
+
+  try {
+    const slug = query.slug;
+
+    const productData = await httpClient.get<IBaseSingleResponse<IProduct>>(
+      ROUTES.products.getProduct(slug as string)
+    );
+
+    return {
+      props: {
+        ...(await serverSideTranslations(locale!, ["common", "product"])),
+        product: productData.data,
+      },
+    };
+  } catch (error: any) {
+    // const statusCode = error?.response?.status === 404 ? 404 : 500;
+    const statusCode = error?.response?.status;
+
+    return {
+      redirect: {
+        // destination: `/${statusCode}?error=${errMsg}`,
+        destination: `/${statusCode}`,
+        permanent: false,
+      },
+    };
+  }
 };
 
-const Product: NextPage<any> = () => {
+const Product: NextPage<any> = ({ product }: { product: IProduct }) => {
   const { t } = useTranslation("product");
 
   return (
@@ -49,55 +73,33 @@ const Product: NextPage<any> = () => {
           <Image
             width={200}
             height={200}
-            src="/images/products/product1.jpg"
+            // src="/images/products/product1.jpg"
+            src={product.thumbnail}
             alt="product"
             className="w-full"
           />
           <div className="grid grid-cols-5 gap-4 mt-4">
-            <Image
-              width={200}
-              height={200}
-              src="/images/products/product2.jpg"
-              alt="product2"
-              className="w-full cursor-pointer border border-primary"
-            />
-            <Image
-              width={200}
-              height={200}
-              src="/images/products/product3.jpg"
-              alt="product2"
-              className="w-full cursor-pointer border"
-            />
-            <Image
-              width={200}
-              height={200}
-              src="/images/products/product4.jpg"
-              alt="product2"
-              className="w-full cursor-pointer border"
-            />
-            <Image
-              width={200}
-              height={200}
-              src="/images/products/product5.jpg"
-              alt="product2"
-              className="w-full cursor-pointer border"
-            />
-            <Image
-              width={200}
-              height={200}
-              src="/images/products/product6.jpg"
-              alt="product2"
-              className="w-full cursor-pointer border"
-            />
+            {product.images.map(img => (
+              <Image
+                key={img}
+                width={200}
+                height={200}
+                // src="/images/products/product2.jpg"
+                src={img}
+                alt="product2"
+                className="w-full cursor-pointer border border-primary"
+              />
+            ))}
           </div>
         </div>
 
         <div>
           <h2 className="text-3xl font-medium uppercase mb-2">
-            Italian L Shape Sofa
+            {product.name}
           </h2>
           <div className="flex items-center mb-4">
-            <div className="flex gap-1 text-sm text-yellow-400">
+            <Rating rating={product.rating} />
+            {/* <div className="flex gap-1 text-sm text-yellow-400">
               <span>
                 <i className="fa-solid fa-star"></i>
               </span>
@@ -113,38 +115,39 @@ const Product: NextPage<any> = () => {
               <span>
                 <i className="fa-solid fa-star"></i>
               </span>
-            </div>
+            </div> */}
             <div className="text-xs text-gray-500 ml-3">(150 Reviews)</div>
           </div>
           <div className="space-y-2">
             <p className="text-gray-800 font-semibold space-x-2">
               <span>Availability: </span>
-              <span className="text-green-600">In Stock</span>
+              <span className="text-green-600">
+                {product.stock > 0 ? "In stock" : "Out of stock"}
+              </span>
             </p>
             <p className="space-x-2">
               <span className="text-gray-800 font-semibold">Brand: </span>
-              <span className="text-gray-600">Apex</span>
+              <span className="text-gray-600">{product.brand}</span>
             </p>
             <p className="space-x-2">
               <span className="text-gray-800 font-semibold">Category: </span>
-              <span className="text-gray-600">Sofa</span>
+              {product.categories.map(category => (
+                <span className="text-gray-600">{category}</span>
+              ))}
             </p>
-            <p className="space-x-2">
+            {/* <p className="space-x-2">
               <span className="text-gray-800 font-semibold">SKU: </span>
-              <span className="text-gray-600">BE45VGRT</span>
-            </p>
+              <span className="text-gray-600">{product.}</span>
+            </p> */}
           </div>
           <div className="flex items-baseline mb-1 space-x-2 font-roboto mt-4">
-            <p className="text-xl text-primary font-semibold">$45.00</p>
+            <p className="text-xl text-primary font-semibold">
+              {product.price}$
+            </p>
             <p className="text-base text-gray-400 line-through">$55.00</p>
           </div>
 
-          <p className="mt-4 text-gray-600">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos eius
-            eum reprehenderit dolore vel mollitia optio consequatur hic
-            asperiores inventore suscipit, velit consequuntur, voluptate
-            doloremque iure necessitatibus adipisci magnam porro.
-          </p>
+          <p className="mt-4 text-gray-600">{product.description}</p>
 
           <div className="pt-4">
             <h3 className="text-sm text-gray-800 uppercase mb-1">Size</h3>

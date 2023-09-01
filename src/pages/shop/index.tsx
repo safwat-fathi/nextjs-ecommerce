@@ -17,13 +17,10 @@ import { getCookie } from "cookies-next";
 import CONSTANTS from "@/constants";
 // import axios from "axios";
 
+const httpClient = new HttpClient();
+
 export const getServerSideProps: GetServerSideProps<any> = async ctx => {
-  const { locale, req, res } = ctx;
-
-  const token = getCookie(CONSTANTS.ACCESS_TOKEN, { req, res });
-  const lang = getCookie(CONSTANTS.NEXT_LOCALE, { req, res });
-
-  const httpClient = new HttpClient(token as string, lang as string);
+  const { locale } = ctx;
 
   try {
     const products = await httpClient.get(ROUTES.products.index, {
