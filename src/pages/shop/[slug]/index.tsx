@@ -140,11 +140,16 @@ const Product: NextPage<any> = ({ product }: { product: IProduct }) => {
               <span className="text-gray-600">{product.}</span>
             </p> */}
           </div>
-          <div className="flex items-baseline mb-1 space-x-2 font-roboto mt-4">
+          <div className="flex gap-2 items-baseline mb-1 space-x-2 font-roboto mt-4">
             <p className="text-xl text-primary font-semibold">
               {product.price}$
             </p>
-            <p className="text-base text-gray-400 line-through">$55.00</p>
+            <p className="text-base text-gray-400 line-through">
+              {Math.floor(
+                (product.price * product.discountPercentage) / 100 +
+                  product.price
+              )}
+            </p>
           </div>
 
           <p className="mt-4 text-gray-600">{product.description}</p>

@@ -4,6 +4,7 @@ import UserNav from "./UserNav";
 import GuestNav from "./GuestNav";
 import { getStorage } from "@/lib/utils";
 import CONSTANTS from "@/constants";
+import NavSearch from "./NavSearch";
 
 const Navbar = () => {
   const userSignedIn = getStorage(CONSTANTS.IS_AUTHENTICATED);
@@ -21,7 +22,8 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div className="w-full max-w-md xl:max-w-lg 2xl:max-w-2xl bg-gray-100 rounded-md hidden md:flex items-center h-12">
+      <NavSearch />
+      {/* <div className="w-full max-w-md xl:max-w-lg 2xl:max-w-2xl bg-gray-100 rounded-md hidden md:flex items-center h-12">
         <select className="form-select bg-transparent focus:outline-none focus:ring-0 uppercase font-bold text-sm border-0">
           <option>All Categories</option>
           <option>Men Cloths</option>
@@ -48,7 +50,7 @@ const Navbar = () => {
             alt="search"
           />
         </button>
-      </div>
+      </div> */}
 
       <div className="lg:max-w-sm hidden lg:flex flex-col place-items-end">
         <span className="font-bold md:text-xl">8 800 332 65-66</span>
@@ -58,7 +60,6 @@ const Navbar = () => {
       </div>
 
       {userSignedIn ? <UserNav /> : <GuestNav />}
-      {/* {state.isAuthenticated ? <UserNav /> : <GuestNav />} */}
 
       {/* <div className="ml-4 hidden sm:flex flex-col font-bold">
           <span className="text-xs text-gray-400">Your Cart</span>
