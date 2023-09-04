@@ -7,7 +7,7 @@ import {
 } from "react";
 import { AuthActionsTypes, IAuth, IAuthContext } from "./types/i-auth";
 import { AuthReducer } from "./reducer";
-import { getStorage, removeStorage } from "@/lib/utils";
+import { getStorage, removeStorage } from "@/core/lib/utils";
 import CONSTANTS from "@/constants";
 import { getCookie } from "cookies-next";
 

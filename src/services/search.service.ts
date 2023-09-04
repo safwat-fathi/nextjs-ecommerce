@@ -1,23 +1,28 @@
-// import { IAuthService, TLoginRes, TLogoutRes } from "./types/services";
 import { ROUTES } from "@/routes";
-import { getCookie } from "cookies-next";
-import CONSTANTS from "@/constants";
 import HttpClient from "@/core/lib/http-client";
+import { IBasePaginatedResponse } from "@/types/i-base-response";
+import { IProduct } from "@/types/i-product";
 
 const httpClient = new HttpClient();
 
 class SearchService {
-  async searchProduct(t: string, c?: string[] | string): Promise<any> {
+  async searchProduct(
+    t: string,
+    c?: string[] | string
+  ): Promise<IBasePaginatedResponse<IProduct>> {
     try {
-      const res = await httpClient.get(ROUTES.products.index, {
-        params: {
-          page: 1,
-          filter: {
-            text: { search: t },
-            ...(c ? { categories: { in: c } } : {}),
+      const res = await httpClient.get<IBasePaginatedResponse<IProduct>>(
+        ROUTES.products.index,
+        {
+          params: {
+            page: 1,
+            filter: {
+              text: { search: t },
+              ...(c ? { categories: { in: c } } : {}),
+            },
           },
-        },
-      });
+        }
+      );
 
       return res;
     } catch (error: any) {

@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import AuthService from "@/services/auth.service";
-import { notify, setStorage } from "@/lib/utils";
+import { notify, setStorage } from "@/core/lib/utils";
 import { useRouter } from "next/router";
 import CONSTANTS from "@/constants";
 import { useAuth } from "@/lib/contexts/auth";

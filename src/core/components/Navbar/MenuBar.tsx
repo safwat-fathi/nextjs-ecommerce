@@ -39,7 +39,7 @@ const MenuBar = () => {
   const router = useRouter();
 
   return (
-    <>
+    <div className="z-10 shadow-lg bg-gray-800 text-gray-200 sticky top-0">
       <div className="w-full flex justify-center items-center gap-4">
         {/* Pages */}
         <Link
@@ -70,7 +70,7 @@ const MenuBar = () => {
 
         <Dropdown options={options} />
       </div>
-    </>
+    </div>
   );
 };
 

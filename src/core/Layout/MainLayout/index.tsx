@@ -28,11 +28,8 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
     <>
       <header style={{ display: "unset" }}>
         <TopBar />
-        {/* <Navbar /> */}
         <DynamicNavbar />
-        <div className="z-10 shadow-lg bg-gray-800 text-gray-200 sticky top-0">
-          <MenuBar />
-        </div>
+        <MenuBar />
       </header>
 
       {!isHome && (

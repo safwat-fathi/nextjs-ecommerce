@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-ROUTES/introduction
 import CONSTANTS from "@/constants";
 import HttpClient from "@/core/lib/http-client";
-import { removeStorage } from "@/lib/utils";
+import { removeStorage } from "@/core/lib/utils";
 import { ROUTES } from "@/routes";
 import { TLogoutRes } from "@/services/types/services";
 import type { NextApiRequest, NextApiResponse } from "next";

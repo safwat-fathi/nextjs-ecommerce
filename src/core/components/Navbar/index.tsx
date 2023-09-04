@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import UserNav from "./UserNav";
 import GuestNav from "./GuestNav";
-import { getStorage } from "@/lib/utils";
+import { getStorage } from "@/core/lib/utils";
 import CONSTANTS from "@/constants";
 import NavSearch from "./NavSearch";
 

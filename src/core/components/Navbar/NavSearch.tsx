@@ -1,37 +1,41 @@
+import { debounce } from "@/core/lib/utils";
+import { ChangeEventHandler, useEffect, useState } from "react";
 import SearchService from "@/services/search.service";
 import Image from "next/image";
-import { ChangeEventHandler, useState } from "react";
+import Link from "next/link";
+import { IProduct } from "@/types/i-product";
 
 const searchService = new SearchService();
 
 const NavSearch = () => {
   const [category, setCategory] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [results, setResults] = useState<IProduct[]>([]);
 
   const handleCategoryChange: ChangeEventHandler<HTMLSelectElement> = e => {
-    // console.log(e.target.value);
     setCategory(e.target.value);
   };
 
-  const handleSearchChange: ChangeEventHandler<HTMLInputElement> = e => {
-    // console.log(e.target.value);
-    setSearchTerm(e.target.value);
-  };
-
-  const handleSearch = () => {
+  const handleSearch = async () => {
     try {
-      console.log("🚀 ~ NavSearch ~ category:", category);
-      console.log("🚀 ~ NavSearch ~ searchTerm:", searchTerm);
+      const res = await searchService.searchProduct(searchTerm, category);
 
-      const res = searchService.searchProduct(searchTerm, category);
-      console.log("🚀 ~ handleSearch ~ res:", res);
+      if (res.success) setResults(res.data);
     } catch (error) {
       console.log("🚀 ~ handleSearch ~ error:", error);
+      setResults([]);
     }
   };
 
+  const debouncedSearch = debounce(handleSearch, 500);
+
+  useEffect(() => {
+    if (searchTerm.length) debouncedSearch(searchTerm);
+    else setResults([]);
+  }, [searchTerm, category]);
+
   return (
-    <div className="w-full max-w-md xl:max-w-lg 2xl:max-w-2xl bg-gray-100 rounded-md hidden md:flex items-center h-12">
+    <div className="relative w-full max-w-md xl:max-w-lg 2xl:max-w-2xl bg-gray-100 rounded-md hidden md:flex items-center h-12">
       <select
         value={category}
         onChange={handleCategoryChange}
@@ -42,20 +46,37 @@ const NavSearch = () => {
         <option value="smartphones">Smartphones</option>
         <option value="laptops">Laptops</option>
       </select>
+
       <input
         type="text"
         className="form-input focus:outline-none focus:ring-0 bg-transparent font-semibold text-sm border-0"
         placeholder="I'm searching for ..."
         value={searchTerm}
-        onChange={handleSearchChange}
+        onChange={e => setSearchTerm(e.target.value)}
       />
-      <button
-        role="button"
-        className="w-8 h-full text-gray-500"
-        onClick={handleSearch}
-      >
+
+      <div className="w-8 text-gray-500">
         <Image src="/icons/magnifier.svg" width={20} height={20} alt="search" />
-      </button>
+      </div>
+
+      {Boolean(results.length) && (
+        <ul className="absolute z-50 top-12 bg-white border border-gray-100 w-full rounded-bl rounded-br">
+          {results.map(item => (
+            <li
+              key={item._id}
+              className="border-b-2 border-gray-100 relative cursor-pointer hover:bg-yellow-50 hover:text-gray-900"
+            >
+              <Link
+                href={`/products/${item.slug}`}
+                className="w-full block px-2 py-1"
+              >
+                {/* <b>Gar</b>da Hotel - Italië */}
+                {item.name} - {item.brand}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

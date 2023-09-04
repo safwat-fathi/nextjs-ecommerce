@@ -15,7 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import Button from "@/core/components/Button";
 import AuthService from "@/services/auth.service";
-import { notify, removeStorage } from "@/lib/utils";
+import { notify, removeStorage } from "@/core/lib/utils";
 import CONSTANTS from "@/constants";
 import { deleteCookie } from "cookies-next";
 import { useTranslation } from "react-i18next";

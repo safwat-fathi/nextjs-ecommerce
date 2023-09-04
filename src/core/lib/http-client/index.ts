@@ -9,7 +9,7 @@ import axios, {
 import CONSTANTS from "@/constants";
 import { TNullable } from "@/types/app";
 import { getCookie } from "cookies-next";
-import { getStorage } from "@/lib/utils";
+import { getStorage } from "@/core/lib/utils";
 
 class HttpClient {
   private readonly _instance: AxiosInstance;

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "next-i18next";
-import { setStorage } from "@/lib/utils";
+import { setStorage } from "@/core/lib/utils";
 import { setCookie } from "cookies-next";
 
 const LanguageSwitcher = () => {

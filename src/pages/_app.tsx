@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import "@/styles/globals.scss";
 import { getCookie } from "cookies-next";
 import CONSTANTS from "@/constants";
-import { removeStorage } from "@/lib/utils";
+import { removeStorage } from "@/core/lib/utils";
 
 // type AppOwnProps = { isAuth: boolean };
 
