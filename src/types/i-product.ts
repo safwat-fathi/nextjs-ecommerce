@@ -26,7 +26,7 @@ export interface IProduct {
 }
 
 export interface IProductsFilters {
-  brands: { in: string[] };
+  brand: { in: string[] };
   categories: { in: string[] };
   price: {
     gte: number | null;

@@ -25,7 +25,7 @@ import HttpClient from "@/core/lib/http-client";
 const httpClient = new HttpClient();
 
 const INITIAL_FILTERS: IProductsFilters = {
-  brands: { in: [] },
+  brand: { in: [] },
   categories: { in: [] },
   price: {
     gte: null,

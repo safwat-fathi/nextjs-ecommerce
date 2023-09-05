@@ -13,9 +13,6 @@ import { ProductsProvider } from "@/lib/contexts/products.context";
 import Products from "@/components/Products";
 import HttpClient from "@/core/lib/http-client";
 import { ROUTES } from "@/routes";
-import { getCookie } from "cookies-next";
-import CONSTANTS from "@/constants";
-// import axios from "axios";
 
 const httpClient = new HttpClient();
 

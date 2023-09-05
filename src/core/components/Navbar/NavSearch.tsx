@@ -8,6 +8,7 @@ import Spinner from "../Spinner";
 
 const searchService = new SearchService();
 
+// TODO: fetch categories from BE
 const NavSearch = () => {
   const [category, setCategory] = useState("");
   const [searchTerm, setSearchTerm] = useState("");

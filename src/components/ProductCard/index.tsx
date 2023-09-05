@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 
 import Rating from "@/core/components/Rating";
 import { IProduct } from "@/types/i-product";
+import Typography from "@/core/components/Typography";
 
 const ProductCard = ({
   price,
@@ -18,15 +19,15 @@ Partial<IProduct>) => {
   const router = useRouter();
 
   return (
-    <div className="bg-white relative shadow rounded-md overflow-hidden group min-h-[20rem]">
+    <div className="bg-white relative shadow rounded-md overflow-hidden group h-80">
       <div className="flex flex-col justify-between bg-white shadow rounded group h-full">
-        <div className="relative flex-1">
+        <div className="relative h-40">
           <Image
             width={200}
             height={200}
             src={thumbnail!}
             alt="product 1"
-            className="w-full"
+            className="w-full h-full object-cover"
           />
           <div
             className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
@@ -61,13 +62,17 @@ Partial<IProduct>) => {
           </div>
         </div>
         <div className="pt-4 pb-3 px-4">
-          <Link href="#">
-            <h4 className="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
+          <Typography title={name} size="md">
+            {name}
+          </Typography>
+          {/* <p className="uppercase font-medium text-lg mb-2 text-gray-800 hover:text-primary transition">
               {name}
-            </h4>
-          </Link>
+            </p> */}
           <div className="flex items-baseline mb-1 space-x-2">
-            <p className="text-xl text-primary font-semibold">${price}</p>
+            <Typography size="md" className="text-primary font-semibold">
+              {price}$
+            </Typography>
+            {/* <p className="text-xl text-primary font-semibold">${price}</p> */}
             {/* <p className="text-sm text-gray-400 line-through">${oldPrice}</p> */}
           </div>
           <div className="flex items-center">

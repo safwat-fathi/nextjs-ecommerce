@@ -27,7 +27,7 @@ const Typography = ({
   return (
     <h1
       className={clsx(
-        `font-roboto focus:outline-none transition ease-in-out duration-300 rounded ${classes.size[size]} ${classes.variant[variant]}}`
+        `text-ellipsis overflow-hidden whitespace-nowrap font-roboto focus:outline-none transition ease-in-out duration-300 rounded ${classes.size[size]} ${classes.variant[variant]}}`
       )}
       {...props}
     >

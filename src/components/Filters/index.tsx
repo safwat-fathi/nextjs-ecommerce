@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
 
 import { useProducts } from "@/lib/contexts/products.context";
 import { IProductsFilters } from "@/types/i-product";
@@ -6,19 +6,39 @@ import { ICategory } from "@/types/i-category";
 
 const brandsData = [
   {
-    id: 0,
-    name: "Cooking Color",
+    id: "0",
+    name: "Apple",
     count: 60,
   },
   {
-    id: 1,
-    name: "Magniflex",
+    id: "1",
+    name: "OPPO",
     count: 7,
   },
   {
-    id: 2,
-    name: "Ashley",
+    id: "2",
+    name: "Samsung",
     count: 2,
+  },
+  {
+    id: "3",
+    name: "fauji",
+    count: 2,
+  },
+  {
+    id: "4",
+    name: "Royal_Mirage",
+    count: 111,
+  },
+  {
+    id: "5",
+    name: "Lord - Al-Rehab",
+    count: 21,
+  },
+  {
+    id: "6",
+    name: "Fair & Clear",
+    count: 32,
   },
 ];
 
@@ -76,25 +96,22 @@ const Filters = () => {
         },
       }));
     }
-
-    // reset page on filter change
-    setPage(1);
   };
 
   const handleBrandChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
 
-    const { brands } = filter;
+    const { brand } = filter;
 
     if (checked) {
       setFilter((prevState: IProductsFilters) => ({
         ...prevState,
-        brands: { in: [...brands.in, name] },
+        brand: { in: [...brand.in, name] },
       }));
     } else {
       setFilter((prevState: IProductsFilters) => ({
         ...prevState,
-        brands: { in: brands.in.filter((item: string) => item !== name) },
+        brand: { in: brand.in.filter((item: string) => item !== name) },
       }));
     }
   };
@@ -116,6 +133,11 @@ const Filters = () => {
       }));
     }
   };
+
+  useEffect(() => {
+    // reset page on filters change
+    setPage(1);
+  }, [filter]);
 
   return (
     <div className="col-span-1 bg-white px-4 pb-6 shadow rounded overflow-hidden hidden md:block">
@@ -161,10 +183,10 @@ const Filters = () => {
               <div className="flex items-center gap-2">
                 <input
                   type="checkbox"
-                  id={brand.name}
+                  id={brand.id}
                   name={brand.name}
                   onChange={handleBrandChange}
-                  checked={filter?.categories.in.includes(brand.name)}
+                  checked={filter?.brand.in.includes(brand.name)}
                   className="text-primary focus:ring-0 rounded-sm cursor-pointer"
                 />
                 <label
