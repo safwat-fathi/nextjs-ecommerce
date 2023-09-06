@@ -22,21 +22,21 @@ const Products = () => {
       isGrid={isGrid}
       setIsGrid={setIsGrid}
     >
-      <GridView>
-        {products.map(item => (
-          <ProductCard
-            key={item._id}
-            name={item.name}
-            thumbnail={item.thumbnail}
-            price={item.price}
-            slug={item.slug}
-            // oldPrice={item.}
-            rating={item.rating}
-            // totalReviews={item.}
-            // images={item.images}
-          />
-        ))}
-      </GridView>
+      {/* <GridView> */}
+      {products.map(item => (
+        <ProductCard
+          key={item._id}
+          name={item.name}
+          thumbnail={item.thumbnail}
+          price={item.price}
+          slug={item.slug}
+          // oldPrice={item.}
+          rating={item.rating}
+          // totalReviews={item.}
+          // images={item.images}
+        />
+      ))}
+      {/* </GridView> */}
     </DataView>
   );
 };
