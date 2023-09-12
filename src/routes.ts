@@ -6,7 +6,8 @@ const auth = {
 } as const;
 
 const products = {
-  index: "/products",
+  all: "/products",
+  index: "/products/index",
   getProduct: (prodSlug: string) => `/products/${prodSlug}`,
 } as const;
 

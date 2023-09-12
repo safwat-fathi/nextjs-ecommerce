@@ -10,7 +10,7 @@ const Navbar = () => {
   const userSignedIn = getStorage(CONSTANTS.IS_AUTHENTICATED);
 
   return (
-    <div className="container mx-auto flex justify-between items-center">
+    <div className="container mx-auto flex justify-between items-center mb-4">
       <div className="md:w-48 flex-shrink-0">
         <Link href="/">
           <Image

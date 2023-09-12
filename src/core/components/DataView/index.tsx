@@ -29,7 +29,6 @@ const DataView = ({
     if (setIsGrid) setIsGrid(!isGrid);
   };
 
-  console.log("🚀 ~ toggleView ~ isGrid:", isGrid);
   if (error) {
     return <ErrorFallback error={error} />;
   }

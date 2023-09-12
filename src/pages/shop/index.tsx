@@ -22,6 +22,8 @@ import Products from "@/components/Products";
 
 import HttpClient from "@/core/lib/http-client";
 import { ROUTES } from "@/routes";
+import { deleteCookie } from "cookies-next";
+import CONSTANTS from "@/constants";
 
 const httpClient = new HttpClient();
 
@@ -42,7 +44,9 @@ export const getServerSideProps: GetServerSideProps<any> = async ctx => {
   } catch (error: any) {
     // console.log("🚀 ~ error:", error);
 
-    const statusCode = error?.response?.status === 404 ? 404 : 500;
+    // const statusCode = error?.response?.status === 404 ? 404 : 500;
+    const statusCode = error?.response?.status;
+
     // const errMsg = encodeURIComponent(error?.message);
     // const errMsg = error?.response?.statusText;
     // const errMsg = encodeURIComponent(error?.response?.data);

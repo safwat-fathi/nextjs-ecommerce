@@ -5,11 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { IProduct } from "@/types/i-product";
 import Spinner from "../Spinner";
+import { useRouter } from "next/router";
 
 const searchService = new SearchService();
 
 // TODO: fetch categories from BE
 const NavSearch = () => {
+  const router = useRouter();
+
   const [category, setCategory] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState<IProduct[]>([]);
@@ -37,11 +40,15 @@ const NavSearch = () => {
       }
 
       setLoading(false);
-    } catch (error) {
+    } catch (error: any) {
       // console.log("🚀 ~ handleSearch ~ error:", error);
       setLoading(false);
       setShowMenu(false);
       setResults([]);
+
+      // if (error.message.includes("Not authorized")) {
+      //   router.push("/login");
+      // }
     }
   };
 

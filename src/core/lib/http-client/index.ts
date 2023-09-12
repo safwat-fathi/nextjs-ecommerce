@@ -1,4 +1,5 @@
 import axios, {
+  AxiosError,
   AxiosInstance,
   AxiosProgressEvent,
   AxiosRequestConfig,
@@ -8,12 +9,13 @@ import axios, {
 
 import CONSTANTS from "@/constants";
 import { TNullable } from "@/types/app";
-import { getCookie } from "cookies-next";
-import { getStorage } from "@/core/lib/utils";
+import { deleteCookie, getCookie } from "cookies-next";
+import { getStorage, removeStorage } from "@/core/lib/utils";
 
 class HttpClient {
   private readonly _instance: AxiosInstance;
   private _accessToken: TNullable<string>;
+  private _abortController: AbortController;
   private _lang: TNullable<string>;
   private _baseURL: TNullable<string>;
 
@@ -22,6 +24,8 @@ class HttpClient {
     lang?: string,
     baseUrl = process.env.NEXT_PUBLIC_BASE_DEV_API
   ) {
+    this._abortController = new AbortController();
+
     this._accessToken =
       (getCookie(CONSTANTS.ACCESS_TOKEN) as string) || token || null;
 
@@ -44,7 +48,11 @@ class HttpClient {
     });
 
     this._instance.interceptors.request.use(
-      (config: InternalAxiosRequestConfig) => config,
+      (config: InternalAxiosRequestConfig) => {
+        config.signal = this._abortController.signal;
+
+        return config;
+      },
       (error: any) => Promise.reject(error)
     );
 
@@ -52,7 +60,36 @@ class HttpClient {
       (response: AxiosResponse) => {
         return response;
       },
-      (error: any) => Promise.reject(error)
+      async (error: any) => {
+        const { response, config } = error as AxiosError;
+
+        // original req to retry response in case of refresh token
+        // const originalRequest = config;
+
+        console.error("Invalid session or user is already logged out");
+
+        if (response?.status === 401) {
+          // logout
+          removeStorage(CONSTANTS.IS_AUTHENTICATED);
+          removeStorage(CONSTANTS.USER);
+          // removeStorage(CONSTANTS.TOKEN);
+
+          this._accessToken = null;
+
+          this._abortController.abort("Not authorized");
+
+          return Promise.reject(new Error("Not authorized"));
+        }
+
+        // The request was canceled
+        if (error.name === "AbortError") {
+          console.log("request canceled");
+
+          return Promise.reject(new Error("Request cancelled"));
+        }
+
+        return Promise.reject(error);
+      }
     );
   }
 

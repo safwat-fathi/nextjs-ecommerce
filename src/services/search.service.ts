@@ -4,7 +4,6 @@ import { IBasePaginatedResponse } from "@/types/i-base-response";
 import { IProduct } from "@/types/i-product";
 
 const httpClient = new HttpClient();
-
 class SearchService {
   async searchProduct(
     t: string,
