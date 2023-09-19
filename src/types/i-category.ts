@@ -4,8 +4,8 @@ export interface ICategory {
   _id: string;
   name: string;
   description: string;
-  sub: ICategory[] | null;
-  parent: string | null;
+  sub?: ICategory[] | null;
+  parent?: string | null;
 }
 
 export interface ICategoryFilters {

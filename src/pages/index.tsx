@@ -11,8 +11,11 @@ import Banner from "@/core/components/Banner";
 import Categories from "@/components/Categories";
 import Typography from "@/core/components/Typography";
 import Section from "@/core/components/Section";
+import { ICategory } from "@/types/i-category";
 
-import { HomeProps } from "./meta/i-home";
+export interface HomeProps {
+  categories: ICategory[];
+}
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async ctx => {
   const { locale } = ctx;
@@ -20,21 +23,21 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async ctx => {
   // const token = getStorage(CONSTANTS.TOKEN, req, res);
   // console.log("🚀 ~ token:", token);
 
-  const categories = [
+  const categories: ICategory[] = [
     {
-      id: 0,
+      _id: "0",
       name: "Category 1",
-      url: "Category 1 description",
+      description: "Category 1 description",
     },
     {
-      id: 1,
+      _id: "1",
       name: "Category 2",
-      url: "Category 2 description",
+      description: "Category 2 description",
     },
     {
-      id: 2,
+      _id: "2",
       name: "Category 3",
-      url: "Category 3 description",
+      description: "Category 3 description",
     },
   ];
 
@@ -125,36 +128,36 @@ const Home: NextPage<HomeProps> = ({ categories }) => {
         </Typography>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <ProductCard
-            imgSrc="/images/logo.svg"
+            thumbnail="/images/logo.svg"
             price={45.0}
-            oldPrice={55.0}
+            // oldPrice={55.0}
             rating={2}
-            title="Guyer Chair"
-            totalReviews={100}
+            name="Guyer Chair"
+            // totalReviews={100}
           />
           <ProductCard
-            imgSrc="/images/logo.svg"
+            thumbnail="/images/logo.svg"
             price={45.0}
-            oldPrice={55.0}
+            // oldPrice={55.0}
             rating={3}
-            title="Guyer Chair"
-            totalReviews={100}
+            name="Guyer Chair"
+            // totalReviews={100}
           />
           <ProductCard
-            imgSrc="/images/logo.svg"
+            thumbnail="/images/logo.svg"
             price={45.0}
-            oldPrice={55.0}
+            // oldPrice={55.0}
             rating={4}
-            title="Guyer Chair"
-            totalReviews={100}
+            name="Guyer Chair"
+            // totalReviews={100}
           />
           <ProductCard
-            imgSrc="/images/logo.svg"
+            thumbnail="/images/logo.svg"
             price={45.0}
-            oldPrice={55.0}
+            // oldPrice={55.0}
             rating={5}
-            title="Guyer Chair"
-            totalReviews={100}
+            name="Guyer Chair"
+            // totalReviews={100}
           />
         </div>
       </Section>
@@ -165,68 +168,68 @@ const Home: NextPage<HomeProps> = ({ categories }) => {
         </Typography>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <ProductCard
-            imgSrc="/images/logo.svg"
+            thumbnail="/images/logo.svg"
             price={45.0}
-            oldPrice={55.0}
+            // oldPrice={55.0}
             rating={5}
-            title="Guyer Chair"
-            totalReviews={100}
+            name="Guyer Chair"
+            // totalReviews={100}
           />
           <ProductCard
-            imgSrc="/images/logo.svg"
+            thumbnail="/images/logo.svg"
             price={45.0}
-            oldPrice={55.0}
+            // oldPrice={55.0}
             rating={5}
-            title="Guyer Chair"
-            totalReviews={100}
+            name="Guyer Chair"
+            // totalReviews={100}
           />
           <ProductCard
-            imgSrc="/images/logo.svg"
+            thumbnail="/images/logo.svg"
             price={45.0}
-            oldPrice={55.0}
+            // oldPrice={55.0}
             rating={5}
-            title="Guyer Chair"
-            totalReviews={100}
+            name="Guyer Chair"
+            // totalReviews={100}
           />
           <ProductCard
-            imgSrc="/images/logo.svg"
+            thumbnail="/images/logo.svg"
             price={45.0}
-            oldPrice={55.0}
+            // oldPrice={55.0}
             rating={5}
-            title="Guyer Chair"
-            totalReviews={100}
+            name="Guyer Chair"
+            // totalReviews={100}
           />
           <ProductCard
-            imgSrc="/images/logo.svg"
+            thumbnail="/images/logo.svg"
             price={45.0}
-            oldPrice={55.0}
+            // oldPrice={55.0}
             rating={5}
-            title="Guyer Chair"
-            totalReviews={100}
+            name="Guyer Chair"
+            // totalReviews={100}
           />
           <ProductCard
-            imgSrc="/images/logo.svg"
+            thumbnail="/images/logo.svg"
             price={45.0}
-            oldPrice={55.0}
+            // oldPrice={55.0}
             rating={5}
-            title="Guyer Chair"
-            totalReviews={100}
+            name="Guyer Chair"
+            // totalReviews={100}
           />
           <ProductCard
-            imgSrc="/images/logo.svg"
+            thumbnail="/images/logo.svg"
             price={45.0}
-            oldPrice={55.0}
+            // oldPrice={55.0}
             rating={5}
-            title="Guyer Chair"
-            totalReviews={100}
+            name="Guyer Chair"
+            // totalReviews={100}
           />
           <ProductCard
-            imgSrc="/images/logo.svg"
+            thumbnail="/images/logo.svg"
             price={45.0}
-            oldPrice={55.0}
+            // oldPrice={55.0}
             rating={5}
-            title="Guyer Chair"
-            totalReviews={100}
+            name="Guyer Chair"
+            // totalReviews={100}
           />
         </div>
       </Section>

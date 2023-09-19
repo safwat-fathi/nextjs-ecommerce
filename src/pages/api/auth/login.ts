@@ -1,11 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-ROUTES/introduction
-import CONSTANTS from "@/constants";
 import HttpClient from "@/core/lib/http-client";
-import { getStorage, removeStorage, setStorage } from "@/core/lib/utils";
 import { ROUTES } from "@/routes";
 import { IBaseSingleResponse } from "@/types/i-base-response";
 import { IUser } from "@/types/i-user";
-import axios from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
@@ -29,7 +26,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         .json({ success: false, message: "Credentials is missing" });
     }
 
-    const url = `${process.env.NEXT_PUBLIC_BASE_DEV_API}${ROUTES.login}`;
+    const url = `${process.env.NEXT_PUBLIC_BASE_DEV_API}${ROUTES.auth.login}`;
 
     const loginRes = await httpClient.post<
       IBaseSingleResponse<{

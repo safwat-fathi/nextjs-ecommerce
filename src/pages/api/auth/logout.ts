@@ -10,14 +10,14 @@ const httpClient = new HttpClient(process.env.NEXT_PUBLIC_BASE_DEV_API);
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const logoutRes = await httpClient.get<TLogoutRes>(ROUTES.logout, {
+    const logoutRes = await httpClient.get<TLogoutRes>(ROUTES.auth.logout, {
       headers: { Cookie: req.headers.cookie },
     });
 
     if (logoutRes.success) {
       // removeStorage(CONSTANTS.TOKEN, req, res);
       // removeStorage(CONSTANTS.ACCESS_TOKEN, req, res);
-      removeStorage(CONSTANTS.USER, req, res);
+      removeStorage(CONSTANTS.USER);
 
       res.status(200).json(logoutRes);
     } else {

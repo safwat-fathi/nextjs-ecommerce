@@ -8,12 +8,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import AuthService from "@/services/auth.service";
-import { notify, setStorage } from "@/core/lib/utils";
+import { setStorage } from "@/core/lib/utils";
 import { useRouter } from "next/router";
 import CONSTANTS from "@/constants";
 import { useAuth } from "@/lib/contexts/auth";
 import { AuthActionsTypes } from "@/lib/contexts/auth/types/i-auth";
 import { getCookie, setCookie } from "cookies-next";
+import { notify } from "@/lib/utils";
 
 type PageProps = {
   name: string;

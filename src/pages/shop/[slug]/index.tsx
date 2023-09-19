@@ -132,7 +132,9 @@ const Product: NextPage<any> = ({ product }: { product: IProduct }) => {
             <p className="space-x-2">
               <span className="text-gray-800 font-semibold">Category: </span>
               {product.categories.map(category => (
-                <span className="text-gray-600">{category}</span>
+                <span key={category} className="text-gray-600">
+                  {category}
+                </span>
               ))}
             </p>
             {/* <p className="space-x-2">
