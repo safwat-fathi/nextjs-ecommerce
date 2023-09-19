@@ -94,7 +94,6 @@ class HttpClient {
   }
 
   public async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
-    console.log("🚀 ~ url:", url);
     const response = await this._instance.get<T>(url, config);
 
     return response.data;
