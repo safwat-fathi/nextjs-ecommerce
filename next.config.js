@@ -8,6 +8,12 @@ const nextConfig = {
   images: {
     domains: ["i.ibb.co", "i.dummyjson.com"],
   },
+  publicRuntimeConfig: {
+    baseURL:
+      process.env.NODE_ENV === "development"
+        ? process.env.NEXT_PUBLIC_BASE_DEV_API
+        : process.env.NEXT_PUBLIC_BASE_PROD_API,
+  },
   // async headers() {
   //   return [
   //     {

@@ -11,22 +11,20 @@ import CONSTANTS from "@/constants";
 import { TNullable } from "@/types/app";
 import { getCookie } from "cookies-next";
 import { getStorage, removeStorage } from "@/core/lib/utils";
+import getConfig from "next/config";
 
-const { NODE_ENV, NEXT_PUBLIC_BASE_DEV_API, NEXT_PUBLIC_BASE_PROD_API } =
-  process.env;
-const baseURL =
-  NODE_ENV === "development"
-    ? NEXT_PUBLIC_BASE_DEV_API
-    : NEXT_PUBLIC_BASE_PROD_API;
+const { publicRuntimeConfig } = getConfig();
+
+const baseURL = publicRuntimeConfig.baseURL;
 
 class HttpClient {
   private readonly _instance: AxiosInstance;
   private _accessToken: TNullable<string>;
   private _abortController: AbortController;
   private _lang: TNullable<string>;
-  private _baseURL: TNullable<string>;
+  private _baseURL: string = baseURL;
 
-  constructor(token?: string, lang?: string, baseUrl = baseURL) {
+  constructor(token?: string, lang?: string) {
     this._abortController = new AbortController();
 
     this._accessToken =
@@ -37,8 +35,6 @@ class HttpClient {
       getStorage(CONSTANTS.LANG) ||
       lang ||
       null;
-
-    this._baseURL = baseUrl;
 
     this._instance = axios.create({
       baseURL: this._baseURL,
@@ -98,6 +94,7 @@ class HttpClient {
   }
 
   public async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    console.log("🚀 ~ url:", url);
     const response = await this._instance.get<T>(url, config);
 
     return response.data;
