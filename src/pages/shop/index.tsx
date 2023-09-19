@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps<any> = async ctx => {
       },
     };
   } catch (error: any) {
-    // console.log("🚀 ~ error:", error);
+    console.log("🚀 ~ error:", error);
 
     // const statusCode = error?.response?.status === 404 ? 404 : 500;
     const statusCode = error?.response?.status;

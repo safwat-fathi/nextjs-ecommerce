@@ -9,8 +9,15 @@ import axios, {
 
 import CONSTANTS from "@/constants";
 import { TNullable } from "@/types/app";
-import { deleteCookie, getCookie } from "cookies-next";
+import { getCookie } from "cookies-next";
 import { getStorage, removeStorage } from "@/core/lib/utils";
+
+const { NODE_ENV, NEXT_PUBLIC_BASE_DEV_API, NEXT_PUBLIC_BASE_PROD_API } =
+  process.env;
+const baseURL =
+  NODE_ENV === "development"
+    ? NEXT_PUBLIC_BASE_DEV_API
+    : NEXT_PUBLIC_BASE_PROD_API;
 
 class HttpClient {
   private readonly _instance: AxiosInstance;
@@ -19,11 +26,7 @@ class HttpClient {
   private _lang: TNullable<string>;
   private _baseURL: TNullable<string>;
 
-  constructor(
-    token?: string,
-    lang?: string,
-    baseUrl = process.env.NEXT_PUBLIC_BASE_DEV_API
-  ) {
+  constructor(token?: string, lang?: string, baseUrl = baseURL) {
     this._abortController = new AbortController();
 
     this._accessToken =
@@ -61,12 +64,13 @@ class HttpClient {
         return response;
       },
       async (error: any) => {
-        const { response, config } = error as AxiosError;
+        console.log("🚀 ~ error:", error);
+        const { response } = error as AxiosError;
 
         // original req to retry response in case of refresh token
         // const originalRequest = config;
 
-        console.error("Invalid session or user is already logged out");
+        // console.error("Invalid session or user is already logged out");
 
         if (response?.status === 401) {
           // logout
