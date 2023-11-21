@@ -66,4 +66,4 @@ const CategoriesProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export { CategoriesContext, CategoriesProvider, useCategories };
+export { CategoriesProvider, useCategories };

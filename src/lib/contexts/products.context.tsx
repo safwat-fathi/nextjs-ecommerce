@@ -104,4 +104,4 @@ const ProductsProvider = ({
   );
 };
 
-export { ProductsContext, ProductsProvider, useProducts };
+export { ProductsProvider, useProducts };

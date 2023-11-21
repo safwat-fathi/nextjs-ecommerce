@@ -2,8 +2,9 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import { ModalProps } from "../types";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useRef } from "react";
 import dynamic from "next/dynamic";
+import { useClickOutside } from "@/core/hooks/useClickOutside";
 const DynamicPortal = dynamic(() => import("../Portal"), { ssr: false });
 
 const Modal = ({
@@ -13,7 +14,10 @@ const Modal = ({
   children,
   title,
 }: PropsWithChildren<ModalProps>) => {
+  const modalRef = useRef<HTMLDivElement>(null);
   const handleClose = () => !isStatic && onClose();
+
+  useClickOutside<HTMLDivElement>(modalRef, handleClose);
 
   return (
     <DynamicPortal>
@@ -27,10 +31,10 @@ const Modal = ({
               "opacity-100 pointer-events-auto": isOpen,
             }
           )}
-          onClick={handleClose}
         />
         {/* modal */}
         <div
+          ref={modalRef}
           className={clsx(
             "w-full max-w-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg rounded-lg overflow-hidden transition-all duration-300 z-50",
             {
